@@ -3,13 +3,15 @@ $(document).ready(function () {
     e.preventDefault();
 
     let datos = {
+      id: $("#id").val(),
       nombre: $("#nombre").val(),
       email: $("#email").val(),
       password: $("#password").val(),
+      tipo: $("#tipo").val(),
     };
 
     $.ajax({
-      url: "../controllers/crear_instructores_controller.php",
+      url: "../controller/crear_instructores_controller.php",
       type: "POST",
       data: { accion: "crear", ...datos },
       dataType: "json",
@@ -22,7 +24,8 @@ $(document).ready(function () {
             showConfirmButton: false,
             timer: 1200,
           }).then(() => {
-            window.location.href = "index.php";Ñ
+            window.location.href = "index.php";
+            Ñ;
           });
         } else {
           Swal.fire({

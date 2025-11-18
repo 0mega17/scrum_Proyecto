@@ -14,7 +14,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Crear Instructores</title>
+    <title>Crear usuario</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
   
@@ -40,8 +40,8 @@
         <div class="content">
             <div class="content-header mb-4">
                 <div>
-                    <h2 class="fw-bold text-success mb-0">Crear Nuevo Instructores</h2>
-                    <p class="text-muted">Complete los datos para registrar un nuevo Instructores.</p>
+                    <h2 class="fw-bold text-success mb-0">Crear Nuevo usuario</h2>
+                    <p class="text-muted">Complete los datos para registrar un nuevo usuario.</p>
                 </div>
                 <div class="user-info">
                 </div>
@@ -49,7 +49,12 @@
 
 
             <form id="formCrearInstructores">
-                <h4 class="mb-4"><i class="bi bi-person-circle me-2"></i> Datos del Instructores</h4>
+                <h4 class="mb-4"><i class="bi bi-person-circle me-2"></i> Datos del usuario</h4>
+
+                <div class="mb-3">
+                    <label for="id" class="form-label">Id</label>
+                    <input type="text" class="form-control" id="id" placeholder="Id" required>
+                </div>
 
                 <div class="mb-3">
                     <label for="nombre" class="form-label">Nombre</label>
@@ -68,6 +73,15 @@
                 </div>
 
 
+                <div class="mb-3">
+                    <label for="tipo" class="form-label">Tipo de usuario</label>
+                    <select class="form-select" id="tipo" required>
+                        <option value="Instructor">Instructor</option>
+                        <option value="administrador">Administrador</option>
+                        <option value="aprendiz">Aprendiz</option>
+                    </select>
+                </div>
+
                 <button type="submit" class="btn btn-success w-100 mt-3">
                     <i class="bi bi-person-plus me-2"></i>Crear Usuario
                 </button>
@@ -77,6 +91,6 @@
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <!-- <script src="../assets/js/scripts.js"></script> -->
+     <script src="../ASSETS/js/crear_instructores.js"></script> 
 </body>
 </html>
