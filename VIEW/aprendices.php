@@ -1,3 +1,26 @@
+<?php
+session_start();
+if ($_SESSION["acceso"] == false || $_SESSION["acceso"] == null) {
+    header("location: ./login.php");
+} else {
+    $_SESSION["acceso"] = true;
+}
+
+require_once "./MODEL/model.php";
+
+$mysql = new MySQL();
+$mysql->conectar();
+
+$aprendices = $mysql->efectuarConsulta("SELECT * FROM usuarios WHERE tipo='Aprendiz'");
+
+
+
+
+?>
+
+
+
+
 <!doctype html>
 <html lang="en" data-bs-theme="auto">
 
@@ -403,20 +426,23 @@
             <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
                 <div
                     class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                    <h1 class="h2">Dashboard</h1>
+                    <h1 class="h2">Aprendices</h1>
                 </div>
-                <h2>Section title</h2>
+                <div class="col-sm-12">
+                    <button class="btn btn-success btn-sm" id="crearAprendiz"> Crear nuevo aprendiz</button>
+                </div>
                 <div class="table-responsive small">
                     <table class="table table-striped table-sm">
                         <thead>
                             <tr>
-                                <th scope="col">#</th>
-                                <th scope="col">Header</th>
-                                <th scope="col">Header</th>
-                                <th scope="col">Header</th>
-                                <th scope="col">Header</th>
+                                <th scope="col">Nombre</th>
+                                <th scope="col">Email</th>
+                                <?php if ($tipoUsuario == "Administrador") { ?>
+                                    <th>Acciones</th>
+                                <?php } ?>
                             </tr>
                         </thead>
+
                     </table>
                 </div>
             </main>
