@@ -16,7 +16,7 @@
     <script src="../assets/js/color-modes.js"></script>
     <link rel="stylesheet" href="../ASSETS/CSS/bootstrap.min.css" />
     <meta name="theme-color" content="#712cf9" />
-    <link href="dashboard.css" rel="stylesheet" />
+    <link href="../ASSETS/CSS/dashboard.css" rel="stylesheet" />
     <style>
         .bd-placeholder-img {
             font-size: 1.125rem;
@@ -612,7 +612,7 @@
         integrity="sha384-eI7PSr3L1XLISH8JdDII5YN/njoSsxfbrkCTnJrzXt+ENP5MOVBxD+l6sEG4zoLp"
         crossorigin="anonymous"
         class="astro-vvvwv3sm"></script>
-    <script src="dashboard.js" class="astro-vvvwv3sm"></script>
+    <script src="../ASSETS/JS/dashboard.js" class="astro-vvvwv3sm"></script>
 </body>
 
 </html>
