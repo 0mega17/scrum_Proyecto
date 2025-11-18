@@ -14,7 +14,7 @@
         rel="canonical"
         href="https://getbootstrap.com/docs/5.3/examples/dashboard/" />
     <script src="../assets/js/color-modes.js"></script>
-    <link href="../assets/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../ASSETS/CSS/bootstrap.min.css" />
     <meta name="theme-color" content="#712cf9" />
     <link href="dashboard.css" rel="stylesheet" />
     <style>
@@ -605,7 +605,7 @@
         </div>
     </div>
     <script
-        src="../assets/dist/js/bootstrap.bundle.min.js"
+        src="../ASSETS/JS/bootstrap.bundle.min.js"
         class="astro-vvvwv3sm"></script>
     <script
         src="https://cdn.jsdelivr.net/npm/chart.js@4.3.2/dist/chart.umd.js"
