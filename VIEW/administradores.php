@@ -11,7 +11,7 @@ try {
 
     $mysql->conectar();
 
-    $aprendices = $mysql->efectuarConsulta("SELECT * FROM aprendices");
+    $aprendices = $mysql->efectuarConsulta("SELECT * FROM administradores");
 
     $mysql->desconectar();
 } catch (Exception $ex) {
@@ -349,17 +349,6 @@ try {
                         class="offcanvas-body d-md-flex flex-column p-0 pt-lg-3 overflow-y-auto">
                         <ul class="nav flex-column">
                             <li class="nav-item">
-                                <a href="./editar_perfil.php" class="nav-link">
-                                    <img
-                                        src="../assets/img/profile.png"
-                                        class="user-image rounded-circle img-fluid"
-                                        alt="User Image"
-                                      />
-                               
-                                </a>
-                            
-                            </li>
-                            <li class="nav-item">
                                 <a
                                     class="nav-link d-flex align-items-center gap-2"
                                     href="index.php">
@@ -394,21 +383,6 @@ try {
                                     Aprendices
                                 </a>
                             </li>
-
-                            <li class="nav-item">
-                                <a class="nav-link d-flex align-items-center gap-2 active" aria-current="page" href="administradores.php">
-                                    <svg class="bi" aria-hidden="true">
-                                        <use xlink:href="#people"></use>
-                                    </svg>
-                                    Administradores
-                                </a>
-                            </li>
-
-                            <li class="nav-item">
-                                <a class="nav-link d-flex align-items-center gap-2 active" aria-current="page" href="trabajos.php">
-                                    Trabajos
-                                </a>
-                            </li>
                         </ul>
                         <hr class="my-3" />
                         <ul class="nav flex-column mb-auto">
@@ -435,7 +409,7 @@ try {
             <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
                 <div
                     class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-1">
-                    <h1 class="h2">Aprendices</h1>
+                    <h1 class="h2">Administradores</h1>
                 </div>
 
                 <div class="table-responsive small">

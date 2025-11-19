@@ -4,6 +4,33 @@ if ($_SESSION["acceso"] == false || $_SESSION["acceso"] == null) {
     header('location: ./login.php');
 }
 
+$rol = $_SESSION["tipoUsuario"];
+$IDusuario = $_SESSION["IDusuario"];
+
+require_once '../MODEL/model.php';
+
+$mysql = new MySQL();
+
+$mysql->conectar();
+
+
+
+if ($rol == 1) {
+    // Realizar la consulta para verificar que existe el usuario
+    $usuario = $mysql->efectuarConsulta("SELECT * FROM administradores WHERE id = $IDusuario");
+    $rolTxt = "Administrador";
+} else if ($rol == 2) {
+    // Realizar la consulta para verificar que existe el usuario
+    $usuario = $mysql->efectuarConsulta("SELECT * FROM instructores WHERE id = $IDusuario");
+    $rolTxt = "Instructor";
+} else if ($rol == 3) {
+    // Realizar la consulta para verificar que existe el usuario
+    $usuario = $mysql->efectuarConsulta("SELECT * FROM aprendices WHERE id = $IDusuario");
+    $rolTxt = "Aprendiz";
+}
+
+$usuario = $usuario->fetch_assoc();
+
 try {
     require_once '../MODEL/model.php';
 
@@ -353,11 +380,10 @@ try {
                                     <img
                                         src="../assets/img/profile.png"
                                         class="user-image rounded-circle img-fluid"
-                                        alt="User Image"
-                                      />
-                               
+                                        alt="User Image" />
+
                                 </a>
-                            
+
                             </li>
                             <li class="nav-item">
                                 <a
@@ -432,36 +458,79 @@ try {
                     </div>
                 </div>
             </div>
-            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-                <div
-                    class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-1">
-                    <h1 class="h2">Aprendices</h1>
-                </div>
 
-                <div class="table-responsive small">
-                    <table class="table table-striped table-sm">
-                        <thead>
-                            <tr>
-                                <th scope="col">Documento</th>
-                                <th scope="col">Nombre</th>
-                                <th scope="col">Email</th>
-                                <th scope="col">Estado</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php while ($fila = $aprendices->fetch_assoc()) { ?>
-                                <tr>
-                                    <td> <?php echo $fila['id'] ?> </td>
-                                    <td> <?php echo $fila['nombre'] ?> </td>
-                                    <td> <?php echo $fila['email'] ?> </td>
-                                    <td> <?php echo $fila['estado'] ?> </td>
-                                </tr>
-                            <?php } ?>
-                        </tbody>
-                    </table>
+            <div class="col-md-4 mb-4 d-flex justify-content-center">
+                <div class="card mt-3 text-center" style="width: 18rem;">
+                    <div class="card-body d-flex flex-column align-items-center">
+                        <img src="../assets/img/profile.png"
+                            class="rounded-circle shadow mb-3"
+                            alt="User Image"
+                            style="width: 150px; height: 150px; object-fit: cover;">
+                        <h3 class="card-title mb-0">
+                            <?php echo $usuario["nombre"]; ?>
+                        </h3>
+                        <small> <?php echo $rolTxt ?></small>
+                    </div>
                 </div>
-            </main>
+            </div>
+            <div class="col-md-5 align-self-center">
+                <div class="profile-card">
+                    <h3 class="fw-bold-card">Detalles Perfil</h3>
+                    <form method="post">
+                        <!-- Información Personal -->
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label class="form-label">Identificacion</label>
+                                <input type="text" class="form-control" id="ID" name="ID" value="<?php echo $usuario['id']; ?>">
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label class="form-label">Nombre</label>
+                                <input type="text" class="form-control" id="nombre" name="nombre" value="<?php echo $usuario['nombre']; ?>">
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-md-12">
+                                <label class="form-label">Email</label>
+                                <input type="email" class="form-control" id="email" name="email" value="<?php echo $usuario['email'] ?>">
+                            </div>
+                        </div>
+
+                        <!-- Separador visual -->
+                        <hr class="my-4">
+
+                        <!-- Cambio de contraseña -->
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label class="form-label">Contraseña actual</label>
+                                <input type="password" class="form-control" id="oldPassword" name="oldPassword" placeholder="Ingrese su contraseña actual">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Nueva Contraseña</label>
+                                <input type="password" class="form-control" id="newPassword" name="newPassword" disabled placeholder="Ingresa una nueva contraseña">
+                                <div class="form-check mb-2">
+                                    <input class="form-check-input" type="checkbox" id="cambiarPassword">
+                                    <label class="form-check-label" for="cambiarPassword">
+                                        ¿Deseas cambiar tu contraseña?
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
         </div>
+        <div class="d-flex justify-content-end m-4">
+            <button type="button" class="btn btn-primary me-2" id="btnGuardar">Guardar</button>
+            <a href="./trabajos.php" class="btn btn-success">Volver a Inicio</a>
+        </div>
+        </form>
+
+    </div>
     </div>
     <script
         src="../ASSETS/JS/bootstrap.bundle.min.js"
