@@ -398,14 +398,35 @@ try {
                                     Dashboard
                                 </a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link d-flex align-items-center gap-2 active" aria-current="page" href="crear_instructores.php">
-                                    <svg class="bi" aria-hidden="true">
-                                        <use xlink:href="#people"></use>
-                                    </svg>
-                                    Crear Usuario
-                                </a>
-                            </li>
+                            <?php if ($rol == 1) { ?>
+                                <li class="nav-item">
+                                    <a class="nav-link d-flex align-items-center gap-2 active" aria-current="page" href="crear_instructores.php">
+                                        <svg class="bi" aria-hidden="true">
+                                            <use xlink:href="#people"></use>
+                                        </svg>
+                                        Crear Instructor
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link d-flex align-items-center gap-2 active" aria-current="page" href="crear_administradores.php">
+                                        <svg class="bi" aria-hidden="true">
+                                            <use xlink:href="#people"></use>
+                                        </svg>
+                                        Crear administradores
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link d-flex align-items-center gap-2 active" aria-current="page" href="crear_instructores.php">
+                                        <svg class="bi" aria-hidden="true">
+                                            <use xlink:href="#people"></use>
+                                        </svg>
+                                        Crear aprendices
+                                    </a>
+                                </li>
+
+                            <?php } ?>
+
+
                             <li class="nav-item">
                                 <a class="nav-link d-flex align-items-center gap-2 active" aria-current="page" href="instructores.php">
                                     <svg class="bi" aria-hidden="true">
@@ -425,17 +446,11 @@ try {
                             </li>
 
                             <li class="nav-item">
-                                <a class="nav-link d-flex align-items-center gap-2 active" aria-current="page" href="administradores.php">
+                                <a class="nav-link d-flex align-items-center gap-2 active" aria-current="page" href="fichas.php">
                                     <svg class="bi" aria-hidden="true">
                                         <use xlink:href="#people"></use>
                                     </svg>
-                                    Administradores
-                                </a>
-                            </li>
-
-                            <li class="nav-item">
-                                <a class="nav-link d-flex align-items-center gap-2 active" aria-current="page" href="trabajos.php">
-                                    Trabajos
+                                    fichas
                                 </a>
                             </li>
                         </ul>
@@ -531,26 +546,26 @@ try {
             </div>
 
         </div>
-        <div class="d-flex justify-content-end m-4">
-            <button type="button" class="btn btn-primary me-2" id="btnGuardar">Guardar</button>
-            <a href="./index.php" class="btn btn-success">Volver a Inicio</a>
-        </div>
-        </form>
+        <div class=" d-flex justify-content-end m-4">
+                            <button type="button" class="btn btn-primary me-2" id="btnGuardar">Guardar</button>
+                            <a href="./index.php" class="btn btn-success">Volver a Inicio</a>
+                        </div>
+                    </form>
 
-    </div>
-    </div>
-    <script
-        src="../ASSETS/JS/bootstrap.bundle.min.js"
-        class="astro-vvvwv3sm"></script>
-    <script
-        src="https://cdn.jsdelivr.net/npm/chart.js@4.3.2/dist/chart.umd.js"
-        integrity="sha384-eI7PSr3L1XLISH8JdDII5YN/njoSsxfbrkCTnJrzXt+ENP5MOVBxD+l6sEG4zoLp"
-        crossorigin="anonymous"
-        class="astro-vvvwv3sm"></script>
+                </div>
+            </div>
+            <script
+                src="../ASSETS/JS/bootstrap.bundle.min.js"
+                class="astro-vvvwv3sm"></script>
+            <script
+                src="https://cdn.jsdelivr.net/npm/chart.js@4.3.2/dist/chart.umd.js"
+                integrity="sha384-eI7PSr3L1XLISH8JdDII5YN/njoSsxfbrkCTnJrzXt+ENP5MOVBxD+l6sEG4zoLp"
+                crossorigin="anonymous"
+                class="astro-vvvwv3sm"></script>
 
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+            <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-    <script src="../ASSETS/js/perfil.js"></script>
+            <script src="../ASSETS/js/perfil.js"></script>
 </body>
 
 </html>

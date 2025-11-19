@@ -4,6 +4,10 @@ if ($_SESSION["acceso"] == false || $_SESSION["acceso"] == null) {
     header('location: ./login.php');
 }
 $rol = $_SESSION["tipoUsuario"];
+if ($rol == 3) {
+    $ficha_id =  $_SESSION["fichaID"];
+}
+
 $IDusuario = $_SESSION["IDusuario"];
 try {
     require_once '../MODEL/model.php';
@@ -12,7 +16,13 @@ try {
 
     $mysql->conectar();
 
-    $instructores = $mysql->efectuarConsulta("SELECT * FROM instructores");
+    if ($rol == 3) {
+        $instructores = $mysql->efectuarConsulta("SELECT * FROM instructores JOIN fichas_has_instructores ON 
+    fichas_has_instructores.instructores_id = instructores.id WHERE fichas_id = $ficha_id");
+    } else {
+        $instructores = $mysql->efectuarConsulta("SELECT * FROM instructores");
+    }
+
 
     $mysql->desconectar();
 } catch (Exception $ex) {

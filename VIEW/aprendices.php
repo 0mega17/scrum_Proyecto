@@ -5,6 +5,9 @@ if ($_SESSION["acceso"] == false || $_SESSION["acceso"] == null) {
 }
 
 $rol = $_SESSION["tipoUsuario"];
+if ($rol == 3) {
+    $ficha_id =  $_SESSION["fichaID"];
+}
 $IDusuario = $_SESSION["IDusuario"];
 
 try {
@@ -14,7 +17,12 @@ try {
 
     $mysql->conectar();
 
-    $resultado = $mysql->efectuarConsulta("SELECT * FROM aprendices");
+    if ($rol == 3) {
+        $resultado = $mysql->efectuarConsulta("SELECT * FROM aprendices WHERE fichas_id = $ficha_id");
+    } else {
+        $resultado = $mysql->efectuarConsulta("SELECT * FROM aprendices");
+    }
+
 
     $mysql->desconectar();
 } catch (Exception $ex) {
