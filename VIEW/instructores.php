@@ -11,7 +11,7 @@ try {
 
     $mysql->conectar();
 
-    $instructores = $mysql->efectuarConsulta("SELECT * FROM usuarios WHERE tipo = 'Instructor'");
+    $instructores = $mysql->efectuarConsulta("SELECT * FROM instructores");
 
     $mysql->desconectar();
 } catch (Exception $ex) {
