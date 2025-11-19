@@ -4,6 +4,9 @@ session_start();
 if ($_SESSION["acceso"] == false || $_SESSION["acceso"] == null) {
     header('location: ./login.php');
 }
+
+$rol = $_SESSION["tipoUsuario"];
+$IDusuario = $_SESSION["IDusuario"];
 ?>
 
 
@@ -356,6 +359,7 @@ if ($_SESSION["acceso"] == false || $_SESSION["acceso"] == null) {
                                     Dashboard
                                 </a>
                             </li>
+                            <?php if($rol == 1){ ?>
                             <li class="nav-item">
                                 <a class="nav-link d-flex align-items-center gap-2 active" aria-current="page" href="crear_instructores.php">
                                     <svg class="bi" aria-hidden="true">
@@ -380,6 +384,8 @@ if ($_SESSION["acceso"] == false || $_SESSION["acceso"] == null) {
                                     Crear aprendices
                                 </a>
                             </li>
+
+                            <?php }?>
 
                             <li class="nav-item">
                                 <a class="nav-link d-flex align-items-center gap-2 active" aria-current="page" href="instructores.php">
