@@ -35,7 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['accion'])) {
         }
 
 
-        $consulta = "INSERT INTO Instructores (id,nombre,area, email, password, estado) VALUES ('$id','$nombre','$area', '$email', '$password','activo')";
+        $consulta = "INSERT INTO Instructores (id,nombre,area, email, password, estado) VALUES ('$id','$nombre','$area', '$email', '$password','Activo')";
         $resultado = $mysql->efectuarConsulta($consulta);
         if ($resultado) {
             echo json_encode(["status" => "success"]);
