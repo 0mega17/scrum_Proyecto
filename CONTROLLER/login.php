@@ -22,8 +22,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         $password = $_POST["password"];
 
-        // Realizar la consulta para verificar que existe el usuario
-        $consulta = $mysql->efectuarConsulta("SELECT * FROM usuarios WHERE email = '$email'");
+        $rol = $_POST["rol"];
+
+        if ($rol == 1) {
+            // Realizar la consulta para verificar que existe el usuario
+            $consulta = $mysql->efectuarConsulta("SELECT * FROM administradores WHERE email = '$email'");
+        } else if ($rol == 2) {
+            // Realizar la consulta para verificar que existe el usuario
+            $consulta = $mysql->efectuarConsulta("SELECT * FROM instructores WHERE email = '$email'");
+        } else if ($rol == 3) {
+            // Realizar la consulta para verificar que existe el usuario
+            $consulta = $mysql->efectuarConsulta("SELECT * FROM aprendices WHERE email = '$email'");
+        }
+
+
 
         // Si se trae una fila EXISTE el usuario
         if ($usuarios = $consulta->fetch_assoc()) {
@@ -35,7 +47,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     $_SESSION["acceso"] = true;
                     $_SESSION["IDusuario"] = $usuarios["id"];
                     $_SESSION["nombreUsuario"] = $usuarios["nombre"];
-                    $_SESSION["tipoUsuario"] = $usuarios["tipo"];
+                    $_SESSION["tipoUsuario"] = $rol;
 
                     echo json_encode([
                         "success" => true,
