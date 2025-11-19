@@ -1,10 +1,10 @@
 <?php
 
-        session_start();
-        if ($_SESSION["acceso"] == false || $_SESSION["acceso"] == null) {
-            header('location: ./login.php');
-        }
-        ?> 
+session_start();
+if ($_SESSION["acceso"] == false || $_SESSION["acceso"] == null) {
+    header('location: ./login.php');
+}
+?>
 <!doctype html>
 <html lang="en" data-bs-theme="auto">
 
@@ -367,7 +367,6 @@
                                     Crear aprendices
                                 </a>
                             </li>
-                            
 
                             <li class="nav-item">
                                 <a class="nav-link d-flex align-items-center gap-2 active" aria-current="page" href="instructores.php">
@@ -384,6 +383,15 @@
                                         <use xlink:href="#people"></use>
                                     </svg>
                                     Aprendices
+                                </a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link d-flex align-items-center gap-2 active" aria-current="page" href="fichas.php">
+                                    <svg class="bi" aria-hidden="true">
+                                        <use xlink:href="#people"></use>
+                                    </svg>
+                                    fichas
                                 </a>
                             </li>
                         </ul>
@@ -428,7 +436,7 @@
                         <input type="text" class="form-control" id="nombre" placeholder="Nombre" required>
                     </div>
 
-                    
+
 
                     <div class="mb-3">
                         <label for="email" class="form-label">Correo Electrónico</label>
@@ -441,7 +449,7 @@
                     </div>
 
 
-                    
+
 
                     <button type="submit" class="btn btn-success w-100 mt-3">
                         <i class="bi bi-person-plus me-2"></i>Crear administradores

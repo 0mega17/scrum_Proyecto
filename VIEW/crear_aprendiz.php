@@ -397,6 +397,15 @@ $mysql->desconectar();
                                     Aprendices
                                 </a>
                             </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link d-flex align-items-center gap-2 active" aria-current="page" href="fichas.php">
+                                    <svg class="bi" aria-hidden="true">
+                                        <use xlink:href="#people"></use>
+                                    </svg>
+                                    fichas
+                                </a>
+                            </li>
                         </ul>
                         <hr class="my-3" />
                         <ul class="nav flex-column mb-auto">
@@ -452,7 +461,7 @@ $mysql->desconectar();
                     <div>
                         <option class="form-label" value="">Elige unA ficha...</option>
 
-                        <select name="ficha"class="form-select" id="ficha" required>
+                        <select name="ficha" class="form-select" id="ficha" required>
                             <?php while ($ficha = mysqli_fetch_assoc($fichas)): ?>
                                 <option value="<?php echo $ficha['id']; ?>"><?php echo $ficha['codigo']; ?></option>
                             <?php endwhile; ?>
