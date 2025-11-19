@@ -10,7 +10,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         &&  isset($_POST["email"]) && !empty($_POST["email"])
     ) {
         // Requerir el modelo a utilizar
-        require_once '../models/MYSQL.php';
+        require_once '../MODEL/model.php';
 
         // Instancia de la clase
         $mysql = new MySQL();
@@ -26,6 +26,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $ID = filter_var(trim($_POST["ID"]), FILTER_SANITIZE_NUMBER_INT);
         $email = filter_var(trim($_POST["email"]), FILTER_SANITIZE_FULL_SPECIAL_CHARS);
         $email = filter_var($email, FILTER_SANITIZE_EMAIL);
+        $rol = filter_var($_POST["rol"], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 
         // Verificar que se haya ingresado un email válido
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
@@ -37,7 +38,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
 
         // Verificar que no exista ese email en la BD
-        $verificacionEmail = $mysql->efectuarConsulta("SELECT 1 FROM usuario WHERE email = '$email' AND id != $idUsuario");
+        $verificacionEmail = $mysql->efectuarConsulta("SELECT 1 FROM $rol WHERE email = '$email' AND id != $idUsuario");
 
         if (mysqli_num_rows($verificacionEmail) > 0) {
             echo json_encode([
@@ -48,7 +49,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
 
         // Obtener contraseña actual de la BD
-        $passwordBD = $mysql->efectuarConsulta("SELECT password FROM usuario WHERE id = $idUsuario");
+        $passwordBD = $mysql->efectuarConsulta("SELECT password FROM $rol WHERE id = $idUsuario");
         $passwordBD = $passwordBD->fetch_assoc()["password"];
 
         // Variable para la nueva contraseña
@@ -79,7 +80,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             ]);
             exit();
         } else {
-            $update = $mysql->efectuarConsulta("UPDATE usuario SET nombre='$nombre', apellido='$apellido', email='$email', password='$newPassword' WHERE id=$idUsuario");
+            $update = $mysql->efectuarConsulta("UPDATE $rol SET nombre='$nombre', email='$email', password='$newPassword' WHERE id=$idUsuario");
 
             if ($update) {
                 echo json_encode([

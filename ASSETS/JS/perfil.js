@@ -22,11 +22,13 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 function actualizar() {
-  const ID = document.getElementById("ID").value;
+  const ID = document.getElementById("IDusuario").value;
+  console.log(ID);
   const nombre = document.getElementById("nombre").value;
   const email = document.getElementById("email").value;
   const oldPassword = document.getElementById("oldPassword").value;
   const newPassword = document.getElementById("newPassword").value;
+  const rol = document.getElementById("rol").value
 
   const formData = new FormData();
   formData.append("ID", ID);
@@ -34,10 +36,10 @@ function actualizar() {
   formData.append("email", email);
   formData.append("oldPassword", oldPassword);
   formData.append("newPassword", newPassword);
+  formData.append("rol", rol);
 
-cargandoAlerta("Actualizando Información...");
 
-  fetch("../../controllers/editarDatosPerfil.php", {
+  fetch("../CONTROLLER/editarDatosPerfil.php", {
     method: "POST",
     body: formData,
   })

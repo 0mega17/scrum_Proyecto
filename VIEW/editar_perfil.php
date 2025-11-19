@@ -19,14 +19,17 @@ if ($rol == 1) {
     // Realizar la consulta para verificar que existe el usuario
     $usuario = $mysql->efectuarConsulta("SELECT * FROM administradores WHERE id = $IDusuario");
     $rolTxt = "Administrador";
+    $rolTxtInp = "administradores";
 } else if ($rol == 2) {
     // Realizar la consulta para verificar que existe el usuario
     $usuario = $mysql->efectuarConsulta("SELECT * FROM instructores WHERE id = $IDusuario");
     $rolTxt = "Instructor";
+    $rolTxtInp = "instructores";
 } else if ($rol == 3) {
     // Realizar la consulta para verificar que existe el usuario
     $usuario = $mysql->efectuarConsulta("SELECT * FROM aprendices WHERE id = $IDusuario");
     $rolTxt = "Aprendiz";
+    $rolTxtInp = "aprendices";
 }
 
 $usuario = $usuario->fetch_assoc();
@@ -481,7 +484,7 @@ try {
                         <div class="row mb-3">
                             <div class="col-md-6">
                                 <label class="form-label">Identificacion</label>
-                                <input type="text" class="form-control" id="ID" name="ID" value="<?php echo $usuario['id']; ?>">
+                                <input type="text" class="form-control" id="IDusuario" name="IDusuario" value="<?php echo $usuario['id']; ?>">
                             </div>
                         </div>
 
@@ -519,6 +522,10 @@ try {
                                 </div>
                             </div>
                         </div>
+
+                        <div class="col-md-6">
+                            <input type="hidden" value="<?php echo $rolTxtInp ?>" class="form-control" id="rol" name="rol"">
+                        </div>
                     </form>
                 </div>
             </div>
@@ -526,7 +533,7 @@ try {
         </div>
         <div class="d-flex justify-content-end m-4">
             <button type="button" class="btn btn-primary me-2" id="btnGuardar">Guardar</button>
-            <a href="./trabajos.php" class="btn btn-success">Volver a Inicio</a>
+            <a href="./index.php" class="btn btn-success">Volver a Inicio</a>
         </div>
         </form>
 
@@ -540,6 +547,10 @@ try {
         integrity="sha384-eI7PSr3L1XLISH8JdDII5YN/njoSsxfbrkCTnJrzXt+ENP5MOVBxD+l6sEG4zoLp"
         crossorigin="anonymous"
         class="astro-vvvwv3sm"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script src="../ASSETS/js/perfil.js"></script>
 </body>
 
 </html>

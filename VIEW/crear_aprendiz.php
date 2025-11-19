@@ -346,6 +346,16 @@ $mysql->desconectar();
                         class="offcanvas-body d-md-flex flex-column p-0 pt-lg-3 overflow-y-auto">
                         <ul class="nav flex-column">
                             <li class="nav-item">
+                                <a href="./editar_perfil.php" class="nav-link">
+                                    <img
+                                        src="../assets/img/profile.png"
+                                        class="user-image rounded-circle img-fluid"
+                                        alt="User Image" />
+
+                                </a>
+
+                            </li>
+                            <li class="nav-item">
                                 <a
                                     class="nav-link d-flex align-items-center gap-2"
                                     href="index.php">
@@ -444,7 +454,7 @@ $mysql->desconectar();
                     <div>
                         <option class="form-label" value="">Elige unA ficha...</option>
 
-                        <select name="ficha"class="form-select" id="ficha" required>
+                        <select name="ficha" class="form-select" id="ficha" required>
                             <?php while ($ficha = mysqli_fetch_assoc($fichas)): ?>
                                 <option value="<?php echo $ficha['id']; ?>"><?php echo $ficha['codigo']; ?></option>
                             <?php endwhile; ?>
