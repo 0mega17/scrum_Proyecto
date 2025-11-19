@@ -348,7 +348,7 @@ try {
                             data-bs-target="#sidebarMenu"
                             aria-label="Close"></button>
                     </div>
-                    <div
+                     <div
                         class="offcanvas-body d-md-flex flex-column p-0 pt-lg-3 overflow-y-auto">
                         <ul class="nav flex-column">
                             <li class="nav-item">
@@ -371,33 +371,34 @@ try {
                                     Dashboard
                                 </a>
                             </li>
-                            <?php if ($rol == 1) { ?>
-                                <li class="nav-item">
-                                    <a class="nav-link d-flex align-items-center gap-2 active" aria-current="page" href="crear_instructores.php">
-                                        <svg class="bi" aria-hidden="true">
-                                            <use xlink:href="#people"></use>
-                                        </svg>
-                                        Crear Instructor
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link d-flex align-items-center gap-2 active" aria-current="page" href="crear_administradores.php">
-                                        <svg class="bi" aria-hidden="true">
-                                            <use xlink:href="#people"></use>
-                                        </svg>
-                                        Crear administradores
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link d-flex align-items-center gap-2 active" aria-current="page" href="crear_instructores.php">
-                                        <svg class="bi" aria-hidden="true">
-                                            <use xlink:href="#people"></use>
-                                        </svg>
-                                        Crear aprendices
-                                    </a>
-                                </li>
+                            <?php if($rol == 1){ ?>
+                            <li class="nav-item">
+                                <a class="nav-link d-flex align-items-center gap-2 active" aria-current="page" href="crear_instructores.php">
+                                    <svg class="bi" aria-hidden="true">
+                                        <use xlink:href="#people"></use>
+                                    </svg>
+                                    Crear Instructor
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link d-flex align-items-center gap-2 active" aria-current="page" href="crear_administradores.php">
+                                    <svg class="bi" aria-hidden="true">
+                                        <use xlink:href="#people"></use>
+                                    </svg>
+                                    Crear administradores
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link d-flex align-items-center gap-2 active" aria-current="page" href="crear_instructores.php">
+                                    <svg class="bi" aria-hidden="true">
+                                        <use xlink:href="#people"></use>
+                                    </svg>
+                                    Crear aprendices
+                                </a>
+                            </li>
 
-                            <?php } ?>
+                            <?php }?>
+
                             <li class="nav-item">
                                 <a class="nav-link d-flex align-items-center gap-2 active" aria-current="page" href="instructores.php">
                                     <svg class="bi" aria-hidden="true">
@@ -415,6 +416,22 @@ try {
                                     Aprendices
                                 </a>
                             </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link d-flex align-items-center gap-2 active" aria-current="page" href="administradores.php">
+                                    <svg class="bi" aria-hidden="true">
+                                        <use xlink:href="#people"></use>
+                                    </svg>
+                                    administradores
+                                </a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link d-flex align-items-center gap-2 active" aria-current="page" href="./trabajos.php">
+                                    <svg class="bi" aria-hidden="true">
+                                        <use xlink:href="#people"></use>
+                                    </svg>
+                                    Trabajos
 
                             <li class="nav-item">
                                 <a class="nav-link d-flex align-items-center gap-2 active" aria-current="page" href="fichas.php">

@@ -4,6 +4,8 @@ session_start();
 if ($_SESSION["acceso"] == false || $_SESSION["acceso"] == null) {
     header('location: ./login.php');
 }
+$rol = $_SESSION["tipoUsuario"];
+$IDusuario = $_SESSION["IDusuario"];
 ?>
 <!doctype html>
 <html lang="en" data-bs-theme="auto">
@@ -353,6 +355,7 @@ if ($_SESSION["acceso"] == false || $_SESSION["acceso"] == null) {
                                     Dashboard
                                 </a>
                             </li>
+                            <?php if($rol == 1){ ?>
                             <li class="nav-item">
                                 <a class="nav-link d-flex align-items-center gap-2 active" aria-current="page" href="crear_instructores.php">
                                     <svg class="bi" aria-hidden="true">
@@ -378,6 +381,8 @@ if ($_SESSION["acceso"] == false || $_SESSION["acceso"] == null) {
                                 </a>
                             </li>
 
+                            <?php }?>
+
                             <li class="nav-item">
                                 <a class="nav-link d-flex align-items-center gap-2 active" aria-current="page" href="instructores.php">
                                     <svg class="bi" aria-hidden="true">
@@ -395,6 +400,22 @@ if ($_SESSION["acceso"] == false || $_SESSION["acceso"] == null) {
                                     Aprendices
                                 </a>
                             </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link d-flex align-items-center gap-2 active" aria-current="page" href="administradores.php">
+                                    <svg class="bi" aria-hidden="true">
+                                        <use xlink:href="#people"></use>
+                                    </svg>
+                                    administradores
+                                </a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link d-flex align-items-center gap-2 active" aria-current="page" href="./trabajos.php">
+                                    <svg class="bi" aria-hidden="true">
+                                        <use xlink:href="#people"></use>
+                                    </svg>
+                                    Trabajos
 
                             <li class="nav-item">
                                 <a class="nav-link d-flex align-items-center gap-2 active" aria-current="page" href="fichas.php">

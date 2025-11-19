@@ -3,8 +3,9 @@ session_start();
 if ($_SESSION["acceso"] == false || $_SESSION["acceso"] == null) {
     header('location: ./login.php');
 }
-$idUsuario = $_SESSION["IDusuario"];
+
 $rol = $_SESSION["tipoUsuario"];
+$IDusuario = $_SESSION["IDusuario"];
 try {
     require_once '../MODEL/model.php';
 
@@ -12,17 +13,13 @@ try {
 
     $mysql->conectar();
 
-    if ($rol == 3) {
-        $trabajos = $mysql->efectuarConsulta("SELECT * FROM trabajos INNER JOIN aprendices ON trabajos.aprendices_id = aprendices.id  WHERE aprendices.id = $idUsuario");
-    } else {
-        $trabajos = $mysql->efectuarConsulta("SELECT * FROM trabajos");
-    }
-
+    $aprendices = $mysql->efectuarConsulta("SELECT * FROM fichas");
 
     $mysql->desconectar();
 } catch (Exception $ex) {
     echo "Ocurrio un error...";
 }
+
 
 ?>
 
@@ -37,10 +34,11 @@ try {
         name="author"
         content="Mark Otto, Jacob Thornton, and Bootstrap contributors" />
     <meta name="generator" content="Astro v5.13.2" />
-    <title>Trabajos</title>
+    <title>Aprendices</title>
     <link
         rel="canonical"
         href="https://getbootstrap.com/docs/5.3/examples/dashboard/" />
+    <script src="../assets/js/color-modes.js"></script>
     <link rel="stylesheet" href="../ASSETS/CSS/bootstrap.min.css" />
     <meta name="theme-color" content="#712cf9" />
     <link href="../ASSETS/CSS/dashboard.css" rel="stylesheet" />
@@ -310,6 +308,7 @@ try {
                 <button
                     class="nav-link px-3 text-white"
                     type="button"
+                    data-bs-toggle="offcanvas"
                     data-bs-target="#sidebarMenu"
                     aria-controls="sidebarMenu"
                     aria-expanded="false"
@@ -331,224 +330,169 @@ try {
     <div class="container-fluid">
         <div class="row">
             <div
-                
                 class="sidebar border border-right col-md-3 col-lg-2 p-0 bg-body-tertiary">
-                <ul class="nav flex-column">
-                    <li class="nav-item">
-                        <a href="./editar_perfil.php" class="nav-link">
-                            <img
-                                src="../assets/img/profile.png"
-                                class="user-image rounded-circle img-fluid"
-                                alt="User Image" />
-
-                        </a>
-
-                    </li>
-                    <li class="nav-item">
-                        <a
-                            class="nav-link d-flex align-items-center gap-2"
-                            href="index.php">
-                            <svg class="bi" aria-hidden="true">
-                                <use xlink:href="#house-fill"></use>
-                            </svg>
-                            Dashboard
-                        </a>
-                    </li>
-                    <?php if ($rol == 1) { ?>
-                        <li class="nav-item">
-                            <a class="nav-link d-flex align-items-center gap-2 active" aria-current="page" href="crear_instructores.php">
-                                <svg class="bi" aria-hidden="true">
-                                    <use xlink:href="#people"></use>
-                                </svg>
-                                Crear Instructor
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link d-flex align-items-center gap-2 active" aria-current="page" href="crear_administradores.php">
-                                <svg class="bi" aria-hidden="true">
-                                    <use xlink:href="#people"></use>
-                                </svg>
-                                Crear administradores
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link d-flex align-items-center gap-2 active" aria-current="page" href="crear_instructores.php">
-                                <svg class="bi" aria-hidden="true">
-                                    <use xlink:href="#people"></use>
-                                </svg>
-                                Crear aprendices
-                            </a>
-                        </li>
-
-                    <?php } ?>
-
-                    <li class="nav-item">
-                        <a class="nav-link d-flex align-items-center gap-2 active" aria-current="page" href="instructores.php">
-                            <svg class="bi" aria-hidden="true">
-                                <use xlink:href="#people"></use>
-                            </svg>
-                            Instructores
-                        </a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link d-flex align-items-center gap-2 active" aria-current="page" href="aprendices.php">
-                            <svg class="bi" aria-hidden="true">
-                                <use xlink:href="#people"></use>
-                            </svg>
-                            Aprendices
-                        </a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link d-flex align-items-center gap-2 active" aria-current="page" href="administradores.php">
-                            <svg class="bi" aria-hidden="true">
-                                <use xlink:href="#people"></use>
-                            </svg>
-                            administradores
-                        </a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link d-flex align-items-center gap-2 active" aria-current="page" href="./trabajos.php">
-                            <svg class="bi" aria-hidden="true">
-                                <use xlink:href="#people"></use>
-                            </svg>
-                            Trabajos
-
-                    <li class="nav-item">
-                        <a class="nav-link d-flex align-items-center gap-2 active" aria-current="page" href="fichas.php">
-                            <svg class="bi" aria-hidden="true">
-                                <use xlink:href="#people"></use>
-                            </svg>
-                            fichas
-                        </a>
-                    </li>
-                </ul>
-                <hr class="my-3" />
-                <ul class="nav flex-column mb-auto">
-                    <li class="nav-item">
-                        <a class="nav-link d-flex align-items-center gap-2" href="#">
-                            <svg class="bi" aria-hidden="true">
-                                <use xlink:href="#gear-wide-connected"></use>
-                            </svg>
-                            Configuración
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link d-flex align-items-center gap-2 btnLogout" href="../CONTROLLER/log_out.php">
-                            <svg class="bi" aria-hidden="true">
-                                <use xlink:href="#door-closed"></use>
-                            </svg>
-                            Cerrar Sesión
-                        </a>
-                    </li>
-                </ul>
-            </div>
-            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-                <div class="container mt-5">
-                    <?php if ($rol == 3) { ?>
-                        <!-- 🔵 FORMULARIO INDEPENDIENTE -->
-                        <div class="card shadow-lg border-0 rounded-4 mb-4">
-                            <div class="card-header bg-white py-3 text-center">
-                                <h4 class="fw-bold mb-0">
-                                    <i class="fa-solid fa-file-arrow-up text-primary me-2"></i>
-                                    Subir Archivo
-                                </h4>
-                            </div>
-
-                            <div class="card-body bg-light">
-
-                                <form method="post" id="frmTrabajos" enctype="multipart/form-data">
-
-                                    <div class="row justify-content-center">
-                                        <div class="col-md-6">
-                                            <label class="fw-semibold">Seleccione un archivo</label>
-                                            <input
-                                                type="file"
-                                                class="form-control shadow-sm"
-                                                id="uploadFile"
-                                                name="uploadFile">
-                                        </div>
-                                    </div>
-
-                                    <div class="text-center mt-4">
-                                        <button
-                                            type="submit"
-                                            id="subirArchivo"
-                                            class="btn btn-warning px-5 py-2 rounded-pill shadow">
-                                            <i class="fa-solid fa-upload me-2"></i> Subir
-                                        </button>
-                                    </div>
-
-                                </form>
-
-                            </div>
-                        </div>
-                    <?php } ?>
-
-
-
-                    <!-- 🔵 TABLA INDEPENDIENTE -->
-                    <div class="card shadow-lg border-0 rounded-4">
-                        <div class="card-header bg-white py-3 text-center">
-                            <h4 class="fw-bold mb-0">
-                                <i class="fa-solid fa-table text-success me-2"></i>
-                                Archivos Subidos
-                            </h4>
-                            <?php if ($rol == 2) { ?>
-                                <div class="text-center mt-4">
-                                    <button
-                                        type="submit"
-                                        id="crearTrabajo"
-                                        name="crearTrabajo"
-                                        class="btn btn-warning px-5 py-2 rounded-pill shadow">
-                                        <i class="fa-solid fa-upload me-2"></i> Crear Trabajo
-                                    </button>
-                                </div>
-                        </div>
-                    <?php } ?>
-
-                    <div class="card-body">
-
-                        <table class="table table-striped table-bordered shadow-sm">
-                            <thead class="table-dark">
-                                <tr>
-                                    <th>Nombre</th>
-                                    <th>Archivo</th>
-                                    <th>Calificacion</th>
-                                    <th>Comentario</th>
-                                    <th>Fecha Limite</th>
-                                </tr>
-                            </thead>
-
-                            <tbody id="tablaTrabajos">
-                                <?php while ($fila = $trabajos->fetch_assoc()): ?>
-                                    <tr>
-                                        <td><?php echo $fila['nombre']; ?></td>
-                                        <td><a href="../CONTROLLER/uploads/<?php echo $fila['archivo']; ?>"
-                                                target="_blank"
-                                                class="btn btn-primary btn-sm">
-                                                Ver archivo
-                                            </a></td>
-                                        <td><?php echo $fila['calificacion']; ?></td>
-                                        <td><?php echo $fila['comentario']; ?></td>
-                                        <td><?php echo $fila['fecha_limite']; ?></td>
-                                    </tr>
-                                <?php endwhile; ?>
-                            </tbody>
-
-                        </table>
-
+                <div
+                    class="offcanvas-md offcanvas-end bg-body-tertiary"
+                    tabindex="-1"
+                    id="sidebarMenu"
+                    aria-labelledby="sidebarMenuLabel">
+                    <div class="offcanvas-header">
+                        <h5 class="offcanvas-title" id="sidebarMenuLabel">
+                            Proyecto Scrum
+                        </h5>
+                        <button
+                            type="button"
+                            class="btn-close"
+                            data-bs-dismiss="offcanvas"
+                            data-bs-target="#sidebarMenu"
+                            aria-label="Close"></button>
                     </div>
+                    <div
+                        class="offcanvas-body d-md-flex flex-column p-0 pt-lg-3 overflow-y-auto">
+                        <ul class="nav flex-column">
+                            <li class="nav-item">
+                                <a href="./editar_perfil.php" class="nav-link">
+                                    <img
+                                        src="../assets/img/profile.png"
+                                        class="user-image rounded-circle img-fluid"
+                                        alt="User Image" />
+
+                                </a>
+
+                            </li>
+                            <li class="nav-item">
+                                <a
+                                    class="nav-link d-flex align-items-center gap-2"
+                                    href="index.php">
+                                    <svg class="bi" aria-hidden="true">
+                                        <use xlink:href="#house-fill"></use>
+                                    </svg>
+                                    Dashboard
+                                </a>
+                            </li>
+                            <?php if ($rol == 1) { ?>
+                                <li class="nav-item">
+                                    <a class="nav-link d-flex align-items-center gap-2 active" aria-current="page" href="crear_instructores.php">
+                                        <svg class="bi" aria-hidden="true">
+                                            <use xlink:href="#people"></use>
+                                        </svg>
+                                        Crear Instructor
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link d-flex align-items-center gap-2 active" aria-current="page" href="crear_administradores.php">
+                                        <svg class="bi" aria-hidden="true">
+                                            <use xlink:href="#people"></use>
+                                        </svg>
+                                        Crear administradores
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link d-flex align-items-center gap-2 active" aria-current="page" href="crear_instructores.php">
+                                        <svg class="bi" aria-hidden="true">
+                                            <use xlink:href="#people"></use>
+                                        </svg>
+                                        Crear aprendices
+                                    </a>
+                                </li>
+
+                            <?php } ?>
+
+                            <li class="nav-item">
+                                <a class="nav-link d-flex align-items-center gap-2 active" aria-current="page" href="instructores.php">
+                                    <svg class="bi" aria-hidden="true">
+                                        <use xlink:href="#people"></use>
+                                    </svg>
+                                    Instructores
+                                </a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link d-flex align-items-center gap-2 active" aria-current="page" href="aprendices.php">
+                                    <svg class="bi" aria-hidden="true">
+                                        <use xlink:href="#people"></use>
+                                    </svg>
+                                    Aprendices
+                                </a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link d-flex align-items-center gap-2 active" aria-current="page" href="administradores.php">
+                                    <svg class="bi" aria-hidden="true">
+                                        <use xlink:href="#people"></use>
+                                    </svg>
+                                    administradores
+                                </a>
+                            </li>
+
+                            
+
+                            <li class="nav-item">
+                                <a class="nav-link d-flex align-items-center gap-2 active" aria-current="page" href="./trabajos.php">
+                                    <svg class="bi" aria-hidden="true">
+                                        <use xlink:href="#people"></use>
+                                    </svg>
+                                    Trabajos
+
+                            <li class="nav-item">
+                                <a class="nav-link d-flex align-items-center gap-2 active" aria-current="page" href="fichas.php">
+                                    <svg class="bi" aria-hidden="true">
+                                        <use xlink:href="#people"></use>
+                                    </svg>
+                                    fichas
+                                </a>
+                            </li>
+                        </ul>
+                        <hr class="my-3" />
+                        <ul class="nav flex-column mb-auto">
+                            <li class="nav-item">
+                                <a class="nav-link d-flex align-items-center gap-2" href="#">
+                                    <svg class="bi" aria-hidden="true">
+                                        <use xlink:href="#gear-wide-connected"></use>
+                                    </svg>
+                                    Configuración
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link d-flex align-items-center gap-2 btnLogout" href="../CONTROLLER/log_out.php">
+                                    <svg class="bi" aria-hidden="true">
+                                        <use xlink:href="#door-closed"></use>
+                                    </svg>
+                                    Cerrar Sesión
+                                </a>
+                            </li>
+                        </ul>
                     </div>
                 </div>
-        </div>
+            </div>
+            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+                <div
+                    class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-1">
+                    <h1 class="h2">Fichas</h1>
+                </div>
 
+                <div class="table-responsive small">
+                    <table class="table table-striped table-sm">
+                        <thead>
+                            <tr>
+                                <th scope="col">Nombre trabajo</th>
+                                <th scope="col">Archivo</th>
+                                <th scope="col">Calificacion</th>
+                                <th scope="col">Comentario</th>
+                                <th scope="col">Aprendis</th>
+                                <th scope="col">Opciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="datosTrabajos">
+
+                        </tbody>
+                    </table>
+                </div>
+            </main>
+        </div>
     </div>
-    </main>
-    </div>
-    </div>
+    <script src="../ASSETS/JS/traerDatosTrabajos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script
         src="../ASSETS/JS/bootstrap.bundle.min.js"
         class="astro-vvvwv3sm"></script>
@@ -557,10 +501,7 @@ try {
         integrity="sha384-eI7PSr3L1XLISH8JdDII5YN/njoSsxfbrkCTnJrzXt+ENP5MOVBxD+l6sEG4zoLp"
         crossorigin="anonymous"
         class="astro-vvvwv3sm"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="../ASSETS/JS/dashboard.js" class="astro-vvvwv3sm"></script>
-    <script src="../public/JS/subirArchivo.js"></script>
+
 </body>
 
 </html>

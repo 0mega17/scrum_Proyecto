@@ -12,6 +12,5 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         isset($_POST["fechaLimite"]) && !empty($_POST["fechaLimite"]) &&
         isset($_POST["aprendiz"]) && !empty($_POST["aprendiz"])
     ) {
-        san
     }
 }

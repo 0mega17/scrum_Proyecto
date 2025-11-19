@@ -404,6 +404,16 @@ $IDusuario = $_SESSION["IDusuario"];
                                     Aprendices
                                 </a>
                             </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link d-flex align-items-center gap-2 active" aria-current="page" href="administradores.php">
+                                    <svg class="bi" aria-hidden="true">
+                                        <use xlink:href="#people"></use>
+                                    </svg>
+                                    administradores
+                                </a>
+                            </li>
+
                             <li class="nav-item">
                                 <a class="nav-link d-flex align-items-center gap-2 active" aria-current="page" href="./trabajos.php">
                                     <svg class="bi" aria-hidden="true">
@@ -417,6 +427,15 @@ $IDusuario = $_SESSION["IDusuario"];
                                         <use xlink:href="#people"></use>
                                     </svg>
                                     fichas
+                                </a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link d-flex align-items-center gap-2 active" aria-current="page" href="asignarTrabajo.php">
+                                    <svg class="bi" aria-hidden="true">
+                                        <use xlink:href="#people"></use>
+                                    </svg>
+                                    asignar trabajo
                                 </a>
                             </li>
                         </ul>
