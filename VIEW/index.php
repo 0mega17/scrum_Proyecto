@@ -314,7 +314,7 @@ if ($_SESSION["acceso"] == false || $_SESSION["acceso"] == null) {
     </header>
     <div class="container-fluid">
         <div class="row">
-            
+
             <div
                 class="sidebar border border-right col-md-3 col-lg-2 p-0 bg-body-tertiary">
                 <div
@@ -336,6 +336,16 @@ if ($_SESSION["acceso"] == false || $_SESSION["acceso"] == null) {
                     <div
                         class="offcanvas-body d-md-flex flex-column p-0 pt-lg-3 overflow-y-auto">
                         <ul class="nav flex-column">
+                            <li class="nav-item">
+                                <a href="./editar_perfil.php" class="nav-link">
+                                    <img
+                                        src="../assets/img/profile.png"
+                                        class="user-image rounded-circle img-fluid"
+                                        alt="User Image" />
+
+                                </a>
+
+                            </li>
                             <li class="nav-item">
                                 <a
                                     class="nav-link d-flex align-items-center gap-2"

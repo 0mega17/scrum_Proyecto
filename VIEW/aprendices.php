@@ -11,7 +11,7 @@ try {
 
     $mysql->conectar();
 
-    $aprendices = $mysql->efectuarConsulta("SELECT * FROM aprendices");
+    $resultado = $mysql->efectuarConsulta("SELECT * FROM aprendices");
 
     $mysql->desconectar();
 } catch (Exception $ex) {
@@ -353,11 +353,10 @@ try {
                                     <img
                                         src="../assets/img/profile.png"
                                         class="user-image rounded-circle img-fluid"
-                                        alt="User Image"
-                                      />
-                               
+                                        alt="User Image" />
+
                                 </a>
-                            
+
                             </li>
                             <li class="nav-item">
                                 <a
@@ -409,6 +408,15 @@ try {
                                         <use xlink:href="#people"></use>
                                     </svg>
                                     Aprendices
+                                </a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link d-flex align-items-center gap-2 active" aria-current="page" href="fichas.php">
+                                    <svg class="bi" aria-hidden="true">
+                                        <use xlink:href="#people"></use>
+                                    </svg>
+                                    fichas
                                 </a>
                             </li>
                         </ul>
