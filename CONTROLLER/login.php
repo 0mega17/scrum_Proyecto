@@ -28,6 +28,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Si se trae una fila EXISTE el usuario
         if ($usuarios = $consulta->fetch_assoc()) {
             // Verificar que el usuario este activo
+            if ($usuarios["estado"] == "Activo") {
                 if (password_verify($password, $usuarios["password"])) {
                     session_start();
 
@@ -49,6 +50,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     ]);
                     exit();
                 }
+            } else {
+                echo json_encode([
+                    "success" => false,
+                    "message" => "Usuario inactivo, por favor intente con otro usuario"
+                ]);
+                exit();
             }
         } else {
             echo json_encode([
@@ -64,4 +71,4 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         ]);
         exit();
     }
-
+}

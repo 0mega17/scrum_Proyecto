@@ -1,3 +1,12 @@
+<?php
+
+session_start();
+if ($_SESSION["acceso"] == false || $_SESSION["acceso"] == null) {
+    header('location: ./login.php');
+}
+?>
+
+
 <!doctype html>
 <html lang="en" data-bs-theme="auto">
 
