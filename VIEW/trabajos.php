@@ -522,40 +522,51 @@ try {
                                 <i class="fa-solid fa-table text-success me-2"></i>
                                 Archivos Subidos
                             </h4>
+                            <?php if ($rol == 2) { ?>
+                                <div class="text-center mt-4">
+                                    <button
+                                        type="submit"
+                                        id="crearTrabajo"
+                                        name="crearTrabajo"
+                                        class="btn btn-warning px-5 py-2 rounded-pill shadow">
+                                        <i class="fa-solid fa-upload me-2"></i> Crear Trabajo
+                                    </button>
+                                </div>
                         </div>
+                    <?php } ?>
 
-                        <div class="card-body">
+                    <div class="card-body">
 
-                            <table class="table table-striped table-bordered shadow-sm">
-                                <thead class="table-dark">
+                        <table class="table table-striped table-bordered shadow-sm">
+                            <thead class="table-dark">
+                                <tr>
+                                    <th>Nombre</th>
+                                    <th>Archivo</th>
+                                    <th>Calificacion</th>
+                                    <th>Comentario</th>
+                                    <th>Fecha Limite</th>
+                                </tr>
+                            </thead>
+
+                            <tbody id="tablaTrabajos">
+                                <?php while ($fila = $trabajos->fetch_assoc()): ?>
                                     <tr>
-                                        <th>Nombre</th>
-                                        <th>Archivo</th>
-                                        <th>Calificacion</th>
-                                        <th>Comentario</th>
-                                        <th>Fecha Limite</th>
+                                        <td><?php echo $fila['nombre']; ?></td>
+                                        <td><a href="../CONTROLLER/uploads/<?php echo $fila['archivo']; ?>"
+                                                target="_blank"
+                                                class="btn btn-primary btn-sm">
+                                                Ver archivo
+                                            </a></td>
+                                        <td><?php echo $fila['calificacion']; ?></td>
+                                        <td><?php echo $fila['comentario']; ?></td>
+                                        <td><?php echo $fila['fecha_limite']; ?></td>
                                     </tr>
-                                </thead>
+                                <?php endwhile; ?>
+                            </tbody>
 
-                                <tbody id="tablaTrabajos">
-                                    <?php while ($fila = $trabajos->fetch_assoc()): ?>
-                                        <tr>
-                                            <td><?php echo $fila['nombre']; ?></td>
-                                            <td><a href="../CONTROLLER/uploads/<?php echo $fila['archivo']; ?>"
-                                                    target="_blank"
-                                                    class="btn btn-primary btn-sm">
-                                                    Ver archivo
-                                                </a></td>
-                                            <td><?php echo $fila['calificacion']; ?></td>
-                                            <td><?php echo $fila['comentario']; ?></td>
-                                            <td><?php echo $fila['fecha_limite']; ?></td>
-                                        </tr>
-                                    <?php endwhile; ?>
-                                </tbody>
+                        </table>
 
-                            </table>
-
-                        </div>
+                    </div>
                     </div>
 
                 </div>
