@@ -13,7 +13,7 @@
         <div class="container py-5 h-100">
             <div class="row d-flex align-items-center justify-content-center h-100">
                 <div class="col-md-8 col-lg-7 col-xl-6">
-                    <img src="../ASSETS/IMG/login.jpeg"
+                    <img src="../ASSETS/IMG/login.png"
                         class="img-fluid" alt="Phone image">
                 </div>
                 <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1">
@@ -23,20 +23,20 @@
                         </div>
                         <!-- Email input -->
                         <div data-mdb-input-init class="form-outline mb-4">
-                            <label class="form-label" for="form1Example13">Email</label>
+                            <label class="form-label" for="email">Email</label>
                             <input type="email" id="email" name="email" class="form-control form-control-lg" />
 
                         </div>
 
                         <!-- Password input -->
                         <div data-mdb-input-init class="form-outline mb-4">
-                            <label class="form-label" for="form1Example23">Contraseña</label>
+                            <label class="form-label" for="password">Contraseña</label>
                             <input type="password" id="password" name="password" class="form-control form-control-lg" />
 
                         </div>
 
                         <!-- Submit button -->
-                        <button type="submit" data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-lg btn-block" id="btn-acceder">Acceder</button>
+                        <button type="submit" data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-lg btn-block w-100 fw-bold fs-5" id="btn-acceder">Acceder</button>
 
                     </form>
                 </div>
