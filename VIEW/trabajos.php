@@ -9,11 +9,10 @@
         name="author"
         content="Mark Otto, Jacob Thornton, and Bootstrap contributors" />
     <meta name="generator" content="Astro v5.13.2" />
-    <title>Dashboard Template · Bootstrap v5.3</title>
+    <title>Trabajos</title>
     <link
         rel="canonical"
         href="https://getbootstrap.com/docs/5.3/examples/dashboard/" />
-    <script src="../assets/js/color-modes.js"></script>
     <link rel="stylesheet" href="../ASSETS/CSS/bootstrap.min.css" />
     <meta name="theme-color" content="#712cf9" />
     <link href="../ASSETS/CSS/dashboard.css" rel="stylesheet" />
@@ -283,7 +282,6 @@
                 <button
                     class="nav-link px-3 text-white"
                     type="button"
-                    data-bs-toggle="offcanvas"
                     data-bs-target="#sidebarMenu"
                     aria-controls="sidebarMenu"
                     aria-expanded="false"
@@ -329,11 +327,11 @@
                                 <a
                                     class="nav-link d-flex align-items-center gap-2 active"
                                     aria-current="page"
-                                    href="#">
+                                    href="./index.php">
                                     <svg class="bi" aria-hidden="true">
                                         <use xlink:href="#house-fill"></use>
                                     </svg>
-                                    Dashboard
+                                    Inicio
                                 </a>
                             </li>
                             <li class="nav-item">
@@ -446,23 +444,66 @@
                 </div>
             </div>
             <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-                <div
-                    class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                    <h1 class="h2">Dashboard</h1>
-                </div>
-                <h2>Section title</h2>
-                <div class="table-responsive small">
-                    <table class="table table-striped table-sm">
-                        <thead>
-                            <tr>
-                                <th scope="col">#</th>
-                                <th scope="col">Header</th>
-                                <th scope="col">Header</th>
-                                <th scope="col">Header</th>
-                                <th scope="col">Header</th>
-                            </tr>
-                        </thead>
-                    </table>
+                <div class="container">
+                    <!-- Encabezado -->
+                    <div class="text-center mb-5">
+                        <div class="p-4 rounded-4 bg-white shadow-sm d-inline-block">
+                            <h2 class="fw-bold text-dark mb-1">
+                                <i class="fa-solid fa-file-pdf text-danger me-2"></i>
+                                Trabajos
+                            </h2>
+                        </div>
+                    </div>
+
+                    <!-- Tarjeta principal -->
+                    <div class="card border-0 rounded-4 shadow-lg overflow-hidden">
+                        <div class="card-header bg-white border-0 py-4 px-4 d-flex align-items-center justify-content-between flex-wrap">
+                            <div class="d-flex align-items-center">
+                                <div class="bg-dark bg-gradient text-white rounded-circle d-flex align-items-center justify-content-center me-3" style="width: 45px; height: 45px;">
+                                    <i class="fa-solid fa-chart-line fs-5"></i>
+                                </div>
+                                <div>
+                                    <h5 class="fw-bold mb-0 text-dark">Subir Trabajos</h5>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card-body bg-light p-5 text-center justify-content-space-around">
+                            <form method="post" action="" id="frmTrabajos" name="frmTrabajos">
+                                <div class="row g-4">
+                                    <!-- Campo: Categoria -->
+                                    <div class="col-md-6 col-lg-3">
+                                        <label for="tipoInforme" class="form-label fw-semibold text-dark">Nombre</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text bg-white border-0 shadow-sm">
+                                                <i class="fa-solid fa-calendar-day text-danger"></i>
+                                            </span>
+                                            <input type="text" class="form-control border-0 shadow-sm" name="nombre" id="nombre">
+                                        </div>
+                                    </div>
+
+                                    <!-- Campo: Fecha inicio -->
+                                    <div class="col-md-6 col-lg-3">
+                                        <label for="fechaInicio" class="form-label fw-semibold text-dark">Cargar Archivo</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text bg-white border-0 shadow-sm">
+                                                <i class="fa-solid fa-calendar-day text-danger"></i>
+                                            </span>
+                                            <input type="file" class="form-control border-0 shadow-sm" name="uploadFile" id="uploadFile">
+                                        </div>
+                                    </div>
+
+
+
+                                    <!-- Botón -->
+                                    <div class="text-center mt-5">
+                                        <button type="submit" class="btn btn-warning btn-lg px-5 py-3 shadow-lg rounded-5" id="subirArchivo" name="subirArchivo" style="font-weight:600; letter-spacing:0.5px;">
+                                            <i class="fa-solid fa-file-pdf me-2"></i>Subir Archivo
+                                        </button>
+                                    </div>
+                            </form>
+                        </div>
+                    </div>
                 </div>
             </main>
         </div>
@@ -475,7 +516,10 @@
         integrity="sha384-eI7PSr3L1XLISH8JdDII5YN/njoSsxfbrkCTnJrzXt+ENP5MOVBxD+l6sEG4zoLp"
         crossorigin="anonymous"
         class="astro-vvvwv3sm"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="../ASSETS/JS/dashboard.js" class="astro-vvvwv3sm"></script>
+    <script src="../public/JS/subirArchivo.js"></script>
 </body>
 
 </html>
