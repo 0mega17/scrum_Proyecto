@@ -5,11 +5,7 @@ if ($_SESSION["acceso"] == false || $_SESSION["acceso"] == null) {
 }
 
 $rol = $_SESSION["tipoUsuario"];
-if ($rol == 3) {
-    $ficha_id =  $_SESSION["fichaID"];
-}
 $IDusuario = $_SESSION["IDusuario"];
-
 try {
     require_once '../MODEL/model.php';
 
@@ -17,12 +13,7 @@ try {
 
     $mysql->conectar();
 
-    if ($rol == 3) {
-        $resultado = $mysql->efectuarConsulta("SELECT * FROM aprendices WHERE fichas_id = $ficha_id");
-    } else {
-        $resultado = $mysql->efectuarConsulta("SELECT * FROM aprendices");
-    }
-
+    $aprendices = $mysql->efectuarConsulta("SELECT * FROM fichas");
 
     $mysql->desconectar();
 } catch (Exception $ex) {
@@ -356,7 +347,7 @@ try {
                             data-bs-target="#sidebarMenu"
                             aria-label="Close"></button>
                     </div>
-                     <div
+                    <div
                         class="offcanvas-body d-md-flex flex-column p-0 pt-lg-3 overflow-y-auto">
                         <ul class="nav flex-column">
                             <li class="nav-item">
@@ -379,33 +370,33 @@ try {
                                     Dashboard
                                 </a>
                             </li>
-                            <?php if($rol == 1){ ?>
-                            <li class="nav-item">
-                                <a class="nav-link d-flex align-items-center gap-2 active" aria-current="page" href="crear_instructores.php">
-                                    <svg class="bi" aria-hidden="true">
-                                        <use xlink:href="#people"></use>
-                                    </svg>
-                                    Crear Instructor
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link d-flex align-items-center gap-2 active" aria-current="page" href="crear_administradores.php">
-                                    <svg class="bi" aria-hidden="true">
-                                        <use xlink:href="#people"></use>
-                                    </svg>
-                                    Crear administradores
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link d-flex align-items-center gap-2 active" aria-current="page" href="crear_instructores.php">
-                                    <svg class="bi" aria-hidden="true">
-                                        <use xlink:href="#people"></use>
-                                    </svg>
-                                    Crear aprendices
-                                </a>
-                            </li>
+                            <?php if ($rol == 1) { ?>
+                                <li class="nav-item">
+                                    <a class="nav-link d-flex align-items-center gap-2 active" aria-current="page" href="crear_instructores.php">
+                                        <svg class="bi" aria-hidden="true">
+                                            <use xlink:href="#people"></use>
+                                        </svg>
+                                        Crear Instructor
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link d-flex align-items-center gap-2 active" aria-current="page" href="crear_administradores.php">
+                                        <svg class="bi" aria-hidden="true">
+                                            <use xlink:href="#people"></use>
+                                        </svg>
+                                        Crear administradores
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link d-flex align-items-center gap-2 active" aria-current="page" href="crear_instructores.php">
+                                        <svg class="bi" aria-hidden="true">
+                                            <use xlink:href="#people"></use>
+                                        </svg>
+                                        Crear aprendices
+                                    </a>
+                                </li>
 
-                            <?php }?>
+                            <?php } ?>
 
                             <li class="nav-item">
                                 <a class="nav-link d-flex align-items-center gap-2 active" aria-current="page" href="instructores.php">
@@ -433,6 +424,8 @@ try {
                                     administradores
                                 </a>
                             </li>
+
+                            
 
                             <li class="nav-item">
                                 <a class="nav-link d-flex align-items-center gap-2 active" aria-current="page" href="./trabajos.php">
@@ -475,34 +468,31 @@ try {
             <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
                 <div
                     class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-1">
-                    <h1 class="h2">Aprendices</h1>
+                    <h1 class="h2">Fichas</h1>
                 </div>
 
                 <div class="table-responsive small">
                     <table class="table table-striped table-sm">
                         <thead>
                             <tr>
-                                <th scope="col">Documento</th>
-                                <th scope="col">Nombre</th>
-                                <th scope="col">Email</th>
-                                <th scope="col">Estado</th>
+                                <th scope="col">Nombre trabajo</th>
+                                <th scope="col">Archivo</th>
+                                <th scope="col">Calificacion</th>
+                                <th scope="col">Comentario</th>
+                                <th scope="col">Aprendis</th>
+                                <th scope="col">Opciones</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <?php while ($aprendice = mysqli_fetch_assoc($resultado)): ?>
-                                <tr>
-                                    <td> <?php echo $aprendice['id'] ?> </td>
-                                    <td> <?php echo $aprendice['nombre'] ?> </td>
-                                    <td> <?php echo $aprendice['email'] ?> </td>
-                                    <td> <?php echo $aprendice['estado'] ?> </td>
-                                </tr>
-                            <?php endwhile; ?>
+                        <tbody id="datosTrabajos">
+
                         </tbody>
                     </table>
                 </div>
             </main>
         </div>
     </div>
+    <script src="../ASSETS/JS/traerDatosTrabajos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script
         src="../ASSETS/JS/bootstrap.bundle.min.js"
         class="astro-vvvwv3sm"></script>
@@ -511,6 +501,7 @@ try {
         integrity="sha384-eI7PSr3L1XLISH8JdDII5YN/njoSsxfbrkCTnJrzXt+ENP5MOVBxD+l6sEG4zoLp"
         crossorigin="anonymous"
         class="astro-vvvwv3sm"></script>
+
 </body>
 
 </html>
