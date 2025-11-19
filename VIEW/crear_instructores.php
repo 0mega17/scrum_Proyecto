@@ -1,13 +1,10 @@
-<!-- <?php
+<?php
 
-        // session_start();
-
-
-        // if (!isset($_SESSION['id_usuario']) || $_SESSION['tipo_usuario'] != 'administrador' || $_SESSION['activo'] != "activo") {
-        //   header("Location: login.php");
-        //   exit();
-        // }
-        ?> -->
+        session_start();
+        if ($_SESSION["acceso"] == false || $_SESSION["acceso"] == null) {
+            header('location: ./login.php');
+        }
+        ?> 
 <!doctype html>
 <html lang="en" data-bs-theme="auto">
 
