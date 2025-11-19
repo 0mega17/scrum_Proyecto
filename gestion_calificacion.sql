@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 18-11-2025 a las 13:53:25
+-- Tiempo de generación: 19-11-2025 a las 13:43:33
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -79,9 +79,18 @@ CREATE TABLE `usuarios` (
   `id` int(11) NOT NULL,
   `nombre` varchar(45) NOT NULL,
   `email` varchar(150) NOT NULL,
-  `password` varchar(45) NOT NULL,
-  `tipo` varchar(150) NOT NULL
+  `password` varchar(150) NOT NULL,
+  `tipo` varchar(150) NOT NULL,
+  `estado` varchar(70) NOT NULL DEFAULT 'Activo'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Volcado de datos para la tabla `usuarios`
+--
+
+INSERT INTO `usuarios` (`id`, `nombre`, `email`, `password`, `tipo`, `estado`) VALUES
+(1, 'usuario', 'usuario@gmail.com', '$2a$12$M96THqQw9yK4b0dRP846RuMg98WBWODWhgbvFvQ6PiAnB2EasNxIe', 'Aprendiz', 'Activo'),
+(123, 'Juan Camilo Vanegas', 'camilo@gmail.com', '$2y$10$YcYqxA6PITCxV91eZzPVd.WFXjEbimyXWYiRaF24xHjVZUHQYDfdS', 'Instructor', 'Activo');
 
 -- --------------------------------------------------------
 

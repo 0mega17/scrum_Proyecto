@@ -1,3 +1,31 @@
+//<?php
+//session_start();
+// if ($_SESSION["acceso"] == false || $_SESSION["acceso"] == null) {
+//     header('location: ./login.php');
+// }
+$idUsuario = $_SESSION["IDusuario"];
+$tipoUsuario = $_SESSION["tipoUsuario"];
+try {
+    require_once '../MODEL/model.php';
+
+    $mysql = new MySQL();
+
+    $mysql->conectar();
+
+    if ($tipoUsuario == 'Aprendiz') {
+        $trabajos = $mysql->efectuarConsulta("SELECT * FROM trabajos INNER JOIN aprendices.id ON aprendices_id = trabajos.id  WHERE aprendices.id = $idUsuario");
+    } else {
+        $trabajos = $mysql->efectuarConsulta("SELECT * FROM trabajos");
+    }
+
+
+    $mysql->desconectar();
+} catch (Exception $ex) {
+    echo "Ocurrio un error...";
+}
+
+?>
+
 <!doctype html>
 <html lang="en" data-bs-theme="auto">
 
@@ -444,66 +472,95 @@
                 </div>
             </div>
             <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-                <div class="container">
-                    <!-- Encabezado -->
-                    <div class="text-center mb-5">
-                        <div class="p-4 rounded-4 bg-white shadow-sm d-inline-block">
-                            <h2 class="fw-bold text-dark mb-1">
-                                <i class="fa-solid fa-file-pdf text-danger me-2"></i>
-                                Trabajos
-                            </h2>
-                        </div>
-                    </div>
-
-                    <!-- Tarjeta principal -->
-                    <div class="card border-0 rounded-4 shadow-lg overflow-hidden">
-                        <div class="card-header bg-white border-0 py-4 px-4 d-flex align-items-center justify-content-between flex-wrap">
-                            <div class="d-flex align-items-center">
-                                <div class="bg-dark bg-gradient text-white rounded-circle d-flex align-items-center justify-content-center me-3" style="width: 45px; height: 45px;">
-                                    <i class="fa-solid fa-chart-line fs-5"></i>
-                                </div>
-                                <div>
-                                    <h5 class="fw-bold mb-0 text-dark">Subir Trabajos</h5>
-                                </div>
+                <div class="container mt-5">
+                    <?php if ($tipoUsuario == 'Aprendiz') { ?>
+                        <!-- 🔵 FORMULARIO INDEPENDIENTE -->
+                        <div class="card shadow-lg border-0 rounded-4 mb-4">
+                            <div class="card-header bg-white py-3 text-center">
+                                <h4 class="fw-bold mb-0">
+                                    <i class="fa-solid fa-file-arrow-up text-primary me-2"></i>
+                                    Subir Archivo
+                                </h4>
                             </div>
-                        </div>
 
-                        <div class="card-body bg-light p-5 text-center justify-content-space-around">
-                            <form method="post" action="" id="frmTrabajos" name="frmTrabajos">
-                                <div class="row g-4">
-                                    <!-- Campo: Categoria -->
-                                    <div class="col-md-6 col-lg-3">
-                                        <label for="tipoInforme" class="form-label fw-semibold text-dark">Nombre</label>
-                                        <div class="input-group">
-                                            <span class="input-group-text bg-white border-0 shadow-sm">
-                                                <i class="fa-solid fa-calendar-day text-danger"></i>
-                                            </span>
-                                            <input type="text" class="form-control border-0 shadow-sm" name="nombre" id="nombre">
+                            <div class="card-body bg-light">
+
+                                <form method="post" id="frmTrabajos" enctype="multipart/form-data">
+
+                                    <div class="row justify-content-center">
+                                        <div class="col-md-6">
+                                            <label class="fw-semibold">Seleccione un archivo</label>
+                                            <input
+                                                type="file"
+                                                class="form-control shadow-sm"
+                                                id="uploadFile"
+                                                name="uploadFile">
                                         </div>
                                     </div>
 
-                                    <!-- Campo: Fecha inicio -->
-                                    <div class="col-md-6 col-lg-3">
-                                        <label for="fechaInicio" class="form-label fw-semibold text-dark">Cargar Archivo</label>
-                                        <div class="input-group">
-                                            <span class="input-group-text bg-white border-0 shadow-sm">
-                                                <i class="fa-solid fa-calendar-day text-danger"></i>
-                                            </span>
-                                            <input type="file" class="form-control border-0 shadow-sm" name="uploadFile" id="uploadFile">
-                                        </div>
-                                    </div>
-
-
-
-                                    <!-- Botón -->
-                                    <div class="text-center mt-5">
-                                        <button type="submit" class="btn btn-warning btn-lg px-5 py-3 shadow-lg rounded-5" id="subirArchivo" name="subirArchivo" style="font-weight:600; letter-spacing:0.5px;">
-                                            <i class="fa-solid fa-file-pdf me-2"></i>Subir Archivo
+                                    <div class="text-center mt-4">
+                                        <button
+                                            type="submit"
+                                            id="subirArchivo"
+                                            class="btn btn-warning px-5 py-2 rounded-pill shadow">
+                                            <i class="fa-solid fa-upload me-2"></i> Subir
                                         </button>
                                     </div>
-                            </form>
+
+                                </form>
+
+                            </div>
+                        </div>
+                    <?php } ?>
+
+
+
+                    <!-- 🔵 TABLA INDEPENDIENTE -->
+                    <div class="card shadow-lg border-0 rounded-4">
+                        <div class="card-header bg-white py-3 text-center">
+                            <h4 class="fw-bold mb-0">
+                                <i class="fa-solid fa-table text-success me-2"></i>
+                                Archivos Subidos
+                            </h4>
+                        </div>
+
+                        <div class="card-body">
+
+                            <table class="table table-striped table-bordered shadow-sm">
+                                <thead class="table-dark">
+                                    <tr>
+                                        <th>Nombre</th>
+                                        <th>Archivo</th>
+                                        <th>Calificacion</th>
+                                        <th>Comentario</th>
+                                        <th>Fecha Limite</th>
+                                    </tr>
+                                </thead>
+
+                                <tbody id="tablaTrabajos">
+                                    <?php while ($fila = $trabajos->fetch_assoc()): ?>
+                                        <tr>
+                                            <td><?php echo $fila['nombre']; ?></td>
+                                            <td>
+                                                <a
+                                                    href="<?php echo $fila['archivo']; ?>"
+                                                    target="_blank"
+                                                    class="text-decoration-none">
+                                                    Ver Archivo
+                                                </a>
+                                            </td>
+                                            <td><?php echo $fila['calificacion']; ?></td>
+                                            <td><?php echo $fila['comentario']; ?></td>
+                                            <td><?php echo $fila['fecha_limite']; ?></td>
+                                        </tr>
+                                    <?php endwhile; ?>
+                                </tbody>
+
+                            </table>
+
                         </div>
                     </div>
+
                 </div>
             </main>
         </div>

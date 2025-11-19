@@ -58,8 +58,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
         // Insertar en BD
         $consulta = $mysql->efectuarConsulta("
-            INSERT INTO trabajos (nombre, fecha_limite, archivo, estado)
-            VALUES ('$nombre', NOW(), '$nombreArchivo', 'Activo')
+            INSERT INTO trabajos()
         ");
 
         if ($consulta) {

@@ -7,7 +7,7 @@ class MySQL {
     private $usuarioBase = "root";
     private $contrasena = "";
     // private $nombreBaseDatos = "gestion_calificacion";
-    private $nombreBaseDatos = "scrum_proyecto";
+    private $nombreBaseDatos = "scrum2";
 
     private $conexion;
 
