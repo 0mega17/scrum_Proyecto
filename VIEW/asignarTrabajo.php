@@ -1,9 +1,11 @@
 <?php
-// session_start();
-// if ($_SESSION["acceso"] == false || $_SESSION["acceso"] == null) {
-//     header('location: ./login.php');
-// }
+session_start();
+if ($_SESSION["acceso"] == false || $_SESSION["acceso"] == null) {
+    header('location: ./login.php');
+}
 
+$rol = $_SESSION["tipoUsuario"];
+$IDusuario = $_SESSION["IDusuario"];
 try {
     require_once '../MODEL/model.php';
 
@@ -336,7 +338,7 @@ try {
                     aria-labelledby="sidebarMenuLabel">
                     <div class="offcanvas-header">
                         <h5 class="offcanvas-title" id="sidebarMenuLabel">
-                            Company name
+                            Proyecto Scrum
                         </h5>
                         <button
                             type="button"
@@ -349,31 +351,114 @@ try {
                         class="offcanvas-body d-md-flex flex-column p-0 pt-lg-3 overflow-y-auto">
                         <ul class="nav flex-column">
                             <li class="nav-item">
-                                <a class="nav-link d-flex align-items-center gap-2" href="./aprendices.php">
-                                    Aprendices
+                                <a href="./editar_perfil.php" class="nav-link">
+                                    <img
+                                        src="../assets/img/profile.png"
+                                        class="user-image rounded-circle img-fluid"
+                                        alt="User Image" />
+
                                 </a>
+
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link d-flex align-items-center gap-2" href="./instructores.php">
+                                <a
+                                    class="nav-link d-flex align-items-center gap-2"
+                                    href="index.php">
+                                    <svg class="bi" aria-hidden="true">
+                                        <use xlink:href="#house-fill"></use>
+                                    </svg>
+                                    Dashboard
+                                </a>
+                            </li>
+                            <?php if ($rol == 1) { ?>
+                                <li class="nav-item">
+                                    <a class="nav-link d-flex align-items-center gap-2 active" aria-current="page" href="crear_instructores.php">
+                                        <svg class="bi" aria-hidden="true">
+                                            <use xlink:href="#people"></use>
+                                        </svg>
+                                        Crear Instructor
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link d-flex align-items-center gap-2 active" aria-current="page" href="crear_administradores.php">
+                                        <svg class="bi" aria-hidden="true">
+                                            <use xlink:href="#people"></use>
+                                        </svg>
+                                        Crear administradores
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link d-flex align-items-center gap-2 active" aria-current="page" href="crear_instructores.php">
+                                        <svg class="bi" aria-hidden="true">
+                                            <use xlink:href="#people"></use>
+                                        </svg>
+                                        Crear aprendices
+                                    </a>
+                                </li>
+
+                            <?php } ?>
+
+                            <li class="nav-item">
+                                <a class="nav-link d-flex align-items-center gap-2 active" aria-current="page" href="instructores.php">
+                                    <svg class="bi" aria-hidden="true">
+                                        <use xlink:href="#people"></use>
+                                    </svg>
                                     Instructores
                                 </a>
                             </li>
+
                             <li class="nav-item">
-                                <a class="nav-link d-flex align-items-center gap-2" href="./fichas.php">
-                                    Fichas
+                                <a class="nav-link d-flex align-items-center gap-2 active" aria-current="page" href="aprendices.php">
+                                    <svg class="bi" aria-hidden="true">
+                                        <use xlink:href="#people"></use>
+                                    </svg>
+                                    Aprendices
+                                </a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link d-flex align-items-center gap-2 active" aria-current="page" href="administradores.php">
+                                    <svg class="bi" aria-hidden="true">
+                                        <use xlink:href="#people"></use>
+                                    </svg>
+                                    administradores
+                                </a>
+                            </li>
+
+                            
+
+                            <li class="nav-item">
+                                <a class="nav-link d-flex align-items-center gap-2 active" aria-current="page" href="./trabajos.php">
+                                    <svg class="bi" aria-hidden="true">
+                                        <use xlink:href="#people"></use>
+                                    </svg>
+                                    Trabajos
+
+                            <li class="nav-item">
+                                <a class="nav-link d-flex align-items-center gap-2 active" aria-current="page" href="fichas.php">
+                                    <svg class="bi" aria-hidden="true">
+                                        <use xlink:href="#people"></use>
+                                    </svg>
+                                    fichas
                                 </a>
                             </li>
                         </ul>
-
                         <hr class="my-3" />
                         <ul class="nav flex-column mb-auto">
-
                             <li class="nav-item">
-                                <a class="nav-link d-flex align-items-center gap-2" href="../CONTROLLER/log_out.php">
+                                <a class="nav-link d-flex align-items-center gap-2" href="#">
+                                    <svg class="bi" aria-hidden="true">
+                                        <use xlink:href="#gear-wide-connected"></use>
+                                    </svg>
+                                    Configuración
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link d-flex align-items-center gap-2 btnLogout" href="../CONTROLLER/log_out.php">
                                     <svg class="bi" aria-hidden="true">
                                         <use xlink:href="#door-closed"></use>
                                     </svg>
-                                    Sign out
+                                    Cerrar Sesión
                                 </a>
                             </li>
                         </ul>

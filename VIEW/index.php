@@ -429,6 +429,15 @@ $IDusuario = $_SESSION["IDusuario"];
                                     fichas
                                 </a>
                             </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link d-flex align-items-center gap-2 active" aria-current="page" href="asignarTrabajo.php">
+                                    <svg class="bi" aria-hidden="true">
+                                        <use xlink:href="#people"></use>
+                                    </svg>
+                                    asignar trabajo
+                                </a>
+                            </li>
                         </ul>
                         <hr class="my-3" />
                         <ul class="nav flex-column mb-auto">
