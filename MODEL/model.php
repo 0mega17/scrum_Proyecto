@@ -6,7 +6,7 @@ class MySQL {
     private $ipServidor = "localhost";
     private $usuarioBase = "root";
     private $contrasena = "";
-    private $nombreBaseDatos = "crud_simple";
+    private $nombreBaseDatos = "gestion_calificacion";
 
     private $conexion;
 
