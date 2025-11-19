@@ -273,6 +273,7 @@ if ($_SESSION["acceso"] == false || $_SESSION["acceso"] == null) {
         <a
             class="navbar-brand col-md-3 col-lg-2 me-0 px-3 fs-6 text-white"
             href="#">Company name</a>
+
         <ul class="navbar-nav flex-row d-md-none">
             <li class="nav-item text-nowrap">
                 <button
@@ -313,6 +314,7 @@ if ($_SESSION["acceso"] == false || $_SESSION["acceso"] == null) {
     </header>
     <div class="container-fluid">
         <div class="row">
+            
             <div
                 class="sidebar border border-right col-md-3 col-lg-2 p-0 bg-body-tertiary">
                 <div
@@ -349,7 +351,7 @@ if ($_SESSION["acceso"] == false || $_SESSION["acceso"] == null) {
                                     <svg class="bi" aria-hidden="true">
                                         <use xlink:href="#people"></use>
                                     </svg>
-                                    Crear Usuario
+                                    Crear Instructor
                                 </a>
                             </li>
 
