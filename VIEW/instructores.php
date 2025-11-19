@@ -11,7 +11,7 @@ try {
 
     $mysql->conectar();
 
-    $aprendices = $mysql->efectuarConsulta("SELECT * FROM usuarios WHERE tipo = 'Instructor'");
+    $instructores = $mysql->efectuarConsulta("SELECT * FROM usuarios WHERE tipo = 'Instructor'");
 
     $mysql->desconectar();
 } catch (Exception $ex) {
@@ -336,7 +336,7 @@ try {
                     aria-labelledby="sidebarMenuLabel">
                     <div class="offcanvas-header">
                         <h5 class="offcanvas-title" id="sidebarMenuLabel">
-                            Company name
+                            Proyecto Scrum
                         </h5>
                         <button
                             type="button"
@@ -349,31 +349,57 @@ try {
                         class="offcanvas-body d-md-flex flex-column p-0 pt-lg-3 overflow-y-auto">
                         <ul class="nav flex-column">
                             <li class="nav-item">
-                                <a class="nav-link d-flex align-items-center gap-2" href="./aprendices.php">
-                                    Aprendices
+                                <a
+                                    class="nav-link d-flex align-items-center gap-2"
+                                    href="index.php">
+                                    <svg class="bi" aria-hidden="true">
+                                        <use xlink:href="#house-fill"></use>
+                                    </svg>
+                                    Dashboard
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link d-flex align-items-center gap-2" href="./instructores.php">
+                                <a class="nav-link d-flex align-items-center gap-2 active" aria-current="page" href="crear_instructores.php">
+                                    <svg class="bi" aria-hidden="true">
+                                        <use xlink:href="#people"></use>
+                                    </svg>
+                                    Crear Usuario
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link d-flex align-items-center gap-2 active" aria-current="page" href="instructores.php">
+                                    <svg class="bi" aria-hidden="true">
+                                        <use xlink:href="#people"></use>
+                                    </svg>
                                     Instructores
                                 </a>
                             </li>
+
                             <li class="nav-item">
-                                <a class="nav-link d-flex align-items-center gap-2" href="./fichas.php">
-                                    Fichas
+                                <a class="nav-link d-flex align-items-center gap-2 active" aria-current="page" href="aprendices.php">
+                                    <svg class="bi" aria-hidden="true">
+                                        <use xlink:href="#people"></use>
+                                    </svg>
+                                    Aprendices
                                 </a>
                             </li>
                         </ul>
-
                         <hr class="my-3" />
                         <ul class="nav flex-column mb-auto">
-                            
                             <li class="nav-item">
-                                <a class="nav-link d-flex align-items-center gap-2" href="../CONTROLLER/log_out.php">
+                                <a class="nav-link d-flex align-items-center gap-2" href="#">
+                                    <svg class="bi" aria-hidden="true">
+                                        <use xlink:href="#gear-wide-connected"></use>
+                                    </svg>
+                                    Configuración
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link d-flex align-items-center gap-2 btnLogout" href="../CONTROLLER/log_out.php">
                                     <svg class="bi" aria-hidden="true">
                                         <use xlink:href="#door-closed"></use>
                                     </svg>
-                                    Sign out
+                                    Cerrar Sesión
                                 </a>
                             </li>
                         </ul>
@@ -394,17 +420,15 @@ try {
                                 <th scope="col">Nombre</th>
                                 <th scope="col">Email</th>
                                 <th scope="col">Estado</th>
-                                <th scope="col">Acciones</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <?php while ($fila = $aprendices->fetch_assoc()) { ?>
+                            <?php while ($fila = $instructores->fetch_assoc()) { ?>
                                 <tr>
                                     <td> <?php echo $fila['id'] ?> </td>
                                     <td> <?php echo $fila['nombre'] ?> </td>
                                     <td> <?php echo $fila['email'] ?> </td>
                                     <td> <?php echo $fila['estado'] ?> </td>
-                                    <td> <button class="btn btn-primary btn-sm">Asignar ficha</button></td>
                                 </tr>
 
 

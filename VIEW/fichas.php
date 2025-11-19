@@ -11,7 +11,7 @@ try {
 
     $mysql->conectar();
 
-    $aprendices = $mysql->efectuarConsulta("SELECT * FROM fichas ");
+    $aprendices = $mysql->efectuarConsulta("SELECT * FROM fichas");
 
     $mysql->desconectar();
 } catch (Exception $ex) {
