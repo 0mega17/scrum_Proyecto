@@ -374,9 +374,26 @@ try {
                                     <svg class="bi" aria-hidden="true">
                                         <use xlink:href="#people"></use>
                                     </svg>
-                                    Crear Usuario
+                                    Crear Instructor
                                 </a>
                             </li>
+                            <li class="nav-item">
+                                <a class="nav-link d-flex align-items-center gap-2 active" aria-current="page" href="crear_administradores.php">
+                                    <svg class="bi" aria-hidden="true">
+                                        <use xlink:href="#people"></use>
+                                    </svg>
+                                    Crear administradores
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link d-flex align-items-center gap-2 active" aria-current="page" href="crear_instructores.php">
+                                    <svg class="bi" aria-hidden="true">
+                                        <use xlink:href="#people"></use>
+                                    </svg>
+                                    Crear aprendices
+                                </a>
+                            </li>
+
                             <li class="nav-item">
                                 <a class="nav-link d-flex align-items-center gap-2 active" aria-current="page" href="instructores.php">
                                     <svg class="bi" aria-hidden="true">
@@ -392,21 +409,6 @@ try {
                                         <use xlink:href="#people"></use>
                                     </svg>
                                     Aprendices
-                                </a>
-                            </li>
-
-                            <li class="nav-item">
-                                <a class="nav-link d-flex align-items-center gap-2 active" aria-current="page" href="administradores.php">
-                                    <svg class="bi" aria-hidden="true">
-                                        <use xlink:href="#people"></use>
-                                    </svg>
-                                    Administradores
-                                </a>
-                            </li>
-
-                            <li class="nav-item">
-                                <a class="nav-link d-flex align-items-center gap-2 active" aria-current="page" href="trabajos.php">
-                                    Trabajos
                                 </a>
                             </li>
                         </ul>
@@ -449,14 +451,14 @@ try {
                             </tr>
                         </thead>
                         <tbody>
-                            <?php while ($fila = $aprendices->fetch_assoc()) { ?>
+                            <?php while ($aprendice = mysqli_fetch_assoc($resultado)): ?>
                                 <tr>
-                                    <td> <?php echo $fila['id'] ?> </td>
-                                    <td> <?php echo $fila['nombre'] ?> </td>
-                                    <td> <?php echo $fila['email'] ?> </td>
-                                    <td> <?php echo $fila['estado'] ?> </td>
+                                    <td> <?php echo $aprendice['id'] ?> </td>
+                                    <td> <?php echo $aprendice['nombre'] ?> </td>
+                                    <td> <?php echo $aprendice['email'] ?> </td>
+                                    <td> <?php echo $aprendice['estado'] ?> </td>
                                 </tr>
-                            <?php } ?>
+                            <?php endwhile; ?>
                         </tbody>
                     </table>
                 </div>

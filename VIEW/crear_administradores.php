@@ -330,19 +330,9 @@ if ($_SESSION["acceso"] == false || $_SESSION["acceso"] == null) {
                             data-bs-target="#sidebarMenu"
                             aria-label="Close"></button>
                     </div>
-                     <div
+                    <div
                         class="offcanvas-body d-md-flex flex-column p-0 pt-lg-3 overflow-y-auto">
                         <ul class="nav flex-column">
-                            <li class="nav-item">
-                                <a href="./editar_perfil.php" class="nav-link">
-                                    <img
-                                        src="../assets/img/profile.png"
-                                        class="user-image rounded-circle img-fluid"
-                                        alt="User Image" />
-
-                                </a>
-
-                            </li>
                             <li class="nav-item">
                                 <a
                                     class="nav-link d-flex align-items-center gap-2"
@@ -430,11 +420,11 @@ if ($_SESSION["acceso"] == false || $_SESSION["acceso"] == null) {
             <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
                 <div
                     class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                    <h1 class="h2">Crear Nuevo instru</h1>
+                    <h1 class="h2">Crear Nuevo administradores</h1>
                 </div>
 
-                <form id="formCrearInstructores">
-                    <h4 class="mb-4"><i class="bi bi-person-circle me-2"></i> Datos del instru</h4>
+                <form id="formCrearAdministradores">
+                    <h4 class="mb-4"><i class="bi bi-person-circle me-2"></i> Datos del administradores</h4>
 
                     <div class="mb-3">
                         <label for="id" class="form-label">Id</label>
@@ -446,14 +436,7 @@ if ($_SESSION["acceso"] == false || $_SESSION["acceso"] == null) {
                         <input type="text" class="form-control" id="nombre" placeholder="Nombre" required>
                     </div>
 
-                    <div class="mb-3">
-                        <label for="area" class="form-label">Area</label>
-                        <select class="form-select" name="area" id="area" required>
-                            <option value="Tecnologia">Tecnologia</option>
-                            <option value="Matematicas">Matematicas</option>
-                            <option value="Catedra">Catedra</option>
-                        </select>
-                    </div>
+
 
                     <div class="mb-3">
                         <label for="email" class="form-label">Correo Electrónico</label>
@@ -469,7 +452,7 @@ if ($_SESSION["acceso"] == false || $_SESSION["acceso"] == null) {
 
 
                     <button type="submit" class="btn btn-success w-100 mt-3">
-                        <i class="bi bi-person-plus me-2"></i>Crear Instru
+                        <i class="bi bi-person-plus me-2"></i>Crear administradores
                     </button>
                 </form>
             </main>
@@ -480,7 +463,7 @@ if ($_SESSION["acceso"] == false || $_SESSION["acceso"] == null) {
     <script
         src="../ASSETS/JS/bootstrap.bundle.min.js"></script>
     <script src="../ASSETS/JS/dashboard.js"></script>
-    <script src="../ASSETS/js/crear_instructores.js"></script>
+    <script src="../ASSETS/js/crear_admin.js"></script>
 </body>
 
 </html>
