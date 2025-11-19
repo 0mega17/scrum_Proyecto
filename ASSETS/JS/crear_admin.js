@@ -1,17 +1,16 @@
 $(document).ready(function () {
-  $("#formCrearInstructores").submit(function (e) {
+  $("#formCrearAdministradores").submit(function (e) {
     e.preventDefault();
 
     let datos = {
       id: $("#id").val(),
       nombre: $("#nombre").val(),
-      area: $("#area").val(),
       email: $("#email").val(),
       password: $("#password").val(),
     };
 
     $.ajax({
-      url: "../controller/crear_instructores_controller.php",
+      url: "../controller/crear_admin_controller.php",
       type: "POST",
       data: { accion: "crear", ...datos },
       dataType: "json",

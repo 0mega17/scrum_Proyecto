@@ -1,10 +1,10 @@
-//<?php
-//session_start();
-// if ($_SESSION["acceso"] == false || $_SESSION["acceso"] == null) {
-//     header('location: ./login.php');
-// }
+<?php
+session_start();
+if ($_SESSION["acceso"] == false || $_SESSION["acceso"] == null) {
+    header('location: ./login.php');
+}
 $idUsuario = $_SESSION["IDusuario"];
-$tipoUsuario = $_SESSION["tipoUsuario"];
+$rol = $_SESSION["tipoUsuario"];
 try {
     require_once '../MODEL/model.php';
 
@@ -12,8 +12,8 @@ try {
 
     $mysql->conectar();
 
-    if ($tipoUsuario == 'Aprendiz') {
-        $trabajos = $mysql->efectuarConsulta("SELECT * FROM trabajos INNER JOIN aprendices.id ON aprendices_id = trabajos.id  WHERE aprendices.id = $idUsuario");
+    if ($rol == 3) {
+        $trabajos = $mysql->efectuarConsulta("SELECT * FROM trabajos INNER JOIN aprendices ON trabajos.aprendices_id = aprendices.id  WHERE aprendices.id = $idUsuario");
     } else {
         $trabajos = $mysql->efectuarConsulta("SELECT * FROM trabajos");
     }
@@ -473,7 +473,7 @@ try {
             </div>
             <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
                 <div class="container mt-5">
-                    <?php if ($tipoUsuario == 'Aprendiz') { ?>
+                    <?php if ($rol == 3) { ?>
                         <!-- 🔵 FORMULARIO INDEPENDIENTE -->
                         <div class="card shadow-lg border-0 rounded-4 mb-4">
                             <div class="card-header bg-white py-3 text-center">
@@ -541,14 +541,11 @@ try {
                                     <?php while ($fila = $trabajos->fetch_assoc()): ?>
                                         <tr>
                                             <td><?php echo $fila['nombre']; ?></td>
-                                            <td>
-                                                <a
-                                                    href="<?php echo $fila['archivo']; ?>"
+                                            <td><a href="../CONTROLLER/uploads/<?php echo $fila['archivo']; ?>"
                                                     target="_blank"
-                                                    class="text-decoration-none">
-                                                    Ver Archivo
-                                                </a>
-                                            </td>
+                                                    class="btn btn-primary btn-sm">
+                                                    Ver archivo
+                                                </a></td>
                                             <td><?php echo $fila['calificacion']; ?></td>
                                             <td><?php echo $fila['comentario']; ?></td>
                                             <td><?php echo $fila['fecha_limite']; ?></td>

@@ -29,6 +29,9 @@ subirArchivo.addEventListener("click", function (e) {
                 title: '<span class="fs-2 fw-bold">¡Éxito!</span>',
                 text: respuesta.message,
                 icon: "success",
+            })
+            .then(() => {
+                location.reload(); //Recargar la página después del mensaje
             });
 
             form.reset();
@@ -40,4 +43,3 @@ subirArchivo.addEventListener("click", function (e) {
         }
     });
 });
-url: ""

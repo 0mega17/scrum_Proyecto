@@ -35,6 +35,17 @@
 
                         </div>
 
+                        <div class="mb-3">
+                            <label class="form-label" for="">Rol</label>
+                            <select class="form-select" id="rol" name="rol" aria-label="Default select example">
+                                <option value="1">Administrador</option>
+                                <option value="2">Instructor</option>
+                                <option value="3">Aprendiz</option>
+                            </select>
+
+                        </div>
+
+
                         <!-- Submit button -->
                         <button type="submit" data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-lg btn-block w-100 fw-bold fs-5" id="btn-acceder">Acceder</button>
 

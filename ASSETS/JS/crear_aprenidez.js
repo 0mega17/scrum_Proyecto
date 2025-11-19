@@ -1,17 +1,18 @@
 $(document).ready(function () {
-  $("#formCrearInstructores").submit(function (e) {
+  $("#formCrearApreniz").submit(function (e) {
     e.preventDefault();
 
-    let datos = {
-      id: $("#id").val(),
-      nombre: $("#nombre").val(),
-      area: $("#area").val(),
-      email: $("#email").val(),
-      password: $("#password").val(),
+      let datos = {
+          id: $("#id").val(),
+          nombre: $("#nombre").val(),
+          area: $("#area").val(),
+          email: $("#email").val(),
+          password: $("#password").val(),
+          ficha: $("#ficha").val()
     };
 
     $.ajax({
-      url: "../controller/crear_instructores_controller.php",
+      url: "../controller/crear_aprenidez_controller.php",
       type: "POST",
       data: { accion: "crear", ...datos },
       dataType: "json",
@@ -19,8 +20,8 @@ $(document).ready(function () {
         if (respuesta.status === "success") {
           Swal.fire({
             icon: "success",
-            title: "instructore creado",
-            text: "instructore creado exitosamente!",
+            title: "Aprendiz creado",
+            text: "Aprendiz creado exitosamente!",
             showConfirmButton: false,
             timer: 1200,
           }).then(() => {
