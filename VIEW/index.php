@@ -349,7 +349,7 @@ if ($_SESSION["acceso"] == false || $_SESSION["acceso"] == null) {
                                     <svg class="bi" aria-hidden="true">
                                         <use xlink:href="#people"></use>
                                     </svg>
-                                    Crear Usuario
+                                    Crear Instructor
                                 </a>
                             </li>
 

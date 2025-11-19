@@ -348,7 +348,7 @@
                                     <svg class="bi" aria-hidden="true">
                                         <use xlink:href="#people"></use>
                                     </svg>
-                                    Crear Usuario
+                                    Crear Instructor
                                 </a>
                             </li>
 
@@ -395,11 +395,11 @@
             <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
                 <div
                     class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                    <h1 class="h2">Crear Nuevo Usuario</h1>
+                    <h1 class="h2">Crear Nuevo instru</h1>
                 </div>
 
                 <form id="formCrearInstructores">
-                    <h4 class="mb-4"><i class="bi bi-person-circle me-2"></i> Datos del usuario</h4>
+                    <h4 class="mb-4"><i class="bi bi-person-circle me-2"></i> Datos del instru</h4>
 
                     <div class="mb-3">
                         <label for="id" class="form-label">Id</label>
@@ -411,6 +411,14 @@
                         <input type="text" class="form-control" id="nombre" placeholder="Nombre" required>
                     </div>
 
+                    <div class="mb-3">
+                        <label for="area" class="form-label">Area</label>
+                        <select class="form-select" name="area" id="area" required>
+                            <option value="Tecnologia">Tecnologia</option>
+                            <option value="Matematicas">Matematicas</option>
+                            <option value="Catedra">Catedra</option>
+                        </select>
+                    </div>
 
                     <div class="mb-3">
                         <label for="email" class="form-label">Correo Electrónico</label>
@@ -423,17 +431,10 @@
                     </div>
 
 
-                    <div class="mb-3">
-                        <label for="tipo" class="form-label">Tipo de usuario</label>
-                        <select class="form-select" id="tipo" required>
-                            <option value="Instructor">Instructor</option>
-                            <option value="administrador">Administrador</option>
-                            <option value="aprendiz">Aprendiz</option>
-                        </select>
-                    </div>
+                    
 
                     <button type="submit" class="btn btn-success w-100 mt-3">
-                        <i class="bi bi-person-plus me-2"></i>Crear Usuario
+                        <i class="bi bi-person-plus me-2"></i>Crear Instru
                     </button>
                 </form>
             </main>

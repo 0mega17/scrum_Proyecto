@@ -5,9 +5,9 @@ $(document).ready(function () {
     let datos = {
       id: $("#id").val(),
       nombre: $("#nombre").val(),
+      area: $("#area").val(),
       email: $("#email").val(),
       password: $("#password").val(),
-      tipo: $("#tipo").val(),
     };
 
     $.ajax({
@@ -25,7 +25,6 @@ $(document).ready(function () {
             timer: 1200,
           }).then(() => {
             window.location.href = "index.php";
-            Ñ;
           });
         } else {
           Swal.fire({
