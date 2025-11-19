@@ -1,27 +1,12 @@
 <?php
+
 session_start();
 if ($_SESSION["acceso"] == false || $_SESSION["acceso"] == null) {
     header('location: ./login.php');
 }
 $rol = $_SESSION["tipoUsuario"];
 $IDusuario = $_SESSION["IDusuario"];
-try {
-    require_once '../MODEL/model.php';
-
-    $mysql = new MySQL();
-
-    $mysql->conectar();
-
-    $instructores = $mysql->efectuarConsulta("SELECT * FROM instructores");
-
-    $mysql->desconectar();
-} catch (Exception $ex) {
-    echo "Ocurrio un error...";
-}
-
-
 ?>
-
 <!doctype html>
 <html lang="en" data-bs-theme="auto">
 
@@ -33,12 +18,13 @@ try {
         name="author"
         content="Mark Otto, Jacob Thornton, and Bootstrap contributors" />
     <meta name="generator" content="Astro v5.13.2" />
-    <title>Aprendices</title>
+    <title>Crear Usuario - Proyecto Scrum</title>
     <link
         rel="canonical"
         href="https://getbootstrap.com/docs/5.3/examples/dashboard/" />
     <script src="../assets/js/color-modes.js"></script>
     <link rel="stylesheet" href="../ASSETS/CSS/bootstrap.min.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
     <meta name="theme-color" content="#712cf9" />
     <link href="../ASSETS/CSS/dashboard.css" rel="stylesheet" />
     <style>
@@ -148,70 +134,6 @@ try {
                 d="M8 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0zm0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13zm8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5zM3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8zm10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0zm-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0zm9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707zM4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708z"></path>
         </symbol>
     </svg>
-    <div
-        class="dropdown position-fixed bottom-0 end-0 mb-3 me-3 bd-mode-toggle">
-        <button
-            class="btn btn-bd-primary py-2 dropdown-toggle d-flex align-items-center"
-            id="bd-theme"
-            type="button"
-            aria-expanded="false"
-            data-bs-toggle="dropdown"
-            aria-label="Toggle theme (auto)">
-            <svg class="bi my-1 theme-icon-active" aria-hidden="true">
-                <use href="#circle-half"></use>
-            </svg>
-            <span class="visually-hidden" id="bd-theme-text">Toggle theme</span>
-        </button>
-        <ul
-            class="dropdown-menu dropdown-menu-end shadow"
-            aria-labelledby="bd-theme-text">
-            <li>
-                <button
-                    type="button"
-                    class="dropdown-item d-flex align-items-center"
-                    data-bs-theme-value="light"
-                    aria-pressed="false">
-                    <svg class="bi me-2 opacity-50" aria-hidden="true">
-                        <use href="#sun-fill"></use>
-                    </svg>
-                    Light
-                    <svg class="bi ms-auto d-none" aria-hidden="true">
-                        <use href="#check2"></use>
-                    </svg>
-                </button>
-            </li>
-            <li>
-                <button
-                    type="button"
-                    class="dropdown-item d-flex align-items-center"
-                    data-bs-theme-value="dark"
-                    aria-pressed="false">
-                    <svg class="bi me-2 opacity-50" aria-hidden="true">
-                        <use href="#moon-stars-fill"></use>
-                    </svg>
-                    Dark
-                    <svg class="bi ms-auto d-none" aria-hidden="true">
-                        <use href="#check2"></use>
-                    </svg>
-                </button>
-            </li>
-            <li>
-                <button
-                    type="button"
-                    class="dropdown-item d-flex align-items-center active"
-                    data-bs-theme-value="auto"
-                    aria-pressed="true">
-                    <svg class="bi me-2 opacity-50" aria-hidden="true">
-                        <use href="#circle-half"></use>
-                    </svg>
-                    Auto
-                    <svg class="bi ms-auto d-none" aria-hidden="true">
-                        <use href="#check2"></use>
-                    </svg>
-                </button>
-            </li>
-        </ul>
-    </div>
     <svg xmlns="http://www.w3.org/2000/svg" class="d-none">
         <symbol id="calendar3" viewBox="0 0 16 16">
             <path
@@ -282,12 +204,76 @@ try {
                 d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"></path>
         </symbol>
     </svg>
+    <div
+        class="dropdown position-fixed bottom-0 end-0 mb-3 me-3 bd-mode-toggle">
+        <button
+            class="btn btn-bd-primary py-2 dropdown-toggle d-flex align-items-center"
+            id="bd-theme"
+            type="button"
+            aria-expanded="false"
+            data-bs-toggle="dropdown"
+            aria-label="Toggle theme (auto)">
+            <svg class="bi my-1 theme-icon-active" aria-hidden="true">
+                <use href="#circle-half"></use>
+            </svg>
+            <span class="visually-hidden" id="bd-theme-text">Toggle theme</span>
+        </button>
+        <ul
+            class="dropdown-menu dropdown-menu-end shadow"
+            aria-labelledby="bd-theme-text">
+            <li>
+                <button
+                    type="button"
+                    class="dropdown-item d-flex align-items-center"
+                    data-bs-theme-value="light"
+                    aria-pressed="false">
+                    <svg class="bi me-2 opacity-50" aria-hidden="true">
+                        <use href="#sun-fill"></use>
+                    </svg>
+                    Light
+                    <svg class="bi ms-auto d-none" aria-hidden="true">
+                        <use href="#check2"></use>
+                    </svg>
+                </button>
+            </li>
+            <li>
+                <button
+                    type="button"
+                    class="dropdown-item d-flex align-items-center"
+                    data-bs-theme-value="dark"
+                    aria-pressed="false">
+                    <svg class="bi me-2 opacity-50" aria-hidden="true">
+                        <use href="#moon-stars-fill"></use>
+                    </svg>
+                    Dark
+                    <svg class="bi ms-auto d-none" aria-hidden="true">
+                        <use href="#check2"></use>
+                    </svg>
+                </button>
+            </li>
+            <li>
+                <button
+                    type="button"
+                    class="dropdown-item d-flex align-items-center active"
+                    data-bs-theme-value="auto"
+                    aria-pressed="true">
+                    <svg class="bi me-2 opacity-50" aria-hidden="true">
+                        <use href="#circle-half"></use>
+                    </svg>
+                    Auto
+                    <svg class="bi ms-auto d-none" aria-hidden="true">
+                        <use href="#check2"></use>
+                    </svg>
+                </button>
+            </li>
+        </ul>
+    </div>
     <header
         class="navbar sticky-top bg-dark flex-md-nowrap p-0 shadow"
         data-bs-theme="dark">
         <a
             class="navbar-brand col-md-3 col-lg-2 me-0 px-3 fs-6 text-white"
-            href="#">Company name</a>
+            href="#">Proyecto Scrum</a>
         <ul class="navbar-nav flex-row d-md-none">
             <li class="nav-item text-nowrap">
                 <button
@@ -346,7 +332,7 @@ try {
                             data-bs-target="#sidebarMenu"
                             aria-label="Close"></button>
                     </div>
-                    <div
+                     <div
                         class="offcanvas-body d-md-flex flex-column p-0 pt-lg-3 overflow-y-auto">
                         <ul class="nav flex-column">
                             <li class="nav-item">
@@ -369,34 +355,33 @@ try {
                                     Dashboard
                                 </a>
                             </li>
-                            <?php if ($rol == 1) { ?>
-                                <li class="nav-item">
-                                    <a class="nav-link d-flex align-items-center gap-2 active" aria-current="page" href="crear_instructores.php">
-                                        <svg class="bi" aria-hidden="true">
-                                            <use xlink:href="#people"></use>
-                                        </svg>
-                                        Crear Instructor
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link d-flex align-items-center gap-2 active" aria-current="page" href="crear_administradores.php">
-                                        <svg class="bi" aria-hidden="true">
-                                            <use xlink:href="#people"></use>
-                                        </svg>
-                                        Crear administradores
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link d-flex align-items-center gap-2 active" aria-current="page" href="crear_instructores.php">
-                                        <svg class="bi" aria-hidden="true">
-                                            <use xlink:href="#people"></use>
-                                        </svg>
-                                        Crear aprendices
-                                    </a>
-                                </li>
+                            <?php if($rol == 1){ ?>
+                            <li class="nav-item">
+                                <a class="nav-link d-flex align-items-center gap-2 active" aria-current="page" href="crear_instructores.php">
+                                    <svg class="bi" aria-hidden="true">
+                                        <use xlink:href="#people"></use>
+                                    </svg>
+                                    Crear Instructor
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link d-flex align-items-center gap-2 active" aria-current="page" href="crear_administradores.php">
+                                    <svg class="bi" aria-hidden="true">
+                                        <use xlink:href="#people"></use>
+                                    </svg>
+                                    Crear administradores
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link d-flex align-items-center gap-2 active" aria-current="page" href="crear_instructores.php">
+                                    <svg class="bi" aria-hidden="true">
+                                        <use xlink:href="#people"></use>
+                                    </svg>
+                                    Crear aprendices
+                                </a>
+                            </li>
 
-                            <?php } ?>
-
+                            <?php }?>
 
                             <li class="nav-item">
                                 <a class="nav-link d-flex align-items-center gap-2 active" aria-current="page" href="instructores.php">
@@ -415,6 +400,22 @@ try {
                                     Aprendices
                                 </a>
                             </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link d-flex align-items-center gap-2 active" aria-current="page" href="administradores.php">
+                                    <svg class="bi" aria-hidden="true">
+                                        <use xlink:href="#people"></use>
+                                    </svg>
+                                    administradores
+                                </a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link d-flex align-items-center gap-2 active" aria-current="page" href="./trabajos.php">
+                                    <svg class="bi" aria-hidden="true">
+                                        <use xlink:href="#people"></use>
+                                    </svg>
+                                    Trabajos
 
                             <li class="nav-item">
                                 <a class="nav-link d-flex align-items-center gap-2 active" aria-current="page" href="fichas.php">
@@ -449,46 +450,51 @@ try {
             </div>
             <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
                 <div
-                    class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-1">
-                    <h1 class="h2">Instructores</h1>
+                    class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                    <h1 class="h2">Crear Nuevo administradores</h1>
                 </div>
 
-                <div class="table-responsive small">
-                    <table class="table table-striped table-sm">
-                        <thead>
-                            <tr>
-                                <th scope="col">Documento</th>
-                                <th scope="col">Nombre</th>
-                                <th scope="col">Email</th>
-                                <th scope="col">Estado</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php while ($fila = $instructores->fetch_assoc()) { ?>
-                                <tr>
-                                    <td> <?php echo $fila['id'] ?> </td>
-                                    <td> <?php echo $fila['nombre'] ?> </td>
-                                    <td> <?php echo $fila['email'] ?> </td>
-                                    <td> <?php echo $fila['estado'] ?> </td>
-                                </tr>
+                <form id="formCrearAdministradores">
+                    <h4 class="mb-4"><i class="bi bi-person-circle me-2"></i> Datos del administradores</h4>
+
+                    <div class="mb-3">
+                        <label for="id" class="form-label">Id</label>
+                        <input type="text" class="form-control" id="id" placeholder="Id" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="nombre" class="form-label">Nombre</label>
+                        <input type="text" class="form-control" id="nombre" placeholder="Nombre" required>
+                    </div>
 
 
 
-                            <?php } ?>
-                        </tbody>
-                    </table>
-                </div>
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Correo Electrónico</label>
+                        <input type="email" class="form-control" id="email" placeholder="ejemplo@correo.com" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="password" class="form-label">Contraseña</label>
+                        <input type="password" class="form-control" id="password" placeholder="Contraseña" required>
+                    </div>
+
+
+
+
+                    <button type="submit" class="btn btn-success w-100 mt-3">
+                        <i class="bi bi-person-plus me-2"></i>Crear administradores
+                    </button>
+                </form>
             </main>
         </div>
     </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script
-        src="../ASSETS/JS/bootstrap.bundle.min.js"
-        class="astro-vvvwv3sm"></script>
-    <script
-        src="https://cdn.jsdelivr.net/npm/chart.js@4.3.2/dist/chart.umd.js"
-        integrity="sha384-eI7PSr3L1XLISH8JdDII5YN/njoSsxfbrkCTnJrzXt+ENP5MOVBxD+l6sEG4zoLp"
-        crossorigin="anonymous"
-        class="astro-vvvwv3sm"></script>
+        src="../ASSETS/JS/bootstrap.bundle.min.js"></script>
+    <script src="../ASSETS/JS/dashboard.js"></script>
+    <script src="../ASSETS/js/crear_admin.js"></script>
 </body>
 
 </html>
