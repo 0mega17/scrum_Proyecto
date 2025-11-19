@@ -16,15 +16,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['accion'])) {
         $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
         $tipo = $_POST['tipo'];
 
-        $verificarId = "SELECT id FROM usuarios WHERE id = '$id'";
-        $resultadoId = $mysql->efectuarConsulta($verificarId);
 
-        if ($resultadoId && mysqli_num_rows($resultadoId) > 0) {
-            echo json_encode(["status" => "error", "message" => "El ID ya está registrado. Por favor, ingrese un ID diferente."]);
-            exit;
-        }
 
-        $verificarEmail = "SELECT id FROM usuarios WHERE email = '$email'";
+        $verificarEmail = "SELECT id FROM usuario WHERE email = '$email'";
         $resultadoVerificacion = $mysql->efectuarConsulta($verificarEmail);
 
         if ($resultadoVerificacion && mysqli_num_rows($resultadoVerificacion) > 0) {
@@ -32,12 +26,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['accion'])) {
             exit;
         }
 
-        $consulta = "INSERT INTO usuarios (id,nombre, email, password,tipo) VALUES ('$id','$nombre', '$email', '$password','$tipo')";
+        $consulta = "INSERT INTO Instructores (id,nombre, email, password,tipo) VALUES ('$id','$nombre', '$email', '$password','$tipo')";
         $resultado = $mysql->efectuarConsulta($consulta);
         if ($resultado) {
             echo json_encode(["status" => "success"]);
         } else {
-            echo json_encode(["status" => "error", "message" => "Error al crear usuario"]);
+            echo json_encode(["status" => "error", "message" => "Error al crear Instructor"]);
         }
    
     }
