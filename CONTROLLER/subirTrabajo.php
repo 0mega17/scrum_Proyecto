@@ -3,7 +3,7 @@ session_start();
 header('Content-Type: application/json');
 $idUsuario = $_SESSION["IDusuario"];
 
-require_once '../MODEL/model.php';  // ← CORRECTO
+require_once '../MODEL/model.php'; 
 
 $mysql = new MySQL();
 $mysql->conectar();

@@ -76,9 +76,7 @@ $archivoActual = basename($_SERVER["PHP_SELF"]);
 
                 <li class="nav-item">
                     <a class="nav-link d-flex align-items-center gap-2 active" aria-current="page" href="./trabajos.php">
-                        <svg class="bi" aria-hidden="true">
-                            <use xlink:href="#people"></use>
-                        </svg>
+                        <i class="bi bi-clipboard2-data-fill"></i>
                         Trabajos
                     </a>
                 </li>
