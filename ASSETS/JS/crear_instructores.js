@@ -24,7 +24,7 @@ $(document).ready(function () {
             showConfirmButton: false,
             timer: 1200,
           }).then(() => {
-            window.location.href = "index.php";
+            window.location.href = "instructores.php";
           });
         } else {
           Swal.fire({

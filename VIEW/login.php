@@ -12,11 +12,11 @@
     <section class="vh-100">
         <div class="container py-5 h-100">
             <div class="row d-flex align-items-center justify-content-center h-100">
-                <div class="col-md-8 col-lg-7 col-xl-6">
+                <div class="col-md-8 col-lg-7 col-xl-4">
                     <img src="../ASSETS/IMG/login.png"
                         class="img-fluid" alt="Phone image">
                 </div>
-                <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1">
+                <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1 bg-body-tertiary p-5 rounded shadow border border-0">
                     <form id="frmLogin">
                         <div class="row my-3">
                             <h1 class="fw-bold">Login</h1>

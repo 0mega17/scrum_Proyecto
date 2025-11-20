@@ -18,12 +18,12 @@ $(document).ready(function () {
         if (respuesta.status === "success") {
           Swal.fire({
             icon: "success",
-            title: "instructore creado",
-            text: "instructore creado exitosamente!",
+            title: "Administrador creado",
+            text: "Administrador creado exitosamente!",
             showConfirmButton: false,
             timer: 1200,
           }).then(() => {
-            window.location.href = "index.php";
+            window.location.href = "administradores.php";
           });
         } else {
           Swal.fire({
