@@ -29,6 +29,9 @@
   <?php if($archivoActual == "editar_perfil.php"){ ?>
   <script src="../ASSETS/js/perfil.js"></script>
     <?php }?>
+    <?php if($archivoActual == "crearFicha.php"){ ?>
+  <script src="../ASSETS/js/crearFicha.js"></script>
+    <?php }?>
 
 
   </body>
