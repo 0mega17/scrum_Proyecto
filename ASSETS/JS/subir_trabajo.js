@@ -1,12 +1,9 @@
-const subirArchivo = document.querySelector("#subirArchivo");
-
-subirArchivo.addEventListener("click", function (e) {
-  e.preventDefault();
-});
 
 const tblTrabajos = document.querySelector("#tablaTrabajos");
 tblTrabajos.addEventListener("click", (e) => {
   if (e.target.classList.contains("btnSubirArchivo")) {
+    let IDtrabajo = e.target.dataset.idtrabajo;
+    let IDusuario = e.target.dataset.idusuario;
     Swal.fire({
       title: '<span class="text-primary fw-bold">Subir trabajo</span>',
       html: `
@@ -22,6 +19,8 @@ tblTrabajos.addEventListener("click", (e) => {
                                     name="uploadFile"
                                     accept=".pdf, .docx, .doc, .xlsx, .png, jpg, jpeg">
                             </div>
+
+                             <input type="hidden" class="form-control" id="IDinstructor" name="IDinstructor" value="${IDtrabajo}" 
                         </div>
                     </form>
    `,
@@ -35,9 +34,11 @@ tblTrabajos.addEventListener("click", (e) => {
       preConfirm: () => {
         const form = document.getElementById("frmTrabajos");
         const formData = new FormData(form);
-
+        formData.append("IDtrabajo", IDtrabajo);
+        formData.append("IDusuario", IDusuario);
+        console.log(formData);
         $.ajax({
-          url: "../CONTROLLER/subirArchivo.php",
+          url: "../CONTROLLER/subirTrabajo.php",
           type: "POST",
           data: formData,
           processData: false,
@@ -63,11 +64,6 @@ tblTrabajos.addEventListener("click", (e) => {
             });
 
             form.reset();
-          },
-
-          error: function (xhr, status, error) {
-            Swal.fire("Error", "Error de conexión con el servidor.", "error");
-            console.error(error);
           },
         });
       },

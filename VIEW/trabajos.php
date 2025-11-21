@@ -15,7 +15,7 @@ $mysql->conectar();
 
 if ($rol == 3) {
     $IDficha = $_SESSION["fichaID"];
-    $trabajos = $mysql->efectuarConsulta("SELECT trabajos.nombre as nombre_trabajo, trabajos.descripcion, trabajos.fecha_publicacion, trabajos.fecha_limite, fichas.codigo, fichas.nombre as nombre_ficha FROM trabajos JOIN fichas ON fichas.id = trabajos.fichas_id WHERE trabajos.fichas_id = $IDficha ");
+    $trabajos = $mysql->efectuarConsulta("SELECT trabajos.id, trabajos.nombre as nombre_trabajo, trabajos.descripcion, trabajos.fecha_publicacion, trabajos.fecha_limite, fichas.codigo, fichas.nombre as nombre_ficha FROM trabajos JOIN fichas ON fichas.id = trabajos.fichas_id WHERE trabajos.fichas_id = $IDficha ");
 } else if ($rol == 2) {
     $trabajos = $mysql->efectuarConsulta("SELECT trabajos.nombre as nombre_trabajo, trabajos.descripcion, trabajos.fecha_publicacion, trabajos.fecha_limite, fichas.codigo, fichas.nombre as nombre_ficha FROM trabajos JOIN fichas ON fichas.id = trabajos.fichas_id WHERE instructores_id = $idUsuario");
 }
@@ -33,7 +33,7 @@ require_once './layout/nav_bar.php';
     <div class="container mt-5">
         <?php if ($rol == 3) { ?>
             <!-- FORMULARIO INDEPENDIENTE -->
-            <div class="card shadow-lg border-0 rounded-4 mb-4">
+            <!-- <div class="card shadow-lg border-0 rounded-4 mb-4">
                 <div class="card-header bg-white py-3 text-center">
                     <h4 class="fw-bold mb-0">
                         <i class="fa-solid fa-file-arrow-up text-primary me-2"></i>
@@ -69,7 +69,7 @@ require_once './layout/nav_bar.php';
                     </form>
 
                 </div>
-            </div>
+            </div> -->
         <?php } ?>
 
 
@@ -128,7 +128,10 @@ require_once './layout/nav_bar.php';
                                 <td><?php echo $fila['codigo']; ?> - <?php echo $fila["nombre_ficha"] ?></td>
                                 <?php if ($rol == 3) { ?>
                                     <td>
-                                        <button id="btnSubirArchivo" class="btn btn-primary btnSubirArchivo">Subir</button>
+                                        <button 
+                                        data-IDusuario= "<?php echo $idUsuario ?>"
+                                        data-IDtrabajo="<?php echo $fila["id"] ?>" 
+                                        id="btnSubirArchivo" class="btn btn-primary btnSubirArchivo">Subir</button>
                                     </td>
                                 <?php } ?>
                             </tr>
