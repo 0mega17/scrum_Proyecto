@@ -33,6 +33,7 @@ if (
     if ($resultado) {
         // si se hace correctamaente todo lo que pasa ahora es que se debe de hacer un update en la base de datos para que no
         // muestre
+        $mysql -> efectuarConsulta("update entregas set estado = 'Calificado' where id= '$idEntrega' ");
         echo json_encode([
             "validacion" => true,
             "mensaje" => "Calificacion realizada correctamente",

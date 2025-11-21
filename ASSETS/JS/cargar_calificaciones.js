@@ -32,14 +32,17 @@ document.addEventListener("DOMContentLoaded", () => {
           .then((datos) => {
             // aqui debe de salir la alerta  para cer que se
             if (datos.validacion) {
-              Swal.fire({
-                icon: "success",
-                title: "¡Calificación realizada!",
-                text: datos.mensaje,
-                timer: 2000,
-                timerProgressBar: true,
-                showConfirmButton: false,
-              });
+             Swal.fire({
+               icon: "success",
+               title: "¡Calificación realizada!",
+               text: datos.mensaje,
+               timer: 2000,
+               timerProgressBar: true,
+               showConfirmButton: false,
+             }).then(() => {
+             
+               location.reload();
+             });
             } else {
               Swal.fire({
                 icon: "error",
