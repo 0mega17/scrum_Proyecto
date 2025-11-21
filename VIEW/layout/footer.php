@@ -20,7 +20,9 @@
   <?php if ($archivoActual == "trabajos.php" && $rol == 3) { ?>
       <script src="../ASSETS/JS/subir_trabajo.js"></script>
   <?php } ?>
-
+  <?php if ($archivoActual == "calificar_trabajo.php" && $rol == 2) { ?>
+      <script src="../ASSETS/JS/cargar_calificaciones.js"></script>
+  <?php } ?>
   <?php if ($archivoActual == "asignarTrabajo.php") { ?>
       <script src="../ASSETS/JS/traerDatosTrabajos.js"></script>
   <?php } ?>
