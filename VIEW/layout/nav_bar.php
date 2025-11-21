@@ -82,6 +82,13 @@ $archivoActual = basename($_SERVER["PHP_SELF"]);
                 </li>
 
                 <li class="nav-item">
+                    <a class="nav-link d-flex align-items-center gap-2 active" aria-current="page" href="./entregas.php">
+                        <i class="bi bi-bag-check-fill"></i>
+                        Entregas
+                    </a>
+                </li>
+
+                <li class="nav-item">
                     <a class="nav-link d-flex align-items-center gap-2 active" aria-current="page" href="fichas.php">
                         <svg class="bi" aria-hidden="true">
                             <use xlink:href="#people"></use>

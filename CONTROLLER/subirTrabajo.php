@@ -17,7 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         // Asignacion de zona horaria para la fecha correcta
         date_default_timezone_set('America/Bogota');
         $fechaLimite = $row["fecha_limite"];
-        $hoy = date("Y-m-d H:i:s");
+        $hoy = date("Y-m-d");
 
         //VALIDAR FECHA
         if ($hoy > $fechaLimite) {
@@ -54,7 +54,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             // Si no agregue el archivo
             $ext = $permitidos[$tipo];
             $nombre_unico = 'archivo_' . date('Ymd_Hisv') . $ext;
-            $ruta = 'assets/uploads/' . $nombre_unico;
+            $ruta = 'ASSETS/uploads/' . $nombre_unico;
             $rutaAbsoluta = __DIR__ . '/../' . $ruta;
         }
 

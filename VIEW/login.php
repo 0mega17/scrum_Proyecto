@@ -9,51 +9,69 @@
 </head>
 
 <body>
-    <section class="vh-100">
-        <div class="container py-5 h-100">
-            <div class="row d-flex align-items-center justify-content-center h-100">
-                <div class="col-md-8 col-lg-7 col-xl-4">
-                    <img src="../ASSETS/IMG/login.png"
-                        class="img-fluid" alt="Phone image">
-                </div>
-                <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1 bg-body-tertiary p-5 rounded shadow border border-0">
-                    <form id="frmLogin">
-                        <div class="row my-3">
-                            <h1 class="fw-bold">Login</h1>
-                        </div>
-                        <!-- Email input -->
-                        <div data-mdb-input-init class="form-outline mb-4">
-                            <label class="form-label" for="email">Email</label>
-                            <input type="email" id="email" name="email" class="form-control form-control-lg" />
+    <section class="vh-100 d-flex align-items-center" style="background: #f1f3f5;">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-4">
 
+                    <div class="card shadow-lg border-0 rounded-4 p-4">
+                        <div class="text-center mb-4">
+                            <img src="../ASSETS/IMG/login.png" class="img-fluid" style="max-width: 120px;" alt="Login image">
+                            <h2 class="fw-bold mt-3">Iniciar sesión</h2>
+                            <p class="text-muted">Accede a tu cuenta</p>
                         </div>
 
-                        <!-- Password input -->
-                        <div data-mdb-input-init class="form-outline mb-4">
-                            <label class="form-label" for="password">Contraseña</label>
-                            <input type="password" id="password" name="password" class="form-control form-control-lg" />
+                        <form id="frmLogin">
 
-                        </div>
+                            <!-- Email -->
+                            <div class="mb-3">
+                                <label class="form-label fw-semibold">Email</label>
+                                <div class="input-group">
+                                    <span class="input-group-text"><i class="bi bi-envelope"></i></span>
+                                    <input type="email"
+                                        class="form-control form-control-lg"
+                                        id="email" name="email"
+                                        placeholder="ejemplo@correo.com">
+                                </div>
+                            </div>
 
-                        <div class="mb-3">
-                            <label class="form-label" for="">Rol</label>
-                            <select class="form-select" id="rol" name="rol" aria-label="Default select example">
-                                <option value="1">Administrador</option>
-                                <option value="2">Instructor</option>
-                                <option value="3">Aprendiz</option>
-                            </select>
+                            <!-- Password -->
+                            <div class="mb-3">
+                                <label class="form-label fw-semibold">Contraseña</label>
+                                <div class="input-group">
+                                    <span class="input-group-text"><i class="bi bi-lock"></i></span>
+                                    <input type="password"
+                                        class="form-control form-control-lg"
+                                        id="password" name="password"
+                                        placeholder="••••••••">
+                                </div>
+                            </div>
 
-                        </div>
+                            <!-- Rol -->
+                            <div class="mb-4">
+                                <label class="form-label fw-semibold">Rol</label>
+                                <select class="form-select form-select-lg" id="rol" name="rol">
+                                    <option value="1">Administrador</option>
+                                    <option value="2">Instructor</option>
+                                    <option value="3">Aprendiz</option>
+                                </select>
+                            </div>
 
+                            <!-- Submit -->
+                            <button type="submit"
+                                class="btn btn-primary btn-lg w-100 fw-bold"
+                                id="btn-acceder">
+                                Acceder
+                            </button>
 
-                        <!-- Submit button -->
-                        <button type="submit" data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-lg btn-block w-100 fw-bold fs-5" id="btn-acceder">Acceder</button>
+                        </form>
+                    </div>
 
-                    </form>
                 </div>
             </div>
         </div>
     </section>
+
 
 
     <script src="../ASSETS/JS/login.js"></script>
