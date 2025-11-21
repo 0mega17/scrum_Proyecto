@@ -15,7 +15,7 @@ $mysql = new MySQL();
 
 $mysql->conectar();
 
-$fichas = $mysql->efectuarConsulta("SELECT * FROM fichas");
+$fichas = $mysql->efectuarConsulta("SELECT fichas.id,fichas.codigo,fichas.nombre,fichas.fecha_inicio,fichas.fecha_fin,areas.nombre_area FROM fichas INNER JOIN areas ON fichas.area_ficha = areas.id");
 
 $mysql->desconectar();
 
@@ -56,7 +56,7 @@ require_once './layout/nav_bar.php';
                         <td> <?php echo $fila['id'] ?> </td>
                         <td> <?php echo $fila['codigo'] ?> </td>
                         <td> <?php echo $fila['nombre'] ?> </td>
-                        <td> <?php echo $fila['area'] ?> </td>
+                        <td> <?php echo $fila['nombre_area'] ?> </td>
                         <td> <?php echo $fila['fecha_inicio'] ?> </td>
                         <td> <?php echo $fila['fecha_fin'] ?> </td>
                     </tr>

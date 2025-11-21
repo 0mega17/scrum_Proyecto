@@ -5,7 +5,7 @@ $(document).ready(function () {
     let datos = {
       id: $("#id").val(),
       nombre: $("#nombre").val(),
-      area: $("#area").val(),
+      area_instructor: $("#area_instructor").val(),
       email: $("#email").val(),
       password: $("#password").val(),
     };
@@ -19,8 +19,8 @@ $(document).ready(function () {
         if (respuesta.status === "success") {
           Swal.fire({
             icon: "success",
-            title: "instructore creado",
-            text: "instructore creado exitosamente!",
+            title: "instructor creado",
+            text: "instructor creado exitosamente!",
             showConfirmButton: false,
             timer: 1200,
           }).then(() => {

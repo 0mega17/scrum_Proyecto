@@ -5,7 +5,7 @@ $(document).ready(function () {
       let datos = {
           codigo: $("#codigo").val(),
           nombre: $("#nombre").val(),
-          area: $("#area").val(),
+          area_ficha: $("#area_ficha").val(),
           fechaInicio: $("#fechaInicio").val(),
           fechaFin: $("#fechaFin").val()
     };

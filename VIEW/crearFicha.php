@@ -14,8 +14,7 @@ $mysql = new MySQL();
 
 $mysql->conectar();
 
-
-$mysql->desconectar();
+$areas = $mysql->efectuarConsulta("SELECT * FROM areas");
 
 // LAYOUT HTML
 require_once './layout/header.php';
@@ -34,17 +33,22 @@ require_once './layout/nav_bar.php';
 
         <div class="mb-3">
             <label for="codigo" class="form-label">Codigo</label>
-            <input type="text" class="form-control" id="codigo" name="codigo" placeholder="Codigo" required>
+            <input type="number" class="form-control" id="codigo" name="codigo" placeholder="Codigo" required>
         </div>
 
         <div class="mb-3">
             <label for="nombre" class="form-label">Nombre</label>
             <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Nombre" required>
         </div>
-
         <div class="mb-3">
-            <label for="area" class="form-label">Area</label>
-            <input type="text" class="form-control" id="area" name="area" placeholder="Area" required>
+        <select class="form-control" name="area_ficha" id="area_ficha">
+            <option value="">Seleccione un área</option>
+            <?php
+            while ($row = $areas->fetch_assoc()) {
+                echo '<option value="' . $row['id'] . '">' . $row['nombre_area'] . '</option>';
+            }
+            ?>
+        </select>
         </div>
 
         <div class="mb-3">
@@ -63,4 +67,5 @@ require_once './layout/nav_bar.php';
 </main>
 <?php
 require_once './layout/footer.php';
+$mysql->desconectar();
 ?>

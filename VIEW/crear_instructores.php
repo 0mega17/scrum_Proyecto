@@ -7,6 +7,12 @@ if ($_SESSION["acceso"] == false || $_SESSION["acceso"] == null) {
 $pagina = "Crear instructores";
 $rol = $_SESSION["tipoUsuario"];
 $IDusuario = $_SESSION["IDusuario"];
+require_once '../MODEL/model.php';
+
+$mysql = new MySQL();
+
+$mysql->conectar();
+$areas = $mysql->efectuarConsulta("SELECT * FROM areas");
 
 // LAYOUT HTML
 require_once './layout/header.php';
@@ -31,14 +37,15 @@ require_once './layout/nav_bar.php';
             <label for="nombre" class="form-label">Nombre</label>
             <input type="text" class="form-control" id="nombre" placeholder="Nombre" required>
         </div>
-
         <div class="mb-3">
-            <label for="area" class="form-label">Area</label>
-            <select class="form-select" name="area" id="area" required>
-                <option value="Tecnologia">Tecnologia</option>
-                <option value="Matematicas">Matematicas</option>
-                <option value="Catedra">Catedra</option>
-            </select>
+        <select class="form-control" name="area_instructor" id="area_instructor">
+            <option value="">Seleccione un área</option>
+            <?php
+            while ($row = $areas->fetch_assoc()) {
+                echo '<option value="' . $row['id'] . '">' . $row['nombre_area'] . '</option>';
+            }
+            ?>
+        </select>
         </div>
 
         <div class="mb-3">
