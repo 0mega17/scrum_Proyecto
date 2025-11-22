@@ -15,11 +15,7 @@ $mysql->conectar();
 
 if ($rol == 3) {
     $IDficha = $_SESSION["fichaID"];
-    $entregas = $mysql->efectuarConsulta("SELECT trabajos.nombre, entregas.id, entregas.archivo, entregas.fecha_subida, entregas.estado FROM entregas JOIN trabajos ON trabajos.id = entregas.trabajos_id WHERE entregas.aprendices_id = $idUsuario");
-} else if ($rol == 2) {
-    $trabajos = $mysql->efectuarConsulta("SELECT trabajos.nombre as nombre_trabajo, trabajos.descripcion, trabajos.fecha_publicacion, trabajos.fecha_limite, fichas.codigo, fichas.nombre as nombre_ficha FROM trabajos JOIN fichas ON fichas.id = trabajos.fichas_id WHERE instructores_id = $idUsuario");
-} else {
-    $trabajos = $mysql->efectuarConsulta("SELECT trabajos.nombre as nombre_trabajo, trabajos.descripcion, trabajos.fecha_publicacion, trabajos.fecha_limite, fichas.codigo, fichas.nombre as nombre_ficha FROM trabajos JOIN fichas ON fichas.id = trabajos.fichas_id");
+    $entregas = $mysql->efectuarConsulta("SELECT trabajos.nombre, entregas.id, entregas.archivo, entregas.fecha_subida, entregas.estado, (SELECT COUNT(*) FROM calificaciones WHERE calificaciones.entregas_id = entregas.id) as calificado FROM entregas JOIN trabajos ON trabajos.id = entregas.trabajos_id WHERE entregas.aprendices_id = $idUsuario ORDER BY entregas.id DESC");
 }
 
 
@@ -37,7 +33,6 @@ require_once './layout/nav_bar.php';
         <div class="card shadow-lg border-0 rounded-4">
             <div class="card-header py-3 text-center">
                 <h4 class="fw-bold mb-0">
-                    <i class="fa-solid fa-table text-success me-2"></i>
                     Listado de entregas de trabajos
                 </h4>
                 <?php if ($rol == 2) { ?>
@@ -64,6 +59,7 @@ require_once './layout/nav_bar.php';
                             <th>Fecha_subida</th>
                             <th>Estado</th>
                             <th>Entrega</th>
+                            <th>Calificacion</th>
                         </tr>
                     </thead>
 
@@ -73,12 +69,22 @@ require_once './layout/nav_bar.php';
 
                                 <td><?php echo $fila['nombre']; ?></td>
                                 <td><?php echo $fila['fecha_subida']; ?></td>
-                                <td><?php echo $fila['estado']; ?></td>              
+                                <td><?php echo $fila['estado']; ?></td>
                                 <td><a href="../<?php echo $fila['archivo']; ?>"
                                         target="_blank"
-                                        class="btn btn-primary btn-sm">
+                                        class="btn btn-primary btn-sm fw-bold">
                                         Ver archivo
                                     </a></td>
+                                <td>
+                                    <?php if ($fila["calificado"] == 0) { ?>
+                                        <span class="badge bg-warning text-black">Sin calificar</span>
+                                    <?php }else{ ?>
+                                        <button onclick="verCalificacion(<?php echo $fila['id'] ?>)" class="btn btn-info btn-sm btnCalificacion">
+                                            <i class="fa-solid fa-eye"></i>
+                                        </button>
+                                        <?php }?>
+                                </td>
+
                             </tr>
                         <?php endwhile; ?>
                     </tbody>

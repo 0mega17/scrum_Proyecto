@@ -5,6 +5,7 @@
       class="astro-vvvwv3sm"></script>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="https://kit.fontawesome.com/4c0cbe7815.js" crossorigin="anonymous"></script>
 
   <!-- BOOSTRAP 5 DATATABLES -->
   <script src="../ASSETS/JS/datatable.js"></script>
@@ -41,6 +42,10 @@
 
   <?php if ($archivoActual == "editar_perfil.php") { ?>
       <script src="../ASSETS/js/perfil.js"></script>
+  <?php } ?>
+
+  <?php if ($archivoActual == "entregas.php" && $rol == 3) { ?>
+      <script src="../ASSETS/JS/ver_calificaciones.js"></script>
   <?php } ?>
 
 

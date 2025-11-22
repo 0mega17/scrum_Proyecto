@@ -1,3 +1,31 @@
+<?php
+
+
+$IDusuario = $_SESSION["IDusuario"];
+$rol = $_SESSION["tipoUsuario"];
+require_once '../MODEL/model.php';
+
+$mysql = new MySQL();
+
+$mysql->conectar();
+
+if ($rol == 1) {
+    // Realizar la consulta para verificar que existe el usuario
+    $usuario = $mysql->efectuarConsulta("SELECT * FROM administradores WHERE id = $IDusuario");
+    $rolTxt = "Administrador";
+} else if ($rol == 2) {
+    // Realizar la consulta para verificar que existe el usuario
+    $usuario = $mysql->efectuarConsulta("SELECT * FROM instructores WHERE id = $IDusuario");
+    $rolTxt = "Instructor";
+} else if ($rol == 3) {
+    // Realizar la consulta para verificar que existe el usuario
+    $usuario = $mysql->efectuarConsulta("SELECT * FROM aprendices WHERE id = $IDusuario");
+    $rolTxt = "Aprendiz";
+}
+
+$usuario = $usuario->fetch_assoc();
+?>
+
 <!doctype html>
 <html lang="en" data-bs-theme="auto">
 
@@ -18,7 +46,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
     <meta name="theme-color" content="#712cf9" />
     <link href="../ASSETS/CSS/dashboard.css" rel="stylesheet" />
-    
+
 
     <!-- Link Datatables -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.3/css/bootstrap.min.css">
@@ -260,6 +288,9 @@
             class="navbar-brand col-md-3 col-lg-2 me-0 px-3 fs-6 text-white"
             href="#">Gestion de notas</a>
 
+        <div class="mx-2">
+            <h6 class="text-light"><?php echo $usuario["nombre"] ?> - <small> <?php echo $rolTxt ?> </small></h6>
+        </div>
         <ul class="navbar-nav flex-row d-md-none">
             <li class="nav-item text-nowrap">
                 <button

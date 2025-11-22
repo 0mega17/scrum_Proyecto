@@ -73,21 +73,23 @@ $archivoActual = basename($_SERVER["PHP_SELF"]);
 
                 <?php } ?>
 
+                <?php if ($rol == 3 || $rol == 2) { ?>
+                    <li class="nav-item">
+                        <a class="nav-link d-flex align-items-center gap-2 active" aria-current="page" href="./trabajos.php">
+                            <i class="bi bi-clipboard2-data-fill"></i>
+                            Trabajos
+                        </a>
+                    </li>
+                <?php } ?>
 
-                <li class="nav-item">
-                    <a class="nav-link d-flex align-items-center gap-2 active" aria-current="page" href="./trabajos.php">
-                        <i class="bi bi-clipboard2-data-fill"></i>
-                        Trabajos
-                    </a>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link d-flex align-items-center gap-2 active" aria-current="page" href="./entregas.php">
-                        <i class="bi bi-bag-check-fill"></i>
-                        Entregas
-                    </a>
-                </li>
-
+                <?php if ($rol == 3) { ?>
+                    <li class="nav-item">
+                        <a class="nav-link d-flex align-items-center gap-2 active" aria-current="page" href="./entregas.php">
+                            <i class="bi bi-bag-check-fill"></i>
+                            Entregas
+                        </a>
+                    </li>
+                <?php } ?>
                 <li class="nav-item">
                     <a class="nav-link d-flex align-items-center gap-2 active" aria-current="page" href="fichas.php">
                         <svg class="bi" aria-hidden="true">

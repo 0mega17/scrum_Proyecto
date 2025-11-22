@@ -60,7 +60,7 @@ tblTrabajos.addEventListener("click", (e) => {
               text: respuesta.message,
               icon: "success",
             }).then(() => {
-              location.reload(); //Recargar la página después del mensaje
+              location.href = "./entregas.php"
             });
 
             form.reset();

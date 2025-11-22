@@ -4,7 +4,7 @@ $(document).ready(function () {
   $("#tblGeneral").DataTable({
     responsive: true,
     fixedHeader: true,
-    scrollY: 300,
+    scrollY: 350,
     ordering: false,
     searching: true,
     language: {
