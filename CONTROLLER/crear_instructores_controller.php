@@ -11,7 +11,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['accion'])) {
     if ($_POST['accion'] == 'crear') {
         $id = $_POST['id'];
         $nombre = filter_var($_POST['nombre'], FILTER_SANITIZE_SPECIAL_CHARS);
-        $area = $_POST['area'];
+        $area = $_POST['area_instructor'];
         $email = $_POST['email'];
         $email = filter_var(trim($email), FILTER_SANITIZE_EMAIL);
         $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
@@ -35,7 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['accion'])) {
         }
 
 
-        $consulta = "INSERT INTO Instructores (id,nombre,area, email, password, estado) VALUES ('$id','$nombre','$area', '$email', '$password','Activo')";
+        $consulta = "INSERT INTO Instructores (id,nombre,email, password,estado,area_id) VALUES ('$id','$nombre','$email', '$password','Activo','$area')";
         $resultado = $mysql->efectuarConsulta($consulta);
         if ($resultado) {
             echo json_encode(["status" => "success"]);

@@ -47,6 +47,13 @@
   <?php if ($archivoActual == "entregas.php" && $rol == 3) { ?>
       <script src="../ASSETS/JS/ver_calificaciones.js"></script>
   <?php } ?>
+    <?php if($archivoActual == "crearFicha.php"){ ?>
+  <script src="../ASSETS/js/crearFicha.js"></script>
+    <?php }?>
+    
+  <?php if($archivoActual == "fichas.php"){ ?>
+  <script src="../ASSETS/js/crearArea.js"></script>
+    <?php }?>
 
 
   </body>

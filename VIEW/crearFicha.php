@@ -4,41 +4,44 @@ session_start();
 if ($_SESSION["acceso"] == false || $_SESSION["acceso"] == null) {
     header('location: ./login.php');
 }
-$pagina = "Crear instructores";
+
+require_once '../MODEL/model.php';
+$pagina = "Crear Ficha";
 $rol = $_SESSION["tipoUsuario"];
 $IDusuario = $_SESSION["IDusuario"];
-require_once '../MODEL/model.php';
 
 $mysql = new MySQL();
 
 $mysql->conectar();
+
 $areas = $mysql->efectuarConsulta("SELECT * FROM areas");
 
 // LAYOUT HTML
 require_once './layout/header.php';
 require_once './layout/nav_bar.php';
-?>
 
+
+?>
 <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
     <div
         class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-        <h1 class="h2">Crear nuevo instructor</h1>
+        <h1 class="h2">Crear Nueva Ficha</h1>
     </div>
 
-    <form id="formCrearInstructores">
-        <h4 class="mb-4"><i class="bi bi-person-circle me-2"></i> <small>Datos del instructor</small></h4>
+    <form id="formCrearFicha" method="POST">
+        <h4 class="mb-4">Datos de la ficha</h4>
 
         <div class="mb-3">
-            <label for="id" class="form-label">Identificacion</label>
-            <input type="text" class="form-control" id="id" placeholder="Identificacion" required>
+            <label for="codigo" class="form-label">Codigo</label>
+            <input type="number" class="form-control" id="codigo" name="codigo" placeholder="Codigo" required>
         </div>
 
         <div class="mb-3">
             <label for="nombre" class="form-label">Nombre</label>
-            <input type="text" class="form-control" id="nombre" placeholder="Nombre" required>
+            <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Nombre" required>
         </div>
         <div class="mb-3">
-        <select class="form-control" name="area_instructor" id="area_instructor">
+        <select class="form-control" name="area_ficha" id="area_ficha">
             <option value="">Seleccione un área</option>
             <?php
             while ($row = $areas->fetch_assoc()) {
@@ -49,21 +52,20 @@ require_once './layout/nav_bar.php';
         </div>
 
         <div class="mb-3">
-            <label for="email" class="form-label">Correo Electrónico</label>
-            <input type="email" class="form-control" id="email" placeholder="ejemplo@correo.com" required>
+            <label for="fecha_inicio" class="form-label">Fecha de inicio</label>
+            <input type="date" class="form-control" id="fechaInicio" name="fechaInicio" placeholder="Fecha Inicio" required>
         </div>
-
         <div class="mb-3">
-            <label for="password" class="form-label">Contraseña</label>
-            <input type="password" class="form-control" id="password" placeholder="Contraseña" required>
+            <label for="fecha_fin" class="form-label">Fecha Fin</label>
+            <input type="date" class="form-control" id="fechaFin" name="fechaFin" placeholder="Fecha Fin" required>
         </div>
 
         <button type="submit" class="btn btn-success w-100 mt-3">
-            <i class="bi bi-person-plus me-2"></i>Crear Instructor
+            <i class="fa-duotone fa-regular fa-plus"></i>Crear Ficha
         </button>
     </form>
 </main>
-
 <?php
 require_once './layout/footer.php';
+$mysql->desconectar();
 ?>
