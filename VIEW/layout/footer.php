@@ -32,6 +32,10 @@
     <?php if($archivoActual == "crearFicha.php"){ ?>
   <script src="../ASSETS/js/crearFicha.js"></script>
     <?php }?>
+    
+  <?php if($archivoActual == "fichas.php"){ ?>
+  <script src="../ASSETS/js/crearArea.js"></script>
+    <?php }?>
 
 
   </body>

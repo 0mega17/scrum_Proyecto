@@ -35,6 +35,12 @@ require_once './layout/nav_bar.php';
         <button class="btn btn-success">
             <a class="nav-link" href="./crearFicha.php"> Crear Ficha</a>
         </button>
+
+        <!-- //* boton para crear areas -->
+        <button class="btn btn-primary" id="btnCrearArea">
+            Crear Área
+        </button>
+
         <?php } ?>
     </div>
 
