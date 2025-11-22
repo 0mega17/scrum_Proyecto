@@ -20,7 +20,7 @@ tblTrabajos.addEventListener("click", (e) => {
                                     accept=".pdf, .docx, .doc, .xlsx, .png, jpg, jpeg">
                             </div>
 
-                             <input type="hidden" class="form-control" id="IDinstructor" name="IDinstructor" value="${IDtrabajo}" 
+                             <input type="hidden" class="form-control" id="IDtrabajo" name="IDtrabajo" value="${IDtrabajo}" 
                         </div>
                     </form>
    `,

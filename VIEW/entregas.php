@@ -33,7 +33,7 @@ require_once './layout/nav_bar.php';
         <div class="card shadow-lg border-0 rounded-4">
             <div class="card-header py-3 text-center">
                 <h4 class="fw-bold mb-0">
-                    Listado de entregas de trabajos
+                    <i class="fa-solid fa-suitcase"></i> Entregas de trabajos
                 </h4>
                 <?php if ($rol == 2) { ?>
                     <div class="text-center mt-4">
@@ -50,10 +50,10 @@ require_once './layout/nav_bar.php';
                 <?php } ?>
             </div>
 
-            <div class="card-body table-responsive">
+            <div class="card-body small">
 
-                <table class="table table-striped table-bordered shadow-sm" id="tblGeneral">
-                    <thead class="table-dark">
+                <table class="table table-striped shadow-sm nowrap" id="tblGeneral">
+                    <thead class="">
                         <tr>
                             <th>Trabajo</th>
                             <th>Fecha_subida</th>
@@ -78,11 +78,11 @@ require_once './layout/nav_bar.php';
                                 <td>
                                     <?php if ($fila["calificado"] == 0) { ?>
                                         <span class="badge bg-warning text-black">Sin calificar</span>
-                                    <?php }else{ ?>
+                                    <?php } else { ?>
                                         <button onclick="verCalificacion(<?php echo $fila['id'] ?>)" class="btn btn-info btn-sm btnCalificacion">
                                             <i class="fa-solid fa-eye"></i>
                                         </button>
-                                        <?php }?>
+                                    <?php } ?>
                                 </td>
 
                             </tr>

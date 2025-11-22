@@ -38,7 +38,7 @@ require_once './layout/nav_bar.php';
         <div class="card shadow-lg border-0 rounded-4">
             <div class="card-header py-3 text-center">
                 <h4 class="fw-bold mb-0">
-                    Listado de trabajos
+                    <i class="fa-solid fa-clipboard"></i> Trabajos
                 </h4>
                 <?php if ($rol == 2) { ?>
                     <div class="text-center mt-4">
@@ -55,10 +55,10 @@ require_once './layout/nav_bar.php';
                 <?php } ?>
             </div>
 
-            <div class="card-body table-responsive">
+            <div class="card-body">
 
-                <table class="table table-striped table-bordered shadow-sm" id="tblGeneral">
-                    <thead class="table-dark">
+                <table class="table table-striped shadow-sm table-sm nowrap" id="tblGeneral">
+                    <thead class="">
                         <tr>
                             <th>Nombre</th>
                             <th>Descripcion</th>
@@ -92,7 +92,7 @@ require_once './layout/nav_bar.php';
                                             <button
                                                 data-IDusuario="<?php echo $idUsuario ?>"
                                                 data-IDtrabajo="<?php echo $fila["id"] ?>"
-                                                id="btnSubirArchivo" class="btn btn-warning btn-sm btnSubirArchivo fw-bold">Editar</button>
+                                                id="btnEditarArchivo" class="btn btn-warning btn-sm btnEditarArchivo fw-bold">Editar</button>
                                         </td>
                                     <?php } ?>
                                 <?php } ?>

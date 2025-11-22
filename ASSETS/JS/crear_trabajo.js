@@ -20,6 +20,10 @@ btnCrear.addEventListener("click", async () => {
     opcionesFichas.push(opcion);
   });
 
+  if(fichas.length == 0){
+    opcionesFichas = "<option disabled selected> Sin fichas </option>"
+  }
+
   Swal.fire({
     title: '<span class="text-success fw-bold">Crear trabajo</span>',
     html: `

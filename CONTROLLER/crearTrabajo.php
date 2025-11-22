@@ -1,7 +1,7 @@
 <?php
 header('Content-Type: application/json');
 
-require_once '../MODEL/model.php';  
+require_once '../MODEL/model.php';
 $mysql = new MySQL();
 $mysql->conectar();
 
@@ -25,13 +25,20 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         $insertTrabajos = $mysql->efectuarConsulta("INSERT INTO trabajos(nombre, descripcion, fecha_publicacion, fecha_limite, instructores_id, fichas_id) VALUES('$nombreActividad', '$descripcion', NOW(), '$fechaLimite', $IDinstructor, $ficha)");
 
 
-        if($insertTrabajos){
+        if ($insertTrabajos) {
             echo json_encode([
                 "success" => true,
                 "message" => "Trabajo agregado exitosamente"
             ]);
         }
-    }else{
+    } else {
+        if (isset($_POST["ficha"]) && !empty($_POST["ficha"])) {
+            echo json_encode([
+                "success" => false,
+                "message" => "No tiene fichas asociadas como instructor"
+            ]);
+            exit();
+        }
         echo json_encode([
             "success" => false,
             "message" => "Todos los campos son obligatorios"
