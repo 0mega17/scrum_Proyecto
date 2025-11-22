@@ -15,8 +15,7 @@ $mysql->conectar();
 
 if ($rol == 3) {
     $IDficha = $_SESSION["fichaID"];
-    $trabajos = $mysql->efectuarConsulta("SELECT trabajos.id, trabajos.nombre as nombre_trabajo, trabajos.descripcion, trabajos.fecha_publicacion, trabajos.fecha_limite, fichas.codigo, fichas.nombre as nombre_ficha,
-    (SELECT COUNT(*) FROM entregas WHERE entregas.trabajos_id = trabajos.id AND aprendices_id = $idUsuario) as entregado FROM trabajos JOIN fichas ON fichas.id = trabajos.fichas_id WHERE trabajos.fichas_id = $IDficha");
+    $trabajos = $mysql->efectuarConsulta("SELECT instructores.nombre as nombre_instructor , trabajos.id, trabajos.nombre as nombre_trabajo, trabajos.descripcion, trabajos.fecha_publicacion, trabajos.fecha_limite, fichas.codigo, fichas.nombre as nombre_ficha, (SELECT COUNT(*) FROM entregas WHERE entregas.trabajos_id = trabajos.id AND aprendices_id = $idUsuario) as entregado FROM trabajos JOIN fichas ON fichas.id = trabajos.fichas_id JOIN instructores ON instructores.id = trabajos.instructores_id WHERE trabajos.fichas_id = $IDficha");
 } else if ($rol == 2) {
     $trabajos = $mysql->efectuarConsulta("SELECT trabajos.nombre as nombre_trabajo, trabajos.descripcion, trabajos.fecha_publicacion, trabajos.fecha_limite, fichas.codigo, fichas.nombre as nombre_ficha FROM trabajos JOIN fichas ON fichas.id = trabajos.fichas_id WHERE instructores_id = $idUsuario");
 } else {
@@ -38,7 +37,7 @@ require_once './layout/nav_bar.php';
         <div class="card shadow-lg border-0 rounded-4">
             <div class="card-header py-3 text-center">
                 <h4 class="fw-bold mb-0">
-                    <i class="fa-solid fa-clipboard"></i> Trabajos
+                    <i class="fa-solid fa-clipboard"></i> Listado de Trabajos
                 </h4>
                 <?php if ($rol == 2) { ?>
                     <div class="text-center mt-4">
@@ -57,15 +56,18 @@ require_once './layout/nav_bar.php';
 
             <div class="card-body">
 
-                <table class="table table-striped shadow-sm table-sm nowrap" id="tblGeneral">
+                <table class="table table-striped shadow-sm nowrap" id="tblGeneral">
                     <thead class="">
                         <tr>
                             <th>Nombre</th>
                             <th>Descripcion</th>
                             <th>Fecha publicacion</th>
                             <th>Fecha limite</th>
-                            <th>Ficha</th>
+                            <?php if ($rol == 2) { ?>
+                                <th>Ficha</th>
+                            <?php } ?>
                             <?php if ($rol == 3) { ?>
+                                <th>Instructor</th>
                                 <th>Acciones</th>
                             <?php } ?>
                         </tr>
@@ -78,21 +80,29 @@ require_once './layout/nav_bar.php';
                                 <td><?php echo $fila['descripcion']; ?></td>
                                 <td><?php echo $fila['fecha_publicacion']; ?></td>
                                 <td><?php echo $fila['fecha_limite']; ?></td>
-                                <td><?php echo $fila['codigo']; ?> - <?php echo $fila["nombre_ficha"] ?></td>
+                                <?php if ($rol == 2) { ?>
+                                    <td><?php echo $fila['codigo']; ?> - <?php echo $fila["nombre_ficha"] ?></td>
+                                <?php } ?>
                                 <?php if ($rol == 3) { ?>
+                                    <td><?php echo $fila["nombre_instructor"] ?></td>
                                     <?php if ($fila["entregado"] == 0) { ?>
                                         <td>
                                             <button
                                                 data-IDusuario="<?php echo $idUsuario ?>"
                                                 data-IDtrabajo="<?php echo $fila["id"] ?>"
-                                                id="btnSubirArchivo" class="btn btn-primary btn-sm btnSubirArchivo fw-bold">Subir</button>
+                                                id="btnSubirArchivo" class="btn btn-primary btn-sm btnSubirArchivo fw-bold">
+                                                <i class="fa-solid fa-download"></i> Subir
+                                            </button>
                                         </td>
                                     <?php } else { ?>
                                         <td>
                                             <button
                                                 data-IDusuario="<?php echo $idUsuario ?>"
                                                 data-IDtrabajo="<?php echo $fila["id"] ?>"
-                                                id="btnEditarArchivo" class="btn btn-warning btn-sm btnEditarArchivo fw-bold">Editar</button>
+                                                id="btnEditarArchivo" class="btn btn-warning btn-sm btnEditarArchivo fw-bold">
+                                                <i class="fa-solid fa-pen-to-square"></i>
+                                                Editar
+                                            </button>
                                         </td>
                                     <?php } ?>
                                 <?php } ?>

@@ -15,7 +15,7 @@ $mysql->conectar();
 
 if ($rol == 3) {
     $IDficha = $_SESSION["fichaID"];
-    $entregas = $mysql->efectuarConsulta("SELECT trabajos.nombre, entregas.id, entregas.archivo, entregas.fecha_subida, entregas.estado, (SELECT COUNT(*) FROM calificaciones WHERE calificaciones.entregas_id = entregas.id) as calificado FROM entregas JOIN trabajos ON trabajos.id = entregas.trabajos_id WHERE entregas.aprendices_id = $idUsuario ORDER BY entregas.id DESC");
+    $entregas = $mysql->efectuarConsulta("SELECT instructores.nombre as nombre_instructor, trabajos.nombre, entregas.id, entregas.archivo, entregas.fecha_subida, entregas.estado, (SELECT COUNT(*) FROM calificaciones WHERE calificaciones.entregas_id = entregas.id) as calificado FROM entregas JOIN trabajos ON trabajos.id = entregas.trabajos_id JOIN instructores ON instructores.id = trabajos.instructores_id WHERE entregas.aprendices_id = $idUsuario ORDER BY entregas.id DESC");
 }
 
 
@@ -50,7 +50,7 @@ require_once './layout/nav_bar.php';
                 <?php } ?>
             </div>
 
-            <div class="card-body small">
+            <div class="card-body">
 
                 <table class="table table-striped shadow-sm nowrap" id="tblGeneral">
                     <thead class="">
@@ -58,6 +58,7 @@ require_once './layout/nav_bar.php';
                             <th>Trabajo</th>
                             <th>Fecha_subida</th>
                             <th>Estado</th>
+                            <th>Instructor</th>
                             <th>Entrega</th>
                             <th>Calificacion</th>
                         </tr>
@@ -70,6 +71,7 @@ require_once './layout/nav_bar.php';
                                 <td><?php echo $fila['nombre']; ?></td>
                                 <td><?php echo $fila['fecha_subida']; ?></td>
                                 <td><?php echo $fila['estado']; ?></td>
+                                <td><?php echo $fila['nombre_instructor'] ?></td>
                                 <td><a href="../<?php echo $fila['archivo']; ?>"
                                         target="_blank"
                                         class="btn btn-primary btn-sm fw-bold">
@@ -77,7 +79,7 @@ require_once './layout/nav_bar.php';
                                     </a></td>
                                 <td>
                                     <?php if ($fila["calificado"] == 0) { ?>
-                                        <span class="badge bg-warning text-black">Sin calificar</span>
+                                        <span class="badge text-bg-warning text-black p-2 rounded-pill">Sin calificar</span>
                                     <?php } else { ?>
                                         <button onclick="verCalificacion(<?php echo $fila['id'] ?>)" class="btn btn-info btn-sm btnCalificacion">
                                             <i class="fa-solid fa-eye"></i>

@@ -15,7 +15,13 @@ $mysql = new MySQL();
 
 $mysql->conectar();
 
-$fichas = $mysql->efectuarConsulta("SELECT fichas.id,fichas.codigo,fichas.nombre,fichas.fecha_inicio,fichas.fecha_fin,areas.nombre_area FROM fichas INNER JOIN areas ON fichas.area_ficha = areas.id");
+if($rol == 1){
+    $fichas = $mysql->efectuarConsulta("SELECT fichas.id,fichas.codigo,fichas.nombre,fichas.fecha_inicio,fichas.fecha_fin,areas.nombre_area FROM fichas INNER JOIN areas ON fichas.area_ficha = areas.id");
+}
+if ($rol == 2) {
+    $fichas = $mysql->efectuarConsulta("SELECT fichas.id,fichas.codigo,fichas.nombre,fichas.fecha_inicio,fichas.fecha_fin,areas.nombre_area FROM fichas INNER JOIN areas ON fichas.area_ficha = areas.id JOIN fichas_has_instructores ON fichas_has_instructores.fichas_id = fichas.id WHERE fichas_has_instructores.instructores_id = $IDusuario");
+}
+
 
 $mysql->desconectar();
 
@@ -32,14 +38,14 @@ require_once './layout/nav_bar.php';
     </div>
     <div class="my-2">
         <?php if ($rol == 1) { ?>
-        <button class="btn btn-success">
-            <a class="nav-link" href="./crearFicha.php"> Crear Ficha</a>
-        </button>
+            <button class="btn btn-success">
+                <a class="nav-link" href="./crearFicha.php"> Crear Ficha</a>
+            </button>
 
-        <!-- //* boton para crear areas -->
-        <button class="btn btn-primary" id="btnCrearArea">
-            Crear Área
-        </button>
+            <!-- //* boton para crear areas -->
+            <button class="btn btn-primary" id="btnCrearArea">
+                Crear Área
+            </button>
 
         <?php } ?>
     </div>
@@ -48,10 +54,10 @@ require_once './layout/nav_bar.php';
         <table class="table table-striped table-sm">
             <thead>
                 <tr>
-                    <th scope="col">id</th>
-                    <th scope="col">codigo</th>
-                    <th scope="col">nombre</th>
-                    <th scope="col">area</th>
+                    <th scope="col">ID</th>
+                    <th scope="col">Codigo</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Area</th>
                     <th scope="col">Fecha de inicio</th>
                     <th scope="col">Fecha Fin</th>
                 </tr>

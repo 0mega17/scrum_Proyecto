@@ -4,6 +4,7 @@ if ($_SESSION["acceso"] == false || $_SESSION["acceso"] == null) {
     header('location: ./login.php');
 }
 
+$pagina = "Editar perfil";
 $rol = $_SESSION["tipoUsuario"];
 $IDusuario = $_SESSION["IDusuario"];
 
@@ -53,7 +54,7 @@ require_once './layout/nav_bar.php';
 
 ?>
 
-<div class="col-md-4 mb-4 d-flex justify-content-center">
+<div class="col-md-4 mb-4 d-flex justify-content-center mt-5">
     <div class="card mt-3 text-center" style="width: 18rem;">
         <div class="card-body d-flex flex-column align-items-center">
             <img src="../assets/img/profile.png"
@@ -67,7 +68,7 @@ require_once './layout/nav_bar.php';
         </div>
     </div>
 </div>
-<div class="col-md-5 align-self-center">
+<div class="col-md-5 align-self-center mt-5">
     <div class="profile-card">
         <h3 class="fw-bold-card">Detalles Perfil</h3>
         <form method="post">
@@ -75,7 +76,7 @@ require_once './layout/nav_bar.php';
             <div class="row mb-3">
                 <div class="col-md-6">
                     <label class="form-label">Identificacion</label>
-                    <input type="text" class="form-control" id="IDusuario" name="IDusuario" value="<?php echo $usuario['id']; ?>">
+                    <input disabled type="text" class="form-control" id="IDusuario" name="IDusuario" value="<?php echo $usuario['id']; ?>">
                 </div>
             </div>
 

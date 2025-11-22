@@ -20,8 +20,8 @@ btnCrear.addEventListener("click", async () => {
     opcionesFichas.push(opcion);
   });
 
-  if(fichas.length == 0){
-    opcionesFichas = "<option disabled selected> Sin fichas </option>"
+  if (fichas.length == 0) {
+    opcionesFichas = "<option disabled selected> Sin fichas </option>";
   }
 
   Swal.fire({
@@ -82,7 +82,14 @@ btnCrear.addEventListener("click", async () => {
     },
   }).then((resultado) => {
     if (resultado.isConfirmed && resultado.value.success) {
-      Swal.fire("Exito", resultado.value.message, "success").then(() => {
+      Swal.fire({
+        title: "Exito",
+        text: resultado.value.message,
+        icon: "success",
+        timer: 2000,
+        timerProgressBar: true,
+        showConfirmButton: false,
+      }).then(() => {
         location.reload();
       });
     }

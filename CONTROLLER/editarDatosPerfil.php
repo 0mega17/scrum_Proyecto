@@ -5,7 +5,6 @@ header('Content-Type: application/json; charset=utf-8');
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if (
-        isset($_POST["ID"]) && !empty($_POST["ID"]) &&
         isset($_POST["nombre"]) && !empty($_POST["nombre"])
         &&  isset($_POST["email"]) && !empty($_POST["email"])
     ) {

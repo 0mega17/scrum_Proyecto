@@ -30,7 +30,10 @@ $archivoActual = basename($_SERVER["PHP_SELF"]);
                             src="../assets/img/profile.png"
                             class="user-image rounded-circle img-fluid w-50"
                             alt="User Image" />
-
+                        <span class="badge rounded-pill text-bg-primary"><?php echo $usuario["nombre"] ?> - <?php echo $rolTxt ?></span>
+                        <?php if ($rol == 3) { ?>
+                            <span class=""><?php echo $usuario["nombreFicha"] ?> </span>
+                        <?php } ?>
                     </a>
 
                 </li>
@@ -90,29 +93,19 @@ $archivoActual = basename($_SERVER["PHP_SELF"]);
                         </a>
                     </li>
                 <?php } ?>
-                <li class="nav-item">
-                    <a class="nav-link d-flex align-items-center gap-2 active" aria-current="page" href="fichas.php">
-                        <svg class="bi" aria-hidden="true">
-                            <use xlink:href="#people"></use>
-                        </svg>
-                        fichas
-                    </a>
-                </li>
 
-                <li class="nav-item">
-                    <a class="nav-link d-flex align-items-center gap-2 active" aria-current="page" href="asignarTrabajo.php">
-                        <svg class="bi" aria-hidden="true">
-                            <use xlink:href="#people"></use>
-                        </svg>
-                        asignar trabajo
-                    </a>
-                </li>
+                <?php if ($rol == 1 || $rol == 2) { ?>
+                    <li class="nav-item">
+                        <a class="nav-link d-flex align-items-center gap-2 active" aria-current="page" href="fichas.php">
+                            <i class="bi bi-collection-fill"></i>
+                            Fichas
+                        </a>
+                    </li>
+                <?php } ?>
                 <?php if ($rol == 2) { ?>
                     <li class="nav-item">
                         <a class="nav-link d-flex align-items-center gap-2 active" aria-current="page" href="calificar_trabajo.php">
-                            <svg class="bi" aria-hidden="true">
-                                <use xlink:href="#people"></use>
-                            </svg>
+                            <i class="bi bi-folder-symlink-fill"></i>
                             Calificaciones
                         </a>
                     </li>
@@ -121,14 +114,6 @@ $archivoActual = basename($_SERVER["PHP_SELF"]);
             </ul>
             <hr class="my-3" />
             <ul class="nav flex-column mb-auto">
-                <li class="nav-item">
-                    <a class="nav-link d-flex align-items-center gap-2" href="#">
-                        <svg class="bi" aria-hidden="true">
-                            <use xlink:href="#gear-wide-connected"></use>
-                        </svg>
-                        Configuración
-                    </a>
-                </li>
                 <li class="nav-item">
                     <a class="nav-link d-flex align-items-center gap-2 btnLogout" href="../CONTROLLER/log_out.php">
                         <svg class="bi" aria-hidden="true">

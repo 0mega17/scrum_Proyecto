@@ -19,7 +19,7 @@ if ($rol == 1) {
     $rolTxt = "Instructor";
 } else if ($rol == 3) {
     // Realizar la consulta para verificar que existe el usuario
-    $usuario = $mysql->efectuarConsulta("SELECT * FROM aprendices WHERE id = $IDusuario");
+    $usuario = $mysql->efectuarConsulta("SELECT aprendices.id, aprendices.nombre, aprendices.email, aprendices.password, aprendices.estado, fichas.nombre as nombreFicha FROM aprendices JOIN fichas ON fichas.id = aprendices.fichas_id WHERE aprendices.id = $IDusuario");
     $rolTxt = "Aprendiz";
 }
 
@@ -288,9 +288,6 @@ $usuario = $usuario->fetch_assoc();
             class="navbar-brand col-md-3 col-lg-2 me-0 px-3 fs-6 text-white"
             href="#">Gestion de notas</a>
 
-        <div class="mx-2">
-            <h6 class="text-light"><?php echo $usuario["nombre"] ?> - <small> <?php echo $rolTxt ?> </small></h6>
-        </div>
         <ul class="navbar-nav flex-row d-md-none">
             <li class="nav-item text-nowrap">
                 <button
