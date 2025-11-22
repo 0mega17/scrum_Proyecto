@@ -37,6 +37,14 @@
   <script src="../ASSETS/js/crearArea.js"></script>
     <?php }?>
 
+  <?php if($archivoActual == "asignarFichas.php"){ ?>
+  <script src="../ASSETS/js/modalInstructor.js"></script>
+  <script src="../ASSETS/js/cargarFichasInstructor.js"></script>
+  <script src="../ASSETS/js/asignarFichaInstructor.js"></script>
+  <script src="../ASSETS/js/desasignarFichaInstructor.js"></script>
+  <script src="../ASSETS/js/asignarFichas.js"></script>
+    <?php }?>
+
 
   </body>
 

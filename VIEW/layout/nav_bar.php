@@ -92,6 +92,17 @@ $archivoActual = basename($_SERVER["PHP_SELF"]);
                     </a>
                 </li>
 
+                <?php if ($rol == 1) { ?>
+                <li class="nav-item">
+                    <a class="nav-link d-flex align-items-center gap-2 active" aria-current="page" href="asignarFichas.php">
+                        <svg class="bi" aria-hidden="true">
+                            <use xlink:href="#people"></use>
+                        </svg>
+                        Asignar Fichas
+                    </a>
+                </li>
+                <?php } ?>
+
                 <li class="nav-item">
                     <a class="nav-link d-flex align-items-center gap-2 active" aria-current="page" href="asignarTrabajo.php">
                         <svg class="bi" aria-hidden="true">
