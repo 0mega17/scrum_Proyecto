@@ -1,7 +1,7 @@
 <?php
 // Obtener el nombre del archivo
 $archivoActual = basename($_SERVER["PHP_SELF"]);
-
+$rol = $_SESSION["tipoUsuario"];
 ?>
 <div
     class="sidebar border border-right col-md-3 col-lg-2 p-0 bg-body-tertiary">
