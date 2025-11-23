@@ -14,7 +14,6 @@ $mysql = new MySQL();
 
 $mysql->conectar();
 
-$aprendices = $mysql->efectuarConsulta("SELECT * FROM fichas");
 
 $mysql->desconectar();
 
@@ -28,7 +27,7 @@ require_once './layout/nav_bar.php';
 <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
     <div
         class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-1">
-        <h1 class="h2">Calificaciones</h1>
+        <h1 class="h2 fw-semibold">Calificar trabajos</h1>
     </div>
 
     <div class="table-responsive small">

@@ -66,7 +66,7 @@ $(document).ready(function () {
           tablaFichas = $('#tablaFichasAsignar').DataTable({
             responsive: true,
             language: {
-              url: '//cdn.datatables.net/plug-ins/2.0.0/i18n/es-ES.json'
+              url: 'https://cdn.datatables.net/plug-ins/2.0.0/i18n/es-ES.json'
             },
             order: [[0, 'asc']],
             
