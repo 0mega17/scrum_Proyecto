@@ -51,7 +51,7 @@ require_once './layout/nav_bar.php';
     </div>
 
     <div class="table-responsive small">
-        <table class="table table-striped table-sm">
+        <table class="table table-bordered table-striped table-sm" id="tblGeneral">
             <thead>
                 <tr>
                     <th scope="col">ID</th>

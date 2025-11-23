@@ -19,7 +19,7 @@ if ($rol == 1) {
     $rolTxt = "Instructor";
 } else if ($rol == 3) {
     // Realizar la consulta para verificar que existe el usuario
-    $usuario = $mysql->efectuarConsulta("SELECT aprendices.id, aprendices.nombre, aprendices.email, aprendices.password, aprendices.estado, fichas.nombre as nombreFicha FROM aprendices JOIN fichas ON fichas.id = aprendices.fichas_id WHERE aprendices.id = $IDusuario");
+    $usuario = $mysql->efectuarConsulta("SELECT aprendices.id, aprendices.nombre, aprendices.email, aprendices.password, aprendices.estado, fichas.nombre as nombreFicha, fichas.codigo FROM aprendices JOIN fichas ON fichas.id = aprendices.fichas_id WHERE aprendices.id = $IDusuario");
     $rolTxt = "Aprendiz";
 }
 

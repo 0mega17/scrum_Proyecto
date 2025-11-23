@@ -34,7 +34,7 @@ require_once './layout/nav_bar.php';
 <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
     <div class="container mt-5">
         <!-- TABLA INDEPENDIENTE -->
-        <div class="card shadow-lg border-0 rounded-4">
+        <div class="card shadow border-0 rounded-4">
             <div class="card-header py-3 text-center">
                 <h4 class="fw-bold mb-0">
                     <i class="fa-solid fa-suitcase"></i> Entregas de trabajos

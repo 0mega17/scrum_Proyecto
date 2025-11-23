@@ -32,7 +32,8 @@ $archivoActual = basename($_SERVER["PHP_SELF"]);
                             alt="User Image" />
                         <span class="badge rounded-pill text-bg-primary"><?php echo $usuario["nombre"] ?> - <?php echo $rolTxt ?></span>
                         <?php if ($rol == 3) { ?>
-                            <span class=""><?php echo $usuario["nombreFicha"] ?> </span>
+                            <span class="fw-bold"><?php echo $usuario["nombreFicha"] ?> </span>
+                            <small class=""><?php echo $usuario["codigo"] ?> </small>
                         <?php } ?>
                     </a>
 
@@ -76,6 +77,15 @@ $archivoActual = basename($_SERVER["PHP_SELF"]);
 
                 <?php } ?>
 
+                <?php if ($rol == 1 || $rol == 2) { ?>
+                    <li class="nav-item">
+                        <a class="nav-link d-flex align-items-center gap-2 active" aria-current="page" href="fichas.php">
+                            <i class="bi bi-collection-fill"></i>
+                            Fichas
+                        </a>
+                    </li>
+                <?php } ?>
+
                 <?php if ($rol == 3 || $rol == 2 || $rol == 1) { ?>
                     <li class="nav-item">
                         <a class="nav-link d-flex align-items-center gap-2 active" aria-current="page" href="./trabajos.php">
@@ -94,14 +104,7 @@ $archivoActual = basename($_SERVER["PHP_SELF"]);
                     </li>
                 <?php } ?>
 
-                <?php if ($rol == 1 || $rol == 2) { ?>
-                    <li class="nav-item">
-                        <a class="nav-link d-flex align-items-center gap-2 active" aria-current="page" href="fichas.php">
-                            <i class="bi bi-collection-fill"></i>
-                            Fichas
-                        </a>
-                    </li>
-                <?php } ?>
+
                 <?php if ($rol == 2) { ?>
                     <li class="nav-item">
                         <a class="nav-link d-flex align-items-center gap-2 active" aria-current="page" href="calificar_trabajo.php">
