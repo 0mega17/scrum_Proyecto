@@ -23,6 +23,7 @@
   <?php } ?>
   <?php if ($archivoActual == "calificar_trabajo.php" && $rol == 2) { ?>
       <script src="../ASSETS/JS/cargar_calificaciones.js"></script>
+      <script src="../ASSETS/JS/mostrarcalificacionesaprendices.js"></script>
   <?php } ?>
   <?php if ($archivoActual == "asignarTrabajo.php") { ?>
       <script src="../ASSETS/JS/traerDatosTrabajos.js"></script>

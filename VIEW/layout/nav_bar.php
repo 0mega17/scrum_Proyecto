@@ -1,7 +1,7 @@
 <?php
 // Obtener el nombre del archivo
 $archivoActual = basename($_SERVER["PHP_SELF"]);
-
+$rol = $_SESSION["tipoUsuario"];
 ?>
 <div
     class="sidebar min-vh-100 border border-right col-md-3 col-lg-2 p-0 bg-body-tertiary">
@@ -40,7 +40,7 @@ $archivoActual = basename($_SERVER["PHP_SELF"]);
                 </li>
                 <li class="nav-item">
                     <a
-                        class="nav-link d-flex align-items-center gap-2"
+                        class="nav-link d-flex align-items-center gap-2 <?php echo ($archivoActual == "index.php" ? "active" : "") ?>"
                         href="index.php">
                         <svg class="bi" aria-hidden="true">
                             <use xlink:href="#house-fill"></use>
@@ -50,7 +50,7 @@ $archivoActual = basename($_SERVER["PHP_SELF"]);
                 </li>
                 <?php if ($rol == 1) { ?>
                     <li class="nav-item">
-                        <a class="nav-link d-flex align-items-center gap-2 active" aria-current="page" href="instructores.php">
+                        <a class="nav-link d-flex align-items-center gap-2 <?php echo ($archivoActual == "instructores.php" ? "active" : "") ?>" aria-current="page" href="instructores.php">
                             <svg class="bi" aria-hidden="true">
                                 <use xlink:href="#people"></use>
                             </svg>
@@ -58,7 +58,7 @@ $archivoActual = basename($_SERVER["PHP_SELF"]);
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link d-flex align-items-center gap-2 active" aria-current="page" href="administradores.php">
+                        <a class="nav-link d-flex align-items-center gap-2 <?php echo ($archivoActual == "administradores.php" ? "active" : "") ?>" aria-current="page" href="administradores.php">
                             <svg class="bi" aria-hidden="true">
                                 <use xlink:href="#people"></use>
                             </svg>
@@ -67,7 +67,7 @@ $archivoActual = basename($_SERVER["PHP_SELF"]);
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link d-flex align-items-center gap-2 active" aria-current="page" href="aprendices.php">
+                        <a class="nav-link d-flex align-items-center gap-2 active <?php echo ($archivoActual == "aprendices.php" ? "active" : "") ?>" aria-current="page" href="aprendices.php">
                             <svg class="bi" aria-hidden="true">
                                 <use xlink:href="#people"></use>
                             </svg>
@@ -79,7 +79,7 @@ $archivoActual = basename($_SERVER["PHP_SELF"]);
 
                 <?php if ($rol == 1 || $rol == 2) { ?>
                     <li class="nav-item">
-                        <a class="nav-link d-flex align-items-center gap-2 active" aria-current="page" href="fichas.php">
+                        <a class="nav-link d-flex align-items-center gap-2 <?php echo ($archivoActual == "fichas.php" ? "active" : "") ?>" aria-current="page" href="fichas.php">
                             <i class="bi bi-collection-fill"></i>
                             Fichas
                         </a>
@@ -88,7 +88,7 @@ $archivoActual = basename($_SERVER["PHP_SELF"]);
 
                 <?php if ($rol == 3 || $rol == 2 || $rol == 1) { ?>
                     <li class="nav-item">
-                        <a class="nav-link d-flex align-items-center gap-2 active" aria-current="page" href="./trabajos.php">
+                        <a class="nav-link d-flex align-items-center gap-2 <?php echo ($archivoActual == "trabajos.php" ? "active" : "") ?>" aria-current="page" href="./trabajos.php">
                             <i class="bi bi-clipboard2-data-fill"></i>
                             Trabajos
                         </a>
@@ -97,7 +97,7 @@ $archivoActual = basename($_SERVER["PHP_SELF"]);
 
                 <?php if ($rol == 3 || $rol == 1) { ?>
                     <li class="nav-item">
-                        <a class="nav-link d-flex align-items-center gap-2 active" aria-current="page" href="./entregas.php">
+                        <a class="nav-link d-flex align-items-center gap-2 <?php echo ($archivoActual == "entregas.php" ? "active" : "") ?>" aria-current="page" href="./entregas.php">
                             <i class="bi bi-bag-check-fill"></i>
                             Entregas
                         </a>
@@ -107,7 +107,7 @@ $archivoActual = basename($_SERVER["PHP_SELF"]);
 
                 <?php if ($rol == 2) { ?>
                     <li class="nav-item">
-                        <a class="nav-link d-flex align-items-center gap-2 active" aria-current="page" href="calificar_trabajo.php">
+                        <a class="nav-link d-flex align-items-center gap-2 <?php echo ($archivoActual == "calificar_trabajo.php" ? "active" : "") ?>" aria-current="page" href="calificar_trabajo.php">
                             <i class="bi bi-folder-symlink-fill"></i>
                             Calificar trabajos
                         </a>
@@ -115,13 +115,13 @@ $archivoActual = basename($_SERVER["PHP_SELF"]);
                 <?php } ?>
 
                 <?php if ($rol == 1) { ?>
-                <li class="nav-item">
-                    <a class="nav-link d-flex align-items-center gap-2 active" aria-current="page" href="asignarFichas.php">
+                    <li class="nav-item">
+                        <a class="nav-link d-flex align-items-center gap-2 <?php echo ($archivoActual == "asignarFichas.php" ? "active" : "") ?>" aria-current="page" href="asignarFichas.php">
                             <i class="bi bi-bookmark-plus-fill"></i>
-                        </svg>
-                        Asignar Fichas
-                    </a>
-                </li>
+                            </svg>
+                            Asignar Fichas
+                        </a>
+                    </li>
                 <?php } ?>
             </ul>
             <hr class="my-3" />
