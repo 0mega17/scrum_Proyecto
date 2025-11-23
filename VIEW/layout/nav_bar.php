@@ -73,16 +73,23 @@ $rol = $_SESSION["tipoUsuario"];
 
                 <?php } ?>
 
+                <?php if ($rol == 3 || $rol == 2) { ?>
+                    <li class="nav-item">
+                        <a class="nav-link d-flex align-items-center gap-2 active" aria-current="page" href="./trabajos.php">
+                            <i class="bi bi-clipboard2-data-fill"></i>
+                            Trabajos
+                        </a>
+                    </li>
+                <?php } ?>
 
-                <li class="nav-item">
-                    <a class="nav-link d-flex align-items-center gap-2 active" aria-current="page" href="./trabajos.php">
-                        <svg class="bi" aria-hidden="true">
-                            <use xlink:href="#people"></use>
-                        </svg>
-                        Trabajos
-                    </a>
-                </li>
-
+                <?php if ($rol == 3) { ?>
+                    <li class="nav-item">
+                        <a class="nav-link d-flex align-items-center gap-2 active" aria-current="page" href="./entregas.php">
+                            <i class="bi bi-bag-check-fill"></i>
+                            Entregas
+                        </a>
+                    </li>
+                <?php } ?>
                 <li class="nav-item">
                     <a class="nav-link d-flex align-items-center gap-2 active" aria-current="page" href="fichas.php">
                         <svg class="bi" aria-hidden="true">
@@ -100,6 +107,17 @@ $rol = $_SESSION["tipoUsuario"];
                         asignar trabajo
                     </a>
                 </li>
+                <?php if ($rol == 2) { ?>
+                    <li class="nav-item">
+                        <a class="nav-link d-flex align-items-center gap-2 active" aria-current="page" href="calificar_trabajo.php">
+                            <svg class="bi" aria-hidden="true">
+                                <use xlink:href="#people"></use>
+                            </svg>
+                            Calificaciones
+                        </a>
+                    </li>
+                <?php } ?>
+
             </ul>
             <hr class="my-3" />
             <ul class="nav flex-column mb-auto">

@@ -47,6 +47,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     $_SESSION["acceso"] = true;
                     $_SESSION["IDusuario"] = $usuarios["id"];
                     $_SESSION["nombreUsuario"] = $usuarios["nombre"];
+
                     if ($rol == 3) {
                         $_SESSION["fichaID"] = $usuarios["fichas_id"];
                     }
