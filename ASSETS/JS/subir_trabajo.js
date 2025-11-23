@@ -1,4 +1,3 @@
-
 const tblTrabajos = document.querySelector("#tablaTrabajos");
 tblTrabajos.addEventListener("click", (e) => {
   if (e.target.classList.contains("btnSubirArchivo")) {
@@ -59,8 +58,11 @@ tblTrabajos.addEventListener("click", (e) => {
               title: '<span class="fs-2 fw-bold">¡Éxito!</span>',
               text: respuesta.message,
               icon: "success",
+              timer: 2000,
+              timerProgressBar: true,
+              showConfirmButton: false,
             }).then(() => {
-              location.href = "./entregas.php"
+              location.href = "./entregas.php";
             });
 
             form.reset();

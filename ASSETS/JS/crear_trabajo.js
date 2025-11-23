@@ -20,9 +20,10 @@ btnCrear.addEventListener("click", async () => {
     opcionesFichas.push(opcion);
   });
 
-  if(fichas.length == 0){
-    opcionesFichas = "<option disabled selected> Sin fichas </option>"
+  if (fichas.length == 0) {
+    opcionesFichas = "<option disabled selected> Sin fichas </option>";
   }
+  const hoy = new Date().toISOString().split("T")[0];
 
   Swal.fire({
     title: '<span class="text-success fw-bold">Crear trabajo</span>',
@@ -30,17 +31,17 @@ btnCrear.addEventListener("click", async () => {
     <form action="" method="post" id="frmTrabajos">
     <div class="mb-3">
         <label for="nombre" class="form-label">Nombre de Actividad</label>
-        <input type="text" class="form-control" id="nombreActividad" name="nombreActividad" required>
+        <input type="text" class="form-control text-center" id="nombreActividad" name="nombreActividad" placeholder="Ingrese el nombre de la actividad" required>
     </div>
     <div class="mb-3">
   <label for="comments" class="form-label">Descripcion:</label>
-  <textarea class="form-control" id="descripcion" name="descripcion" rows="5"></textarea>
+  <textarea class="form-control" id="descripcion" name="descripcion" placeholder="Ingrese la descripcion de la actividad" rows="5"></textarea>
     </div>
     <div class="row">
         <div class="col-sm-5">
  <div class="mb-3">
         <label for="fecha" class="form-label">Fecha Limite</label>
-        <input type="date" class="form-control" id="fechaLimite" name="fechaLimite" required>
+        <input type="date" class="form-control" min="${hoy}" value="${hoy}" id="fechaLimite" name="fechaLimite" required>
     </div>
         </div>
 
@@ -82,7 +83,14 @@ btnCrear.addEventListener("click", async () => {
     },
   }).then((resultado) => {
     if (resultado.isConfirmed && resultado.value.success) {
-      Swal.fire("Exito", resultado.value.message, "success").then(() => {
+      Swal.fire({
+        title: "Exito",
+        text: resultado.value.message,
+        icon: "success",
+        timer: 2000,
+        timerProgressBar: true,
+        showConfirmButton: false,
+      }).then(() => {
         location.reload();
       });
     }

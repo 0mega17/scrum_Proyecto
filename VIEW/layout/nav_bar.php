@@ -4,7 +4,7 @@ $archivoActual = basename($_SERVER["PHP_SELF"]);
 $rol = $_SESSION["tipoUsuario"];
 ?>
 <div
-    class="sidebar border border-right col-md-3 col-lg-2 p-0 bg-body-tertiary">
+    class="sidebar min-vh-100 border border-right col-md-3 col-lg-2 p-0 bg-body-tertiary">
     <div
         class="offcanvas-md offcanvas-end bg-body-tertiary"
         tabindex="-1"
@@ -25,12 +25,16 @@ $rol = $_SESSION["tipoUsuario"];
             class="offcanvas-body d-md-flex flex-column p-0 pt-lg-3 overflow-y-auto">
             <ul class="nav flex-column">
                 <li class="nav-item text-center">
-                    <a href="./editar_perfil.php" class="nav-link">
+                    <a href="./editar_perfil.php" class="nav-link d-flex flex-column justify-content-center align-items-center">
                         <img
                             src="../assets/img/profile.png"
                             class="user-image rounded-circle img-fluid w-50"
                             alt="User Image" />
-
+                        <span class="badge rounded-pill text-bg-primary"><?php echo $usuario["nombre"] ?> - <?php echo $rolTxt ?></span>
+                        <?php if ($rol == 3) { ?>
+                            <span class="fw-bold"><?php echo $usuario["nombreFicha"] ?> </span>
+                            <small class=""><?php echo $usuario["codigo"] ?> </small>
+                        <?php } ?>
                     </a>
 
                 </li>
@@ -73,7 +77,16 @@ $rol = $_SESSION["tipoUsuario"];
 
                 <?php } ?>
 
-                <?php if ($rol == 3 || $rol == 2) { ?>
+                <?php if ($rol == 1 || $rol == 2) { ?>
+                    <li class="nav-item">
+                        <a class="nav-link d-flex align-items-center gap-2 active" aria-current="page" href="fichas.php">
+                            <i class="bi bi-collection-fill"></i>
+                            Fichas
+                        </a>
+                    </li>
+                <?php } ?>
+
+                <?php if ($rol == 3 || $rol == 2 || $rol == 1) { ?>
                     <li class="nav-item">
                         <a class="nav-link d-flex align-items-center gap-2 active" aria-current="page" href="./trabajos.php">
                             <i class="bi bi-clipboard2-data-fill"></i>
@@ -82,7 +95,7 @@ $rol = $_SESSION["tipoUsuario"];
                     </li>
                 <?php } ?>
 
-                <?php if ($rol == 3) { ?>
+                <?php if ($rol == 3 || $rol == 1) { ?>
                     <li class="nav-item">
                         <a class="nav-link d-flex align-items-center gap-2 active" aria-current="page" href="./entregas.php">
                             <i class="bi bi-bag-check-fill"></i>
@@ -90,45 +103,29 @@ $rol = $_SESSION["tipoUsuario"];
                         </a>
                     </li>
                 <?php } ?>
-                <li class="nav-item">
-                    <a class="nav-link d-flex align-items-center gap-2 active" aria-current="page" href="fichas.php">
-                        <svg class="bi" aria-hidden="true">
-                            <use xlink:href="#people"></use>
-                        </svg>
-                        fichas
-                    </a>
-                </li>
 
-                <li class="nav-item">
-                    <a class="nav-link d-flex align-items-center gap-2 active" aria-current="page" href="asignarTrabajo.php">
-                        <svg class="bi" aria-hidden="true">
-                            <use xlink:href="#people"></use>
-                        </svg>
-                        asignar trabajo
-                    </a>
-                </li>
+
                 <?php if ($rol == 2) { ?>
                     <li class="nav-item">
                         <a class="nav-link d-flex align-items-center gap-2 active" aria-current="page" href="calificar_trabajo.php">
-                            <svg class="bi" aria-hidden="true">
-                                <use xlink:href="#people"></use>
-                            </svg>
-                            Calificaciones
+                            <i class="bi bi-folder-symlink-fill"></i>
+                            Calificar trabajos
                         </a>
                     </li>
                 <?php } ?>
 
+                <?php if ($rol == 1) { ?>
+                <li class="nav-item">
+                    <a class="nav-link d-flex align-items-center gap-2 active" aria-current="page" href="asignarFichas.php">
+                            <i class="bi bi-bookmark-plus-fill"></i>
+                        </svg>
+                        Asignar Fichas
+                    </a>
+                </li>
+                <?php } ?>
             </ul>
             <hr class="my-3" />
             <ul class="nav flex-column mb-auto">
-                <li class="nav-item">
-                    <a class="nav-link d-flex align-items-center gap-2" href="#">
-                        <svg class="bi" aria-hidden="true">
-                            <use xlink:href="#gear-wide-connected"></use>
-                        </svg>
-                        Configuración
-                    </a>
-                </li>
                 <li class="nav-item">
                     <a class="nav-link d-flex align-items-center gap-2 btnLogout" href="../CONTROLLER/log_out.php">
                         <svg class="bi" aria-hidden="true">

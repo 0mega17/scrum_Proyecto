@@ -9,7 +9,12 @@ document.addEventListener("DOMContentLoaded", () => {
         fila.innerHTML = `
               <td>${datos.nombre_aprendiz}</td>
               <td>${datos.nombre_trabajo}</td>
-              <td>${datos.archivo}</td>
+              <td>
+              <a href="../${datos.archivo}"
+                      target="_blank"
+                      class="btn btn-primary btn-sm fw-bold">
+                                Ver archivo
+                        </a>
               <td>
                     <textarea class ="comentario" name="comentario" rows="3" style="width: 100%;"></textarea>
             </td>
@@ -32,17 +37,16 @@ document.addEventListener("DOMContentLoaded", () => {
           .then((datos) => {
             // aqui debe de salir la alerta  para cer que se
             if (datos.validacion) {
-             Swal.fire({
-               icon: "success",
-               title: "¡Calificación realizada!",
-               text: datos.mensaje,
-               timer: 2000,
-               timerProgressBar: true,
-               showConfirmButton: false,
-             }).then(() => {
-             
-               location.reload();
-             });
+              Swal.fire({
+                icon: "success",
+                title: "¡Calificación realizada!",
+                text: datos.mensaje,
+                timer: 2000,
+                timerProgressBar: true,
+                showConfirmButton: false,
+              }).then(() => {
+                location.reload();
+              });
             } else {
               Swal.fire({
                 icon: "error",
@@ -67,5 +71,4 @@ document.addEventListener("DOMContentLoaded", () => {
         });
       });
     });
-  
 });
