@@ -32,13 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             ]);
         }
     } else {
-        if (isset($_POST["ficha"]) && !empty($_POST["ficha"])) {
-            echo json_encode([
-                "success" => false,
-                "message" => "No tiene fichas asociadas como instructor"
-            ]);
-            exit();
-        }
+      
         echo json_encode([
             "success" => false,
             "message" => "Todos los campos son obligatorios"

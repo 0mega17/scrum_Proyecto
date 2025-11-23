@@ -20,9 +20,10 @@ btnCrear.addEventListener("click", async () => {
     opcionesFichas.push(opcion);
   });
 
-  if(fichas.length == 0){
-    opcionesFichas = "<option disabled selected> Sin fichas </option>"
+  if (fichas.length == 0) {
+    opcionesFichas = "<option disabled selected> Sin fichas </option>";
   }
+  const hoy = new Date().toISOString().split("T")[0];
 
   Swal.fire({
     title: '<span class="text-success fw-bold">Crear trabajo</span>',
@@ -40,7 +41,7 @@ btnCrear.addEventListener("click", async () => {
         <div class="col-sm-5">
  <div class="mb-3">
         <label for="fecha" class="form-label">Fecha Limite</label>
-        <input type="date" class="form-control" id="fechaLimite" name="fechaLimite" required>
+        <input type="date" class="form-control" min="${hoy}" value="${hoy}" id="fechaLimite" name="fechaLimite" required>
     </div>
         </div>
 
@@ -82,7 +83,14 @@ btnCrear.addEventListener("click", async () => {
     },
   }).then((resultado) => {
     if (resultado.isConfirmed && resultado.value.success) {
-      Swal.fire("Exito", resultado.value.message, "success").then(() => {
+      Swal.fire({
+        title: "Exito",
+        text: resultado.value.message,
+        icon: "success",
+        timer: 2000,
+        timerProgressBar: true,
+        showConfirmButton: false,
+      }).then(() => {
         location.reload();
       });
     }

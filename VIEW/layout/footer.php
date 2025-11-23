@@ -44,7 +44,7 @@
       <script src="../ASSETS/js/perfil.js"></script>
   <?php } ?>
 
-  <?php if ($archivoActual == "entregas.php" && $rol == 3) { ?>
+  <?php if ($archivoActual == "entregas.php" && $rol == 3 || $rol == 1) { ?>
       <script src="../ASSETS/JS/ver_calificaciones.js"></script>
   <?php } ?>
   <?php if ($archivoActual == "crearFicha.php") { ?>
@@ -58,6 +58,14 @@
   <?php if ($archivoActual == "trabajos.php") { ?>
       <script src="../ASSETS/JS/eliminarTrabajo.js"></script>
   <?php } ?>
+  <?php if($archivoActual == "asignarFichas.php"){ ?>
+  <script src="../ASSETS/js/modalInstructor.js"></script>
+  <script src="../ASSETS/js/cargarFichasInstructor.js"></script>
+  <script src="../ASSETS/js/asignarFichaInstructor.js"></script>
+  <script src="../ASSETS/js/desasignarFichaInstructor.js"></script>
+  <script src="../ASSETS/js/asignarFichas.js"></script>
+    <?php }?>
+
 
   </body>
 

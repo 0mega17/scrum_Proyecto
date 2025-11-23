@@ -13,9 +13,13 @@ $mysql = new MySQL();
 
 $mysql->conectar();
 
+if ($rol == 1) {
+    $entregas = $mysql->efectuarConsulta("SELECT aprendices.nombre as nombre_aprendiz, instructores.nombre as nombre_instructor, trabajos.nombre, entregas.id, entregas.archivo, entregas.fecha_subida, entregas.estado, (SELECT COUNT(*) FROM calificaciones WHERE calificaciones.entregas_id = entregas.id) as calificado FROM entregas JOIN trabajos ON trabajos.id = entregas.trabajos_id JOIN instructores ON instructores.id = trabajos.instructores_id JOIN aprendices ON aprendices.id = entregas.aprendices_id ORDER BY entregas.id DESC");
+}
+
 if ($rol == 3) {
     $IDficha = $_SESSION["fichaID"];
-    $entregas = $mysql->efectuarConsulta("SELECT trabajos.nombre, entregas.id, entregas.archivo, entregas.fecha_subida, entregas.estado, (SELECT COUNT(*) FROM calificaciones WHERE calificaciones.entregas_id = entregas.id) as calificado FROM entregas JOIN trabajos ON trabajos.id = entregas.trabajos_id WHERE entregas.aprendices_id = $idUsuario ORDER BY entregas.id DESC");
+    $entregas = $mysql->efectuarConsulta("SELECT instructores.nombre as nombre_instructor, trabajos.nombre, entregas.id, entregas.archivo, entregas.fecha_subida, entregas.estado, (SELECT COUNT(*) FROM calificaciones WHERE calificaciones.entregas_id = entregas.id) as calificado FROM entregas JOIN trabajos ON trabajos.id = entregas.trabajos_id JOIN instructores ON instructores.id = trabajos.instructores_id WHERE entregas.aprendices_id = $idUsuario ORDER BY entregas.id DESC");
 }
 
 
@@ -30,7 +34,7 @@ require_once './layout/nav_bar.php';
 <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
     <div class="container mt-5">
         <!-- TABLA INDEPENDIENTE -->
-        <div class="card shadow-lg border-0 rounded-4">
+        <div class="card shadow border-0 rounded-4">
             <div class="card-header py-3 text-center">
                 <h4 class="fw-bold mb-0">
                     <i class="fa-solid fa-suitcase"></i> Entregas de trabajos
@@ -50,14 +54,18 @@ require_once './layout/nav_bar.php';
                 <?php } ?>
             </div>
 
-            <div class="card-body small">
+            <div class="card-body">
 
-                <table class="table table-striped shadow-sm nowrap" id="tblGeneral">
+                <table class="table table-striped table-bordered shadow-sm nowrap" id="tblGeneral">
                     <thead class="">
                         <tr>
+                            <th>Instructor</th>
                             <th>Trabajo</th>
                             <th>Fecha_subida</th>
                             <th>Estado</th>
+                            <?php if($rol == 1){ ?>
+                            <th>Aprendiz</th>
+                            <?php }?>
                             <th>Entrega</th>
                             <th>Calificacion</th>
                         </tr>
@@ -66,10 +74,13 @@ require_once './layout/nav_bar.php';
                     <tbody id="tablaTrabajos">
                         <?php while ($fila = $entregas->fetch_assoc()): ?>
                             <tr>
-
+                                <td><?php echo $fila['nombre_instructor'] ?></td>
                                 <td><?php echo $fila['nombre']; ?></td>
                                 <td><?php echo $fila['fecha_subida']; ?></td>
                                 <td><?php echo $fila['estado']; ?></td>
+                                <?php if($rol == 1){ ?>
+                                <td><?php echo $fila['nombre_aprendiz']?></td>
+                                <?php }?>
                                 <td><a href="../<?php echo $fila['archivo']; ?>"
                                         target="_blank"
                                         class="btn btn-primary btn-sm fw-bold">
@@ -77,7 +88,7 @@ require_once './layout/nav_bar.php';
                                     </a></td>
                                 <td>
                                     <?php if ($fila["calificado"] == 0) { ?>
-                                        <span class="badge bg-warning text-black">Sin calificar</span>
+                                        <span class="badge text-bg-warning text-black p-2 rounded-pill">Sin calificar</span>
                                     <?php } else { ?>
                                         <button onclick="verCalificacion(<?php echo $fila['id'] ?>)" class="btn btn-info btn-sm btnCalificacion">
                                             <i class="fa-solid fa-eye"></i>
