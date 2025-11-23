@@ -1,3 +1,31 @@
+<?php
+
+
+$IDusuario = $_SESSION["IDusuario"];
+$rol = $_SESSION["tipoUsuario"];
+require_once '../MODEL/model.php';
+
+$mysql = new MySQL();
+
+$mysql->conectar();
+
+if ($rol == 1) {
+    // Realizar la consulta para verificar que existe el usuario
+    $usuario = $mysql->efectuarConsulta("SELECT * FROM administradores WHERE id = $IDusuario");
+    $rolTxt = "Administrador";
+} else if ($rol == 2) {
+    // Realizar la consulta para verificar que existe el usuario
+    $usuario = $mysql->efectuarConsulta("SELECT * FROM instructores WHERE id = $IDusuario");
+    $rolTxt = "Instructor";
+} else if ($rol == 3) {
+    // Realizar la consulta para verificar que existe el usuario
+    $usuario = $mysql->efectuarConsulta("SELECT aprendices.id, aprendices.nombre, aprendices.email, aprendices.password, aprendices.estado, fichas.nombre as nombreFicha, fichas.codigo FROM aprendices JOIN fichas ON fichas.id = aprendices.fichas_id WHERE aprendices.id = $IDusuario");
+    $rolTxt = "Aprendiz";
+}
+
+$usuario = $usuario->fetch_assoc();
+?>
+
 <!doctype html>
 <html lang="en" data-bs-theme="auto">
 
@@ -18,6 +46,13 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
     <meta name="theme-color" content="#712cf9" />
     <link href="../ASSETS/CSS/dashboard.css" rel="stylesheet" />
+    <link rel="shortcut icon" href="../ASSETS/IMG/educacion.png" type="image/x-icon">
+
+
+    <!-- Link Datatables -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.3.4/css/dataTables.bootstrap5.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/responsive/3.0.7/css/responsive.bootstrap5.css">
     <style>
         .bd-placeholder-img {
             font-size: 1.125rem;

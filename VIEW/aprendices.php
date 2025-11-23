@@ -48,7 +48,7 @@ require_once './layout/nav_bar.php';
     </div>
 
     <div class="table-responsive small">
-        <table class="table table-striped table-sm">
+        <table class="table table-striped table-bordered shadow-sm table-sm nowrap" id="tblGeneral">
             <thead>
                 <tr>
                     <th scope="col">Documento</th>
