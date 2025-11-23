@@ -117,8 +117,7 @@ $archivoActual = basename($_SERVER["PHP_SELF"]);
                 <?php if ($rol == 1) { ?>
                 <li class="nav-item">
                     <a class="nav-link d-flex align-items-center gap-2 active" aria-current="page" href="asignarFichas.php">
-                        <svg class="bi" aria-hidden="true">
-                            <use xlink:href="#people"></use>
+                            <i class="bi bi-bookmark-plus-fill"></i>
                         </svg>
                         Asignar Fichas
                     </a>

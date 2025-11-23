@@ -62,6 +62,7 @@ require_once './layout/nav_bar.php';
         </div>
     </div>
 
+    //* mesaje inicial que sale de fondo
     <div id="mensajeInicial" class="text-center mt-5">
         <i class="bi bi-person-badge" style="font-size: 4rem; color: #6c757d;"></i>
         <p class="mt-3 text-muted">Selecciona un instructor para ver y asignar fichas</p>
