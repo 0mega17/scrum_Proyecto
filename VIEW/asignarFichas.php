@@ -42,7 +42,7 @@ require_once './layout/nav_bar.php';
 
     <div id="tablaFichas" style="display: none;">
         <div class="table-responsive">
-            <table class="table table-striped table-hover">
+            <table id="tblGeneral" class="table table-striped table-hover">
                 <thead>
                     <tr>
                         <th>ID</th>
