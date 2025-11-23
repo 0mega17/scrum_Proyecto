@@ -5,6 +5,7 @@ if ($_SESSION["acceso"] == false || $_SESSION["acceso"] == null) {
     exit;
 }
 
+$pagina = "Editar perfil";
 $rol = $_SESSION["tipoUsuario"];
 $IDusuario = $_SESSION["IDusuario"];
 

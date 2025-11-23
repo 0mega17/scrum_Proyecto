@@ -61,7 +61,7 @@ require_once './layout/nav_bar.php';
         <div class="card shadow-lg border-0 rounded-4">
             <div class="card-header py-3 text-center">
                 <h4 class="fw-bold mb-0">
-                    <i class="fa-solid fa-clipboard"></i> Trabajos
+                    <i class="fa-solid fa-clipboard"></i> Listado de Trabajos
                 </h4>
 
                 <?php if ($rol == 2) { ?>
