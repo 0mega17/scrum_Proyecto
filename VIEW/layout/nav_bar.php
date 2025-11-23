@@ -44,6 +44,16 @@ $archivoActual = basename($_SERVER["PHP_SELF"]);
                         Dashboard
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a
+                        class="nav-link d-flex align-items-center gap-2"
+                        href="editar_perfil.php">
+                        <svg class="bi" aria-hidden="true">
+                            <use xlink:href="#people"></use>
+                        </svg>
+                        Perfil
+                    </a>
+                </li>
                 <?php if ($rol == 1) { ?>
                     <li class="nav-item">
                         <a class="nav-link d-flex align-items-center gap-2 active" aria-current="page" href="instructores.php">
