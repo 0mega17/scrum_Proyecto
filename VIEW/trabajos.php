@@ -15,11 +15,11 @@ $mysql->conectar();
 
 if ($rol == 3) {
     $IDficha = $_SESSION["fichaID"];
-    $trabajos = $mysql->efectuarConsulta("SELECT instructores.nombre as nombre_instructor , trabajos.id, trabajos.nombre as nombre_trabajo, trabajos.descripcion, trabajos.fecha_publicacion, trabajos.fecha_limite, fichas.codigo, fichas.nombre as nombre_ficha, (SELECT COUNT(*) FROM entregas WHERE entregas.trabajos_id = trabajos.id AND aprendices_id = $idUsuario) as entregado FROM trabajos JOIN fichas ON fichas.id = trabajos.fichas_id JOIN instructores ON instructores.id = trabajos.instructores_id WHERE trabajos.fichas_id = $IDficha");
+    $trabajos = $mysql->efectuarConsulta("SELECT instructores.nombre as nombre_instructor , trabajos.id, trabajos.nombre as nombre_trabajo, trabajos.descripcion, trabajos.fecha_publicacion, trabajos.fecha_limite, fichas.codigo, fichas.nombre as nombre_ficha, (SELECT COUNT(*) FROM entregas WHERE entregas.trabajos_id = trabajos.id AND aprendices_id = $idUsuario) as entregado FROM trabajos JOIN fichas ON fichas.id = trabajos.fichas_id JOIN instructores ON instructores.id = trabajos.instructores_id WHERE trabajos.fichas_id = $IDficha ORDER BY trabajos.id DESC");
 } else if ($rol == 2) {
-    $trabajos = $mysql->efectuarConsulta("SELECT trabajos.nombre as nombre_trabajo, trabajos.descripcion, trabajos.fecha_publicacion, trabajos.fecha_limite, fichas.codigo, fichas.nombre as nombre_ficha FROM trabajos JOIN fichas ON fichas.id = trabajos.fichas_id WHERE instructores_id = $idUsuario");
+    $trabajos = $mysql->efectuarConsulta("SELECT trabajos.nombre as nombre_trabajo, trabajos.descripcion, trabajos.fecha_publicacion, trabajos.fecha_limite, fichas.codigo, fichas.nombre as nombre_ficha FROM trabajos JOIN fichas ON fichas.id = trabajos.fichas_id WHERE instructores_id = $idUsuario ORDER BY trabajos.id DESC");
 } else {
-    $trabajos = $mysql->efectuarConsulta("SELECT trabajos.nombre as nombre_trabajo, trabajos.descripcion, trabajos.fecha_publicacion, trabajos.fecha_limite, fichas.codigo, fichas.nombre as nombre_ficha FROM trabajos JOIN fichas ON fichas.id = trabajos.fichas_id");
+    $trabajos = $mysql->efectuarConsulta("SELECT instructores.nombre as nombre_instructor , trabajos.nombre as nombre_trabajo, trabajos.descripcion, trabajos.fecha_publicacion, trabajos.fecha_limite, fichas.codigo, fichas.nombre as nombre_ficha FROM trabajos JOIN fichas ON fichas.id = trabajos.fichas_id JOIN instructores ON instructores.id = trabajos.instructores_id ORDER BY trabajos.id DESC");
 }
 
 
@@ -56,7 +56,7 @@ require_once './layout/nav_bar.php';
 
             <div class="card-body">
 
-                <table class="table table-striped shadow-sm nowrap" id="tblGeneral">
+                <table class="table table-striped table-bordered shadow-sm nowrap" id="tblGeneral">
                     <thead class="">
                         <tr>
                             <th>Nombre</th>
@@ -66,8 +66,13 @@ require_once './layout/nav_bar.php';
                             <?php if ($rol == 2) { ?>
                                 <th>Ficha</th>
                             <?php } ?>
-                            <?php if ($rol == 3) { ?>
+
+                            <?php if ($rol == 1 || $rol == 3) { ?>
                                 <th>Instructor</th>
+                            <?php } ?>
+
+                            <?php if ($rol == 3) { ?>
+
                                 <th>Acciones</th>
                             <?php } ?>
                         </tr>
@@ -83,8 +88,12 @@ require_once './layout/nav_bar.php';
                                 <?php if ($rol == 2) { ?>
                                     <td><?php echo $fila['codigo']; ?> - <?php echo $fila["nombre_ficha"] ?></td>
                                 <?php } ?>
-                                <?php if ($rol == 3) { ?>
+
+                                <?php if ($rol == 1 || $rol == 3) { ?>
                                     <td><?php echo $fila["nombre_instructor"] ?></td>
+                                <?php } ?>
+
+                                <?php if ($rol == 3) { ?>
                                     <?php if ($fila["entregado"] == 0) { ?>
                                         <td>
                                             <button

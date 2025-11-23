@@ -44,7 +44,7 @@
       <script src="../ASSETS/js/perfil.js"></script>
   <?php } ?>
 
-  <?php if ($archivoActual == "entregas.php" && $rol == 3) { ?>
+  <?php if ($archivoActual == "entregas.php" && $rol == 3 || $rol == 1) { ?>
       <script src="../ASSETS/JS/ver_calificaciones.js"></script>
   <?php } ?>
     <?php if($archivoActual == "crearFicha.php"){ ?>

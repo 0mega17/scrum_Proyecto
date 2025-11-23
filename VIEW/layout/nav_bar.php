@@ -25,7 +25,7 @@ $archivoActual = basename($_SERVER["PHP_SELF"]);
             class="offcanvas-body d-md-flex flex-column p-0 pt-lg-3 overflow-y-auto">
             <ul class="nav flex-column">
                 <li class="nav-item text-center">
-                    <a href="./editar_perfil.php" class="nav-link">
+                    <a href="./editar_perfil.php" class="nav-link d-flex flex-column justify-content-center align-items-center">
                         <img
                             src="../assets/img/profile.png"
                             class="user-image rounded-circle img-fluid w-50"
@@ -76,7 +76,7 @@ $archivoActual = basename($_SERVER["PHP_SELF"]);
 
                 <?php } ?>
 
-                <?php if ($rol == 3 || $rol == 2) { ?>
+                <?php if ($rol == 3 || $rol == 2 || $rol == 1) { ?>
                     <li class="nav-item">
                         <a class="nav-link d-flex align-items-center gap-2 active" aria-current="page" href="./trabajos.php">
                             <i class="bi bi-clipboard2-data-fill"></i>
@@ -85,7 +85,7 @@ $archivoActual = basename($_SERVER["PHP_SELF"]);
                     </li>
                 <?php } ?>
 
-                <?php if ($rol == 3) { ?>
+                <?php if ($rol == 3 || $rol == 1) { ?>
                     <li class="nav-item">
                         <a class="nav-link d-flex align-items-center gap-2 active" aria-current="page" href="./entregas.php">
                             <i class="bi bi-bag-check-fill"></i>
@@ -106,7 +106,7 @@ $archivoActual = basename($_SERVER["PHP_SELF"]);
                     <li class="nav-item">
                         <a class="nav-link d-flex align-items-center gap-2 active" aria-current="page" href="calificar_trabajo.php">
                             <i class="bi bi-folder-symlink-fill"></i>
-                            Calificaciones
+                            Calificar trabajos
                         </a>
                     </li>
                 <?php } ?>
