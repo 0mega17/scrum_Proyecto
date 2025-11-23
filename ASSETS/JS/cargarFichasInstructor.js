@@ -49,6 +49,21 @@ $(document).ready(function () {
           });
           //* se actualiza el contenido del cuerpo de la tabla con el HTML generado
           $("#tableFichasBody").html(tableHTML);
+          
+          //* Destruir DataTable existente si ya está inicializada
+          if ($.fn.DataTable.isDataTable('#tablaFichasAsignar')) {
+            $('#tablaFichasAsignar').DataTable().destroy();
+          }
+          
+          //* Inicializar DataTable
+          $('#tablaFichasAsignar').DataTable({
+            responsive: true,
+            language: {
+              url: '//cdn.datatables.net/plug-ins/2.0.0/i18n/es-ES.json'
+            },
+            order: [[0, 'asc']],
+            
+          });
         } else {
           Swal.fire({
             icon: "error",
