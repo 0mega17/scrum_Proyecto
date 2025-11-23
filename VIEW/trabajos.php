@@ -10,25 +10,49 @@ $rol = $_SESSION["tipoUsuario"];
 require_once '../MODEL/model.php';
 
 $mysql = new MySQL();
-
 $mysql->conectar();
 
 if ($rol == 3) {
     $IDficha = $_SESSION["fichaID"];
-    $trabajos = $mysql->efectuarConsulta("SELECT instructores.nombre as nombre_instructor , trabajos.id, trabajos.nombre as nombre_trabajo, trabajos.descripcion, trabajos.fecha_publicacion, trabajos.fecha_limite, fichas.codigo, fichas.nombre as nombre_ficha, (SELECT COUNT(*) FROM entregas WHERE entregas.trabajos_id = trabajos.id AND aprendices_id = $idUsuario) as entregado FROM trabajos JOIN fichas ON fichas.id = trabajos.fichas_id JOIN instructores ON instructores.id = trabajos.instructores_id WHERE trabajos.fichas_id = $IDficha ORDER BY trabajos.id DESC");
+    $trabajos = $mysql->efectuarConsulta("
+        SELECT 
+            trabajos.id,
+            trabajos.nombre AS nombre_trabajo,
+            trabajos.descripcion,
+            trabajos.fecha_publicacion,
+            trabajos.fecha_limite,
+            fichas.codigo,
+            fichas.nombre AS nombre_ficha,
+            (SELECT estado 
+             FROM entregas 
+             WHERE entregas.trabajos_id = trabajos.id 
+             AND aprendices_id = $idUsuario 
+             LIMIT 1) AS estado_entrega
+        FROM trabajos
+        JOIN fichas ON fichas.id = trabajos.fichas_id
+        WHERE trabajos.fichas_id = $IDficha
+    ");
 } else if ($rol == 2) {
-    $trabajos = $mysql->efectuarConsulta("SELECT trabajos.nombre as nombre_trabajo, trabajos.descripcion, trabajos.fecha_publicacion, trabajos.fecha_limite, fichas.codigo, fichas.nombre as nombre_ficha FROM trabajos JOIN fichas ON fichas.id = trabajos.fichas_id WHERE instructores_id = $idUsuario ORDER BY trabajos.id DESC");
+    $trabajos = $mysql->efectuarConsulta("
+        SELECT trabajos.nombre AS nombre_trabajo, trabajos.descripcion, trabajos.fecha_publicacion,
+            trabajos.fecha_limite, fichas.codigo, fichas.nombre AS nombre_ficha
+        FROM trabajos
+        JOIN fichas ON fichas.id = trabajos.fichas_id
+        WHERE instructores_id = $idUsuario
+    ");
 } else {
-    $trabajos = $mysql->efectuarConsulta("SELECT instructores.nombre as nombre_instructor , trabajos.nombre as nombre_trabajo, trabajos.descripcion, trabajos.fecha_publicacion, trabajos.fecha_limite, fichas.codigo, fichas.nombre as nombre_ficha FROM trabajos JOIN fichas ON fichas.id = trabajos.fichas_id JOIN instructores ON instructores.id = trabajos.instructores_id ORDER BY trabajos.id DESC");
+    $trabajos = $mysql->efectuarConsulta("
+        SELECT trabajos.nombre AS nombre_trabajo, trabajos.descripcion, trabajos.fecha_publicacion,
+            trabajos.fecha_limite, fichas.codigo, fichas.nombre AS nombre_ficha
+        FROM trabajos
+        JOIN fichas ON fichas.id = trabajos.fichas_id
+    ");
 }
-
 
 $mysql->desconectar();
 
-// LAYOUT HTML
 require_once './layout/header.php';
 require_once './layout/nav_bar.php';
-
 ?>
 
 <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
@@ -119,10 +143,8 @@ require_once './layout/nav_bar.php';
             </table>
         </div>
     </div>
-    </div>
-
-    </div>
 </main>
+
 <?php
 require_once './layout/footer.php';
 ?>
