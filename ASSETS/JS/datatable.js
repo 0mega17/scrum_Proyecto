@@ -2,9 +2,7 @@
 
 $(document).ready(function () {
   $("#tblGeneral").DataTable({
-    responsive: true,
-    fixedHeader: true,
-    scrollY: 350,
+    autoWidth: false,
     ordering: false,
     searching: true,
     language: {

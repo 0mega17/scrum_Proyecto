@@ -59,6 +59,11 @@
       <script src="../ASSETS/JS/eliminarTrabajo.js"></script>
   <?php } ?>
 
+  <?php if ($archivoActual == "editar_perfil.php") { ?>
+      <script src="../ASSETS/JS/actualizacionPerfil.js"></script>
+  <?php } ?>
+
+
   </body>
 
   </html>

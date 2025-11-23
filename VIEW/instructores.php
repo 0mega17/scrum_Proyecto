@@ -67,8 +67,6 @@ require_once './layout/nav_bar.php';
                         <td> <?php echo $fila['estado'] ?> </td>
                     </tr>
 
-
-
                 <?php } ?>
             </tbody>
         </table>

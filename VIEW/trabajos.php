@@ -80,82 +80,92 @@ require_once './layout/nav_bar.php';
 
             <div class="card-body">
 
-                <table class="table table-striped shadow-sm table-sm nowrap" id="tblGeneral">
-                    <thead>
-                        <tr>
-                            <th>Nombre</th>
-                            <th>Descripción</th>
-                            <th>Fecha publicación</th>
-                            <th>Fecha límite</th>
-                            <th>Ficha</th>
+                <!-- **Tabla responsive para evitar que se salga del card** -->
+                <div class="table-responsive">
 
-                            <?php if ($rol == 3) { ?>
-                                <th>Acciones</th>
-                            <?php } ?>
-                        </tr>
-                    </thead>
-
-                    <tbody id="tablaTrabajos">
-                        <?php while ($fila = $trabajos->fetch_assoc()): ?>
+                    <table class="table table-striped shadow-sm table-sm text-wrap" id="tblGeneral">
+                        <thead>
                             <tr>
-                                <td><?php echo $fila['nombre_trabajo']; ?></td>
-                                <td><?php echo $fila['descripcion']; ?></td>
-                                <td><?php echo $fila['fecha_publicacion']; ?></td>
-                                <td><?php echo $fila['fecha_limite']; ?></td>
-                                <td><?php echo $fila['codigo']; ?> - <?php echo $fila["nombre_ficha"]; ?></td>
+                                <th>Nombre</th>
+                                <th>Descripción</th>
+                                <th>Fecha publicación</th>
+                                <th>Fecha límite</th>
+                                <th>Ficha</th>
 
-                                <?php if ($rol == 3): ?>
-                                    <td>
+                                <?php if ($rol == 3) { ?>
+                                    <th>Acciones</th>
+                                <?php } ?>
+                            </tr>
+                        </thead>
 
-                                        <?php
-                                        $estado = $fila["estado_entrega"];
-                                        $hoy = date("Y-m-d");
-                                        $limite = $fila["fecha_limite"];
-                                        $fueraDeTiempo = ($hoy > $limite);
-                                        ?>
+                        <tbody id="tablaTrabajos">
+                            <?php while ($fila = $trabajos->fetch_assoc()): ?>
+                                <tr>
+                                    <td><?php echo $fila['nombre_trabajo']; ?></td>
 
-                                        <?php if ($estado === null): ?>
+                                    <!-- Descripción con salto de línea y límite de ancho -->
+                                    <td class="text-wrap" style="max-width: 300px;">
+                                        <?php echo $fila['descripcion']; ?>
+                                    </td>
 
-                                            <?php if ($fueraDeTiempo): ?>
-                                                <button class="btn btn-secondary btn-sm fw-bold" disabled>
-                                                    No entregado
-                                                </button>
-                                            <?php else: ?>
+                                    <td><?php echo $fila['fecha_publicacion']; ?></td>
+                                    <td><?php echo $fila['fecha_limite']; ?></td>
+                                    <td><?php echo $fila['codigo']; ?> - <?php echo $fila["nombre_ficha"]; ?></td>
+
+                                    <?php if ($rol == 3): ?>
+                                        <td>
+
+                                            <?php
+                                            $estado = $fila["estado_entrega"];
+                                            $hoy = date("Y-m-d");
+                                            $limite = $fila["fecha_limite"];
+                                            $fueraDeTiempo = ($hoy > $limite);
+                                            ?>
+
+                                            <?php if ($estado === null): ?>
+
+                                                <?php if ($fueraDeTiempo): ?>
+                                                    <button class="btn btn-secondary btn-sm fw-bold" disabled>
+                                                        No entregado
+                                                    </button>
+                                                <?php else: ?>
+                                                    <button
+                                                        data-IDusuario="<?php echo $idUsuario; ?>"
+                                                        data-IDtrabajo="<?php echo $fila["id"]; ?>"
+                                                        class="btn btn-primary btn-sm btnSubirArchivo fw-bold">
+                                                        Subir
+                                                    </button>
+                                                <?php endif; ?>
+
+                                            <?php elseif ($estado === "Entregado"): ?>
+
+                                                <span class="btn btn-warning btn-sm fw-bold" style="cursor: default;">
+                                                    Trabajo entregado
+                                                </span>
+
                                                 <button
-                                                    data-IDusuario="<?php echo $idUsuario; ?>"
-                                                    data-IDtrabajo="<?php echo $fila["id"]; ?>"
-                                                    class="btn btn-primary btn-sm btnSubirArchivo fw-bold">
-                                                    Subir
+                                                    onclick="eliminarTrabajo(<?= $fila['id'] ?>)"
+                                                    class="btn btn-danger btn-sm fw-bold ms-2">
+                                                    Eliminar
                                                 </button>
+
+                                            <?php elseif ($estado === "Calificado"): ?>
+
+                                                <button class="btn btn-success btn-sm fw-bold" disabled>
+                                                    Calificado
+                                                </button>
+
                                             <?php endif; ?>
 
-                                        <?php elseif ($estado === "Entregado"): ?>
+                                        </td>
+                                    <?php endif; ?>
+                                </tr>
+                            <?php endwhile; ?>
+                        </tbody>
 
-                                            <span class="btn btn-warning btn-sm fw-bold" style="cursor: default;">
-                                                Trabajo entregado
-                                            </span>
+                    </table>
 
-                                            <button
-                                                onclick="eliminarTrabajo(<?= $fila['id'] ?>)"
-                                                class="btn btn-danger btn-sm fw-bold ms-2">
-                                                Eliminar
-                                            </button>
-
-                                        <?php elseif ($estado === "Calificado"): ?>
-
-                                            <button class="btn btn-success btn-sm fw-bold" disabled>
-                                                Calificado
-                                            </button>
-
-                                        <?php endif; ?>
-
-                                    </td>
-                                <?php endif; ?>
-                            </tr>
-                        <?php endwhile; ?>
-                    </tbody>
-
-                </table>
+                </div>
 
             </div>
         </div>
@@ -165,5 +175,3 @@ require_once './layout/nav_bar.php';
 <?php
 require_once './layout/footer.php';
 ?>
-
-
