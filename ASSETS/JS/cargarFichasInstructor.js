@@ -1,6 +1,9 @@
 $(document).ready(function () {
   //* se activa la funcion para cargar las fichas del instructor
   //* el window.instructorActual se define en modalInstructor.js
+  
+  //* variable para almacenar la instancia de DataTable
+  let tablaFichas = null;
 
   window.cargarFichas = function(instructorId) {
     $.ajax({
@@ -15,6 +18,15 @@ $(document).ready(function () {
           $("#instructorInfo").show();
           $("#mensajeInicial").hide();
           $("#tablaFichas").show();
+
+          //* Si la tabla ya está inicializada, destruirla completamente
+          //* esto se hace para evitar errores al reinicializar la tabla con nueva data
+          //* y que se le tega que dar f5 
+          //! sin esto, no van a salir los cambios en la tabla al asignar o desasignar fichas
+          if (tablaFichas !== null) {
+            tablaFichas.destroy();
+            tablaFichas = null;
+          }
 
           let tableHTML = "";
           respuesta.fichas.forEach((ficha) => {
@@ -50,13 +62,8 @@ $(document).ready(function () {
           //* se actualiza el contenido del cuerpo de la tabla con el HTML generado
           $("#tableFichasBody").html(tableHTML);
           
-          //* Destruir DataTable existente si ya está inicializada
-          if ($.fn.DataTable.isDataTable('#tablaFichasAsignar')) {
-            $('#tablaFichasAsignar').DataTable().destroy();
-          }
-          
-          //* Inicializar DataTable
-          $('#tablaFichasAsignar').DataTable({
+          //* Inicializar DataTable y guardar la instancia
+          tablaFichas = $('#tablaFichasAsignar').DataTable({
             responsive: true,
             language: {
               url: '//cdn.datatables.net/plug-ins/2.0.0/i18n/es-ES.json'
