@@ -4,7 +4,7 @@ $archivoActual = basename($_SERVER["PHP_SELF"]);
 $rol = $_SESSION["tipoUsuario"];
 ?>
 <div
-    class="sidebar min-vh-100 border border-right col-md-3 col-lg-2 p-0 bg-body-tertiary">
+    class="sidebar border border-right col-md-3 col-lg-2 p-0 bg-body-tertiary d-md-block">
     <div
         class="offcanvas-md offcanvas-end bg-body-tertiary"
         tabindex="-1"
@@ -48,29 +48,33 @@ $rol = $_SESSION["tipoUsuario"];
                         Dashboard
                     </a>
                 </li>
+
+                <li class="nav-item">
+                    <a
+                        class="nav-link d-flex align-items-center gap-2"
+                        href="editar_perfil.php">
+                        <i class="bi bi-person-fill-gear"></i>
+                        Perfil
+                    </a>
+                </li>
+
                 <?php if ($rol == 1) { ?>
                     <li class="nav-item">
                         <a class="nav-link d-flex align-items-center gap-2 <?php echo ($archivoActual == "instructores.php" ? "active" : "") ?>" aria-current="page" href="instructores.php">
-                            <svg class="bi" aria-hidden="true">
-                                <use xlink:href="#people"></use>
-                            </svg>
+                            <i class="bi bi-people-fill"></i>
                             Instructores
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link d-flex align-items-center gap-2 <?php echo ($archivoActual == "administradores.php" ? "active" : "") ?>" aria-current="page" href="administradores.php">
-                            <svg class="bi" aria-hidden="true">
-                                <use xlink:href="#people"></use>
-                            </svg>
+                            <i class="bi bi-people-fill"></i>
                             Administradores
                         </a>
                     </li>
 
                     <li class="nav-item">
                         <a class="nav-link d-flex align-items-center gap-2 active <?php echo ($archivoActual == "aprendices.php" ? "active" : "") ?>" aria-current="page" href="aprendices.php">
-                            <svg class="bi" aria-hidden="true">
-                                <use xlink:href="#people"></use>
-                            </svg>
+                            <i class="bi bi-people-fill"></i>
                             Aprendices
                         </a>
                     </li>
@@ -109,7 +113,7 @@ $rol = $_SESSION["tipoUsuario"];
                     <li class="nav-item">
                         <a class="nav-link d-flex align-items-center gap-2 <?php echo ($archivoActual == "calificar_trabajo.php" ? "active" : "") ?>" aria-current="page" href="calificar_trabajo.php">
                             <i class="bi bi-folder-symlink-fill"></i>
-                            Calificar trabajos
+                            Calificaciones
                         </a>
                     </li>
                 <?php } ?>
