@@ -108,8 +108,10 @@ selectTrabajo.addEventListener("change", async () => {
 
   aprendices.forEach((a) => {
     let color =
-      a.estado_entrega === "Calificado"
+      a.estado_entrega === "Aprobado"
         ? "text-success fw-bold"
+        : a.estado_entrega === "Desaprobado"
+        ? "text-danger fw-bold"
         : "";
 
     filas.push(`
