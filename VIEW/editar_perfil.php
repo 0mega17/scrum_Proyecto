@@ -2,6 +2,7 @@
 session_start();
 if ($_SESSION["acceso"] == false || $_SESSION["acceso"] == null) {
     header('location: ./login.php');
+    exit;
 }
 
 $pagina = "Editar perfil";
@@ -11,126 +12,93 @@ $IDusuario = $_SESSION["IDusuario"];
 require_once '../MODEL/model.php';
 
 $mysql = new MySQL();
-
 $mysql->conectar();
 
-
-
-if ($rol == 1) {
-    // Realizar la consulta para verificar que existe el usuario
-    $usuario = $mysql->efectuarConsulta("SELECT * FROM administradores WHERE id = $IDusuario");
-    $rolTxt = "Administrador";
-    $rolTxtInp = "administradores";
-} else if ($rol == 2) {
-    // Realizar la consulta para verificar que existe el usuario
-    $usuario = $mysql->efectuarConsulta("SELECT * FROM instructores WHERE id = $IDusuario");
-    $rolTxt = "Instructor";
-    $rolTxtInp = "instructores";
-} else if ($rol == 3) {
-    // Realizar la consulta para verificar que existe el usuario
-    $usuario = $mysql->efectuarConsulta("SELECT * FROM aprendices WHERE id = $IDusuario");
-    $rolTxt = "Aprendiz";
-    $rolTxtInp = "aprendices";
+switch ($rol) {
+    case 1:
+        $rolTabla = "administradores";
+        break;
+    case 2:
+        $rolTabla = "instructores";
+        break;
+    default:
+        $rolTabla = "aprendices";
+        break;
 }
 
-$usuario = $usuario->fetch_assoc();
-
-
-require_once '../MODEL/model.php';
-
-$mysql = new MySQL();
-
-$mysql->conectar();
-
-$aprendices = $mysql->efectuarConsulta("SELECT * FROM aprendices");
+$usuario = $mysql->efectuarConsulta("SELECT * FROM $rolTabla WHERE id = $IDusuario")->fetch_assoc();
 
 $mysql->desconectar();
 
-// LAYOUT HTML
 require_once './layout/header.php';
 require_once './layout/nav_bar.php';
-
-
-
 ?>
 
-<div class="col-md-4 mb-4 d-flex justify-content-center mt-5">
-    <div class="card mt-3 text-center" style="width: 18rem;">
-        <div class="card-body d-flex flex-column align-items-center">
-            <img src="../assets/img/profile.png"
-                class="rounded-circle shadow mb-3"
-                alt="User Image"
-                style="width: 150px; height: 150px; object-fit: cover;">
-            <h3 class="card-title mb-0">
-                <?php echo $usuario["nombre"]; ?>
-            </h3>
-            <small> <?php echo $rolTxt ?></small>
-        </div>
-    </div>
-</div>
-<div class="col-md-5 align-self-center mt-5">
-    <div class="profile-card">
-        <h3 class="fw-bold-card">Detalles Perfil</h3>
-        <form method="post">
-            <!-- Información Personal -->
-            <div class="row mb-3">
-                <div class="col-md-6">
-                    <label class="form-label">Identificacion</label>
-                    <input disabled type="text" class="form-control" id="IDusuario" name="IDusuario" value="<?php echo $usuario['id']; ?>">
-                </div>
-            </div>
+<main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+    <div class="d-flex justify-content-center mt-3">
+        <div class="card shadow-lg border-0" style="max-width: 650px; width: 100%; border-radius: 1rem;">
+            <div class="card-body p-4">
+                <h3 class="text-center fw-bold mb-4">Detalles del Perfil</h3>
 
-            <div class="row mb-3">
-                <div class="col-md-6">
-                    <label class="form-label">Nombre</label>
-                    <input type="text" class="form-control" id="nombre" name="nombre" value="<?php echo $usuario['nombre']; ?>">
-                </div>
-            </div>
-
-            <div class="row mb-3">
-                <div class="col-md-12">
-                    <label class="form-label">Email</label>
-                    <input type="email" class="form-control" id="email" name="email" value="<?php echo $usuario['email'] ?>">
-                </div>
-            </div>
-
-            <!-- Separador visual -->
-            <hr class="my-4">
-
-            <!-- Cambio de contraseña -->
-            <div class="row mb-3">
-                <div class="col-md-6">
-                    <label class="form-label">Contraseña actual</label>
-                    <input type="password" class="form-control" id="oldPassword" name="oldPassword" placeholder="Ingrese su contraseña actual">
-                </div>
-                <div class="col-md-6">
-                    <label class="form-label">Nueva Contraseña</label>
-                    <input type="password" class="form-control" id="newPassword" name="newPassword" disabled placeholder="Ingresa una nueva contraseña">
-                    <div class="form-check mb-2">
-                        <input class="form-check-input" type="checkbox" id="cambiarPassword">
-                        <label class="form-check-label" for="cambiarPassword">
-                            ¿Deseas cambiar tu contraseña?
-                        </label>
+                <form id="formPerfil" onsubmit="event.preventDefault();">
+                    <div class="mb-3">
+                        <label class="form-label fw-semibold">Nombre</label>
+                        <input type="text" class="form-control" id="nombre" name="nombre" 
+                               value="<?php echo htmlspecialchars($usuario['nombre']); ?>" required>
                     </div>
-                </div>
-            </div>
 
-            <div class="col-md-6">
-                <input type="hidden" value="<?php echo $rolTxtInp ?>" class="form-control" id="rol" name="rol"">
+                    <div class="mb-3">
+                        <label class="form-label fw-semibold">Email</label>
+                        <input type="email" class="form-control" id="email" name="email" 
+                               value="<?php echo htmlspecialchars($usuario['email']); ?>" required>
+                    </div>
+
+                    <hr class="my-4">
+
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label class="form-label fw-semibold">Contraseña actual</label>
+                            <input type="password" class="form-control" id="oldPassword" name="oldPassword" 
+                                   placeholder="Ingrese su contraseña actual">
                         </div>
-                    </form>
-                </div>
-            </div>
 
+                        <div class="col-md-6">
+                            <label class="form-label fw-semibold">Nueva contraseña</label>
+                            <input type="password" class="form-control" id="newPassword" name="newPassword" 
+                                   disabled placeholder="Ingresa una nueva contraseña">
+
+                            <div class="form-check mt-2">
+                                <input class="form-check-input" type="checkbox" id="cambiarPassword">
+                                <label class="form-check-label" for="cambiarPassword">
+                                    ¿Deseas cambiar tu contraseña?
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <input type="hidden" id="IDusuario" value="<?php echo $usuario['id']; ?>">
+                    <input type="hidden" id="rol" value="<?php echo $rolTabla; ?>">
+
+                    <div class="text-end mt-4">
+                        <button type="button" id="btnGuardar" class="btn btn-primary px-4 me-2">Guardar</button>
+                        <a href="./index.php" class="btn btn-success px-4">Volver</a>
+                    </div>
+                </form>
+
+            </div>
         </div>
-        <div class=" d-flex justify-content-end m-4">
-                <button type="button" class="btn btn-primary me-2" id="btnGuardar">Guardar</button>
-                <a href="./index.php" class="btn btn-success">Volver a Inicio</a>
-            </div>
-        </form>
-
     </div>
-</div>
-<?php
-require_once './layout/footer.php';
+</main>
+
+<script>
+
+document.getElementById('cambiarPassword').addEventListener('change', function() {
+    const newPassword = document.getElementById('newPassword');
+    newPassword.disabled = !this.checked;
+    if (!this.checked) newPassword.value = "";
+});
+</script>
+
+<?php 
+require_once './layout/footer.php'; 
 ?>
