@@ -68,7 +68,7 @@ require_once './layout/nav_bar.php';
                             <td><a href="../<?php echo $fila['archivo']; ?>"
                                     target="_blank"
                                     class="btn btn-primary btn-sm fw-bold">
-                                    Ver archivo
+                                    <i class="fa-solid fa-file"></i>
                                 </a></td>
                             <td>
                                 <?php if ($fila["calificado"] == 0) { ?>

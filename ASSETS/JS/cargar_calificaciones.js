@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", () => {
               <a href="../${datos.archivo}"
                       target="_blank"
                       class="btn btn-primary btn-sm fw-bold">
-                                Ver archivo
+                                <i class="fa-solid fa-file"></i>
                         </a>
               <td>
                     <textarea class ="comentario" name="comentario" rows="3" style="width: 100%;"></textarea>
