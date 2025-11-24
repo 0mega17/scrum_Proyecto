@@ -48,14 +48,17 @@
   <?php if ($archivoActual == "entregas.php" && $rol == 3 || $rol == 1) { ?>
       <script src="../ASSETS/JS/ver_calificaciones.js"></script>
   <?php } ?>
-    <?php if($archivoActual == "crearFicha.php"){ ?>
-  <script src="../ASSETS/js/crearFicha.js"></script>
-    <?php }?>
-    
-  <?php if($archivoActual == "fichas.php"){ ?>
-  <script src="../ASSETS/js/crearArea.js"></script>
-    <?php }?>
+  <?php if ($archivoActual == "crearFicha.php") { ?>
+      <script src="../ASSETS/js/crearFicha.js"></script>
+  <?php } ?>
 
+  <?php if ($archivoActual == "fichas.php") { ?>
+      <script src="../ASSETS/js/crearArea.js"></script>
+  <?php } ?>
+
+  <?php if ($archivoActual == "trabajos.php") { ?>
+      <script src="../ASSETS/JS/eliminarTrabajo.js"></script>
+  <?php } ?>
   <?php if($archivoActual == "asignarFichas.php"){ ?>
   <script src="../ASSETS/js/modalInstructor.js"></script>
   <script src="../ASSETS/js/cargarFichasInstructor.js"></script>
@@ -63,6 +66,11 @@
   <script src="../ASSETS/js/desasignarFichaInstructor.js"></script>
   <script src="../ASSETS/js/asignarFichas.js"></script>
     <?php }?>
+
+
+  <?php if ($archivoActual == "editar_perfil.php") { ?>
+      <script src="../ASSETS/JS/actualizacionPerfil.js"></script>
+  <?php } ?>
 
 
   </body>
