@@ -27,7 +27,10 @@ if ($rol == 3) {
              FROM entregas 
              WHERE entregas.trabajos_id = trabajos.id 
              AND aprendices_id = $idUsuario 
-             LIMIT 1) AS estado_entrega
+             LIMIT 1) AS estado_entrega,
+             (SELECT archivo FROM entregas 
+             WHERE entregas.trabajos_id = trabajos.id
+             AND aprendices_id = $idUsuario) as archivo_entrega
         FROM trabajos
         JOIN fichas ON fichas.id = trabajos.fichas_id
         WHERE trabajos.fichas_id = $IDficha
@@ -116,41 +119,44 @@ require_once './layout/nav_bar.php';
                                     <?php if ($estado === null): ?>
 
                                         <?php if ($fueraDeTiempo): ?>
-                                            <button class="btn btn-secondary btn-sm fw-bold" disabled>
-                                                No entregado
+                                            <button class="btn btn-danger btn-sm fw-bold" disabled>
+                                                <i class="fa-solid fa-circle-xmark"></i> Sin entregar
                                             </button>
                                         <?php else: ?>
                                             <button
                                                 data-IDusuario="<?php echo $idUsuario; ?>"
                                                 data-IDtrabajo="<?php echo $fila["id"]; ?>"
-                                                class="btn btn-primary btn-sm btnSubirArchivo fw-bold mb-1">
-                                                Subir
+                                                class="btn btn-success btn-sm btnSubirArchivo px-4 fw-bold mb-1">
+                                                <i class="fa-solid fa-upload"></i> Subir
                                             </button>
                                         <?php endif; ?>
 
                                     <?php elseif ($estado === "Entregado"): ?>
 
+                                           <?php if ($fueraDeTiempo): ?>
+                                            <button class="btn btn-danger btn-sm fw-bold" disabled>
+                                                <i class="fa-solid fa-circle-xmark"></i> Sin entregar
+                                            </button>
+                                        <?php else: ?> 
                                         <div class="">
-                                            <span class="btn btn-warning btn-sm fw-bold" style="cursor: default;">
-                                                 Entregado
-                                            </span>
-
                                             <button
-                                                onclick="eliminarTrabajo(<?= $fila['id'] ?>)"
-                                                class="btn btn-danger btn-sm fw-bold">
-                                                Eliminar
+                                                onclick="editarTrabajo(<?= $fila['id'] ?>, <?= $idUsuario ?>)"
+                                                class="btn btn-primary btn-sm fw-bold px-4">
+                                                <i class="fa-solid fa-pen-to-square"></i> Editar
                                             </button>
                                         </div>
+                                        <?php endif; ?>
 
                                     <?php elseif ($estado === "Calificado"): ?>
-
                                         <button class="btn btn-success btn-sm fw-bold" disabled>
-                                            Calificado
+                                            <i class="fa-solid fa-check"></i> Calificado
                                         </button>
 
                                     <?php endif; ?>
 
                                 </td>
+
+
                             <?php endif; ?>
                         </tr>
                     <?php endwhile; ?>
