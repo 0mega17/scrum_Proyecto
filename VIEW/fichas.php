@@ -25,7 +25,6 @@ if ($rol == 2) {
 
 $mysql->desconectar();
 
-// LAYOUT HTML
 require_once './layout/header.php';
 require_once './layout/nav_bar.php';
 
