@@ -1,5 +1,7 @@
 <?php
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
+session_start();
+
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     if (isset($_POST["idFicha"])) {
 
@@ -7,12 +9,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $mysql = new MySQL();
         $mysql->conectar();
 
-        $idFicha = $_POST["idFicha"];
+        $idFicha = intval($_POST["idFicha"]);
+        $IDinstructor = intval($_SESSION["IDusuario"]); // instructor logueado
 
         $consulta = $mysql->efectuarConsulta("
             SELECT id, nombre AS nombre_trabajo
             FROM trabajos
-            WHERE fichas_id = '$idFicha'
+            WHERE fichas_id = $idFicha
+              AND instructores_id = $IDinstructor
         ");
 
         $trabajos = [];
@@ -20,7 +24,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         while ($fila = $consulta->fetch_assoc()) {
             $trabajos[] = $fila;
         }
-        header('Content-Type: application/json; charset=utf-8');
+
+        header("Content-Type: application/json; charset=utf-8");
         echo json_encode($trabajos);
+        exit;
     }
 }
+
+echo json_encode([]); // si POST llega mal
+exit;
