@@ -48,6 +48,7 @@ $rol = $_SESSION["tipoUsuario"];
                         Dashboard
                     </a>
                 </li>
+
                 <li class="nav-item">
                     <a
                         class="nav-link d-flex align-items-center gap-2"
@@ -58,6 +59,7 @@ $rol = $_SESSION["tipoUsuario"];
                         Perfil
                     </a>
                 </li>
+
                 <?php if ($rol == 1) { ?>
                     <li class="nav-item">
                         <a class="nav-link d-flex align-items-center gap-2 <?php echo ($archivoActual == "instructores.php" ? "active" : "") ?>" aria-current="page" href="instructores.php">
@@ -119,7 +121,7 @@ $rol = $_SESSION["tipoUsuario"];
                     <li class="nav-item">
                         <a class="nav-link d-flex align-items-center gap-2 <?php echo ($archivoActual == "calificar_trabajo.php" ? "active" : "") ?>" aria-current="page" href="calificar_trabajo.php">
                             <i class="bi bi-folder-symlink-fill"></i>
-                            Calificar trabajos
+                            Calificaciones
                         </a>
                     </li>
                 <?php } ?>

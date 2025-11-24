@@ -29,14 +29,14 @@ require_once './layout/nav_bar.php';
         class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-1">
         <h1 class="h2 fw-semibold">Calificar trabajos</h1>
     </div>
-    <div>
+    <div class="mb-3">
         <button id="mostrarCalificacionesAprendices" data-id="<?= $_SESSION['IDusuario'] ?>" class="btn btn-primary">
             Ver calificaciones
         </button>
     </div>
 
     <div class="table-responsive small">
-        <table class="table table-striped table-sm">
+        <table class="table table-striped table-sm" id="tblGeneral">
             <thead>
                 <tr>
                     <th scope="col">Aprendiz</th>
