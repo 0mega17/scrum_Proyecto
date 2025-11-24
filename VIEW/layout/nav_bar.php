@@ -132,9 +132,7 @@ $rol = $_SESSION["tipoUsuario"];
             <ul class="nav flex-column mb-auto">
                 <li class="nav-item">
                     <a class="nav-link d-flex align-items-center gap-2 btnLogout" href="../CONTROLLER/log_out.php">
-                        <svg class="bi" aria-hidden="true">
-                            <use xlink:href="#door-closed"></use>
-                        </svg>
+                        <i class="bi bi-door-closed-fill"></i>
                         Cerrar Sesión
                     </a>
                 </li>
