@@ -107,17 +107,10 @@ selectTrabajo.addEventListener("change", async () => {
   let filas = [];
 
   aprendices.forEach((a) => {
-    let color =
-      a.estado_entrega === "Aprobado"
-        ? "text-success fw-bold"
-        : a.estado_entrega === "Desaprobado"
-        ? "text-danger fw-bold"
-        : "";
-
     filas.push(`
       <tr>
         <td>${a.nombre_aprendiz}</td>
-        <td class="${color}">${a.calificacion ?? "Sin calificar"}</td>
+        <td>${a.calificacion ?? "Sin calificar"}</td>
       </tr>
     `);
   });
