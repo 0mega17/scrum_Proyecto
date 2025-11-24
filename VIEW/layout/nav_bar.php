@@ -53,9 +53,7 @@ $rol = $_SESSION["tipoUsuario"];
                     <a
                         class="nav-link d-flex align-items-center gap-2"
                         href="editar_perfil.php">
-                        <svg class="bi" aria-hidden="true">
-                            <use xlink:href="#people"></use>
-                        </svg>
+                        <i class="bi bi-person-fill-gear"></i>
                         Perfil
                     </a>
                 </li>
@@ -63,26 +61,20 @@ $rol = $_SESSION["tipoUsuario"];
                 <?php if ($rol == 1) { ?>
                     <li class="nav-item">
                         <a class="nav-link d-flex align-items-center gap-2 <?php echo ($archivoActual == "instructores.php" ? "active" : "") ?>" aria-current="page" href="instructores.php">
-                            <svg class="bi" aria-hidden="true">
-                                <use xlink:href="#people"></use>
-                            </svg>
+                            <i class="bi bi-people-fill"></i>
                             Instructores
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link d-flex align-items-center gap-2 <?php echo ($archivoActual == "administradores.php" ? "active" : "") ?>" aria-current="page" href="administradores.php">
-                            <svg class="bi" aria-hidden="true">
-                                <use xlink:href="#people"></use>
-                            </svg>
+                            <i class="bi bi-people-fill"></i>
                             Administradores
                         </a>
                     </li>
 
                     <li class="nav-item">
                         <a class="nav-link d-flex align-items-center gap-2 active <?php echo ($archivoActual == "aprendices.php" ? "active" : "") ?>" aria-current="page" href="aprendices.php">
-                            <svg class="bi" aria-hidden="true">
-                                <use xlink:href="#people"></use>
-                            </svg>
+                            <i class="bi bi-people-fill"></i>
                             Aprendices
                         </a>
                     </li>
