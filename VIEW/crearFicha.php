@@ -41,7 +41,7 @@ require_once './layout/nav_bar.php';
             <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Nombre" required>
         </div>
         <div class="mb-3">
-        <select class="form-control" name="area_ficha" id="area_ficha">
+        <select class="form-control" name="area_ficha" id="area_ficha" required>
             <option value="">Seleccione un área</option>
             <?php
             while ($row = $areas->fetch_assoc()) {
