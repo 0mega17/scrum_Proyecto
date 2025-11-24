@@ -4,7 +4,7 @@ $archivoActual = basename($_SERVER["PHP_SELF"]);
 $rol = $_SESSION["tipoUsuario"];
 ?>
 <div
-    class="sidebar min-vh-100 border border-right col-md-3 col-lg-2 p-0 bg-body-tertiary">
+    class="sidebar border border-right col-md-3 col-lg-2 p-0 bg-body-tertiary d-md-block">
     <div
         class="offcanvas-md offcanvas-end bg-body-tertiary"
         tabindex="-1"
