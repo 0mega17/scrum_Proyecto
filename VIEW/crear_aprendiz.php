@@ -34,19 +34,26 @@ require_once './layout/nav_bar.php';
     <form id="formCrearApreniz">
         <h4 class="mb-4"><i class="bi bi-person-circle me-2"></i> Datos del Aprendiz</h4>
 
+
+        <!-- //* se le puso pattern para validar solo números -->
         <div class="mb-3">
             <label for="id" class="form-label">Identificacion</label>
-            <input type="text" class="form-control" id="id" placeholder="Idendificacion" required>
+            <input type="number" class="form-control" id="id" placeholder="Identificacion" pattern="[0-9]+" title="Solo se permiten números" maxlength="15" required>
+            <small class="form-text text-muted">Solo números, sin símbolos ni espacios</small>
         </div>
 
+        <!-- //* se le puso pattern para validar solo letras y espacios -->
         <div class="mb-3">
             <label for="nombre" class="form-label">Nombre</label>
-            <input type="text" class="form-control" id="nombre" placeholder="Nombre" required>
+            <input type="text" class="form-control" id="nombre" placeholder="Nombre" pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+" title="Solo se permiten letras y espacios" maxlength="100" required>
+            <small class="form-text text-muted">Solo letras y espacios</small>
         </div>
 
+        <!-- //* se le puso pattern para validar formato de correo -->
         <div class="mb-3">
             <label for="email" class="form-label">Correo Electrónico</label>
-            <input type="email" class="form-control" id="email" placeholder="ejemplo@correo.com" required>
+            <input type="email" class="form-control" id="email" placeholder="ejemplo@correo.com" pattern="[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[a-zA-Z]+" title="Solo letras, números, @ y punto. Ejemplo: usuario@correo.com" required>
+            <small class="form-text text-muted">Solo letras, números, @ y punto (sin símbolos especiales)</small>
         </div>
 
         <div class="mb-3">
@@ -55,7 +62,7 @@ require_once './layout/nav_bar.php';
         </div>
 
         <div>
-            <option class="form-label" value="">Elige unA ficha...</option>
+            <option class="form-label" value="">Elige una ficha...</option>
 
             <select name="ficha" class="form-select" id="ficha" required>
                 <?php while ($ficha = mysqli_fetch_assoc($fichas)): ?>
