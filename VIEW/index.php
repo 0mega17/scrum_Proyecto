@@ -51,8 +51,8 @@ require_once './layout/nav_bar.php';
                     <ul class="mb-0">
                         <li><b>Daniel Felipe Navarro</b></li>
                         <li><b>Juan Sebastian Trujillo</b></li>
-                        <li><b>Stiven Monsalves</b></li>
-                        <li><b>Yerson Estiven</b></li>
+                        <li><b>Stiven Monsalve</b></li>
+                        <li><b>Jerson Estiven Bedoya</b></li>
                         <li><b>Santiago Gaviria</b></li>
                     </ul>
                 </div>
