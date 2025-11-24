@@ -14,6 +14,7 @@ $consaultaDatosEntrega = "select entregas.id ,aprendices.nombre as nombre_aprend
 inner join aprendices on aprendices.id = entregas.aprendices_id inner join trabajos on trabajos.id = entregas.trabajos_id 
 where entregas.estado = 'Entregado' and trabajos.instructores_id = $idUsuario
 ";
+// esta consulta se encarga de traer los trabajos para ser calificados en base al intructor que lo asigno
 $resultado = $mysql->efectuarConsulta($consaultaDatosEntrega);
 $entregas = [];
 
