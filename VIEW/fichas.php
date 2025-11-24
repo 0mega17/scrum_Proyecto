@@ -53,7 +53,6 @@ require_once './layout/nav_bar.php';
         <table class="table table-bordered table-striped nowrap table-sm" id="tblGeneral">
             <thead>
                 <tr>
-                    <th scope="col">ID</th>
                     <th scope="col">Codigo</th>
                     <th scope="col">Nombre</th>
                     <th scope="col">Area</th>
@@ -64,7 +63,6 @@ require_once './layout/nav_bar.php';
             <tbody>
                 <?php while ($fila = $fichas->fetch_assoc()) { ?>
                     <tr>
-                        <td> <?php echo $fila['id'] ?> </td>
                         <td> <?php echo $fila['codigo'] ?> </td>
                         <td> <?php echo $fila['nombre'] ?> </td>
                         <td> <?php echo $fila['nombre_area'] ?> </td>
