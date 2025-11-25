@@ -23,6 +23,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['accion'])) {
             exit();
         }
 
+        if ($fechaFin < $fechaInicio) {
+            echo json_encode([
+                "success" => false,
+                "message" => "La fecha de fin no puede ser anterior a la fecha de inicio"
+            ]);
+            exit();
+        }
+
         $verificacionCodigo = $mysql->efectuarConsulta("SELECT 1 FROM fichas WHERE codigo = '$codigo'");
 
         if (mysqli_num_rows($verificacionCodigo) > 0) {
