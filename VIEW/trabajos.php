@@ -133,18 +133,20 @@ require_once './layout/nav_bar.php';
 
                                     <?php elseif ($estado === "Entregado"): ?>
 
-                                           <?php if ($fueraDeTiempo): ?>
-                                            <button class="btn btn-danger btn-sm fw-bold" disabled>
-                                                <i class="fa-solid fa-circle-xmark"></i> Sin entregar
-                                            </button>
-                                        <?php else: ?> 
-                                        <div class="">
+                                        <?php if ($fueraDeTiempo): ?>
                                             <button
                                                 onclick="editarTrabajo(<?= $fila['id'] ?>, <?= $idUsuario ?>)"
-                                                class="btn btn-primary btn-sm fw-bold px-4">
+                                                class="btn btn-primary btn-sm fw-bold px-4" disabled>
                                                 <i class="fa-solid fa-pen-to-square"></i> Editar
                                             </button>
-                                        </div>
+                                        <?php else: ?>
+                                            <div class="">
+                                                <button
+                                                    onclick="editarTrabajo(<?= $fila['id'] ?>, <?= $idUsuario ?>)"
+                                                    class="btn btn-primary btn-sm fw-bold px-4">
+                                                    <i class="fa-solid fa-pen-to-square"></i> Editar
+                                                </button>
+                                            </div>
                                         <?php endif; ?>
 
                                     <?php elseif ($estado === "Calificado"): ?>
