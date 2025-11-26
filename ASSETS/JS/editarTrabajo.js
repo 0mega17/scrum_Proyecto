@@ -1,6 +1,6 @@
 function editarTrabajo(IDtrabajo, IDusuario) {
-    console.log(IDtrabajo);
-    console.log(IDusuario);
+  console.log(IDtrabajo);
+  console.log(IDusuario);
   Swal.fire({
     title: `<span class="text-primary fw-bold">Editar trabajo</span>`,
     html: `
@@ -44,8 +44,11 @@ function editarTrabajo(IDtrabajo, IDusuario) {
               icon: "success",
               title: "Edicion completada",
               text: "El trabajo fue editado correctamente.",
+              timer: 2000,
+              timerProgressBar: true,
+              showConfirmButton: false,
             }).then(() => {
-              location.href = "./entregas.php"
+              location.href = "./entregas.php";
             });
           } else {
             Swal.fire({
