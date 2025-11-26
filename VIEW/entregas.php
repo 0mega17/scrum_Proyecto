@@ -183,28 +183,6 @@ require_once './layout/nav_bar.php';
                     </table>
                 </div>
             </div>
-
-            <!-- Footer de la tabla -->
-            <div class="card-footer bg-light py-3">
-                <div class="row align-items-center">
-                    <div class="col">
-                        <small class="text-muted">
-                            <i class="fas fa-info-circle me-1"></i>
-                            <?php if ($rol == 1): ?>
-                                Mostrando todas las entregas del sistema
-                            <?php else: ?>
-                                Mostrando tus entregas realizadas
-                            <?php endif; ?>
-                        </small>
-                    </div>
-                    <div class="col-auto">
-                        <small class="text-muted">
-                            <i class="fas fa-clock me-1"></i>
-                            Actualizado: <?php echo date('d/m/Y H:i'); ?>
-                        </small>
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
 </main>

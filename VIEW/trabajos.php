@@ -220,14 +220,6 @@ require_once './layout/nav_bar.php';
                     </table>
                 </div>
             </div>
-
-            <!-- Footer de la tabla con información -->
-            <div class="card-footer bg-light text-muted py-2">
-                <small>
-                    <i class="fas fa-info-circle me-1"></i>
-                    Mostrando todos los trabajos disponibles
-                </small>
-            </div>
         </div>
 
     </div>
