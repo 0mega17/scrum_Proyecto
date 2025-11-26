@@ -12,11 +12,10 @@ $IDusuario = $_SESSION["IDusuario"];
 require_once '../MODEL/model.php';
 $mysql = new MySQL();
 $mysql->conectar();
-if ($rol == 3) {
-    $resultado = $mysql->efectuarConsulta("SELECT * FROM aprendices WHERE fichas_id = $ficha_id");
-} else {
-    $resultado = $mysql->efectuarConsulta("SELECT * FROM aprendices");
-}
+
+
+$resultado = $mysql->efectuarConsulta("SELECT * FROM aprendices");
+
 $mysql->desconectar();
 // LAYOUT HTML
 require_once './layout/header.php';
@@ -26,7 +25,7 @@ require_once './layout/nav_bar.php';
 <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
     <div class="container-fluid mt-2">
 
-        <!-- Header Section Mejorado -->
+        <!-- Header Section-->
         <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-4 border-bottom">
             <div>
                 <h1 class="h2 mb-1">
@@ -34,15 +33,11 @@ require_once './layout/nav_bar.php';
                     Gestión de Aprendices
                 </h1>
                 <p class="text-muted mb-0">
-                    <?php if ($rol == 3): ?>
-                        Lista de aprendices de tu ficha
-                    <?php else: ?>
                         Administra todos los aprendices del sistema
-                    <?php endif; ?>
                 </p>
             </div>
 
-            <div class="btn-toolbar mb-2 mb-md-0">
+            <div class="mb-2 mb-md-0">
                 <a href="./crear_aprendiz.php" class="btn btn-success px-4 py-2 shadow-sm text-decoration-none">
                     <i class="fas fa-user-plus me-2"></i>
                     Crear Aprendiz
@@ -69,43 +64,37 @@ require_once './layout/nav_bar.php';
                             <tr>
                                 <th class="fw-semibold" scope="col">Documento</th>
                                 <th class="fw-semibold" scope="col">Nombre Completo</th>
-                                <th class="fw-semibold" scope="col">Correo Electrónico</th>
+                                <th class="fw-semibold" scope="col">Email</th>
                                 <th class="fw-semibold text-center" scope="col">Estado</th>
                             </tr>
                         </thead>
                         <tbody>
                             <?php
-                            mysqli_data_seek($resultado, 0);
-                            while ($aprendice = mysqli_fetch_assoc($resultado)):
+
+                            while ($aprendiz = mysqli_fetch_assoc($resultado)):
                             ?>
                                 <tr>
                                     <td>
-                                        <span class="badge bg-secondary bg-opacity-25 text-dark px-3 py-2">
-                                            <i class="fas fa-id-card me-1"></i>
-                                            <?php echo $aprendice['id'] ?>
-                                        </span>
+                                        <?php echo $aprendiz['id'] ?>
                                     </td>
                                     <td>
                                         <div class="d-flex align-items-center">
-                                            <div class="avatar-circle bg-primary bg-opacity-10 me-3">
+                                            <div class="bg-primary bg-opacity-10 me-3">
                                                 <i class="fas fa-user text-primary"></i>
                                             </div>
                                             <div>
-                                                <strong class="text-dark d-block"><?php echo $aprendice['nombre'] ?></strong>
-                                                <small class="text-muted">ID: <?php echo $aprendice['id'] ?></small>
+                                                <strong class="text-dark d-block"><?php echo $aprendiz['nombre'] ?></strong>
+                                                <small class="text-muted">ID: <?php echo $aprendiz['id'] ?></small>
                                             </div>
                                         </div>
                                     </td>
                                     <td>
-                                        <a href="mailto:<?php echo $aprendice['email'] ?>"
-                                            class="text-decoration-none text-primary">
-                                            <i class="fas fa-envelope me-1"></i>
-                                            <?php echo $aprendice['email'] ?>
-                                        </a>
+                                        <i class="fas fa-envelope me-1"></i>
+                                        <?php echo $aprendiz['email'] ?>
                                     </td>
                                     <td class="text-center">
                                         <?php
-                                        $estado = $aprendice['estado'];
+                                        $estado = $aprendiz['estado'];
                                         $estadoLower = strtolower($estado);
                                         $badgeClass = '';
                                         $iconClass = '';
@@ -123,7 +112,7 @@ require_once './layout/nav_bar.php';
                                         ?>
                                         <span class="badge <?php echo $badgeClass; ?> px-3 py-2">
                                             <i class="fas <?php echo $iconClass; ?> me-1"></i>
-                                            <?php echo ucfirst($estado); ?>
+                                            <?php echo $estado; ?>
                                         </span>
                                     </td>
                                 </tr>

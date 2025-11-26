@@ -107,7 +107,7 @@ require_once './layout/nav_bar.php';
             </div>
             <div class="card-body p-0">
                 <div class="table-responsive">
-                    <table class="table table-striped mb-0" id="tblGeneral">
+                    <table class="table table-striped mb-0 nowrap" id="tblGeneral">
                         <thead class="table-light">
                             <tr class="p-1">
                                 <th class="fw-semibold">
@@ -141,8 +141,8 @@ require_once './layout/nav_bar.php';
                                     </td>
                                     <td>
                                         <span class="text-muted">
-                                            <?php echo substr($fila['descripcion'], 0, 60); ?>
-                                            <?php echo strlen($fila['descripcion']) > 60 ? '...' : ''; ?>
+                                            <?php echo $fila['descripcion']; ?>
+                                          
                                         </span>
                                     </td>
                                     <td class="text-center">

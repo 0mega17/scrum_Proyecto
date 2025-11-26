@@ -65,7 +65,7 @@ require_once './layout/nav_bar.php';
             </div>
             <div class="card-body p-0">
                 <div class="table-responsive">
-                    <table class="table table-striped mb-0 align-middle" id="tblGeneral">
+                    <table class="table table-striped mb-0 align-middle nowrap" id="tblGeneral">
                         <thead class="table-light">
                             <tr>
                                 <th class="fw-semibold">
@@ -75,7 +75,7 @@ require_once './layout/nav_bar.php';
                                     Trabajo
                                 </th>
                                 <th class="fw-semibold text-center">
-                                   Fecha Entrega
+                                    Fecha Entrega
                                 </th>
                                 <th class="fw-semibold text-center">
                                     Estado
@@ -112,7 +112,7 @@ require_once './layout/nav_bar.php';
                                     </td>
                                     <td class="text-center">
                                         <span class="badge bg-info text-dark px-3 py-2">
-                                            <i class="far fa-calendar-alt me-1"></i>
+
                                             <?php echo date('d/m/Y', strtotime($fila['fecha_subida'])); ?>
                                         </span>
                                     </td>
@@ -171,7 +171,6 @@ require_once './layout/nav_bar.php';
                                             <button
                                                 onclick="verCalificacion(<?php echo $fila['id'] ?>)"
                                                 class="btn btn-info btn-sm shadow-sm btnCalificacion"
-                                                data-bs-toggle="tooltip"
                                                 title="Ver calificación">
                                                 <i class="fa-solid fa-eye me-1"></i>
                                                 Ver Nota
