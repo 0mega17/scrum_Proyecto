@@ -57,7 +57,7 @@ require_once './layout/nav_bar.php';
                 <div class="row align-items-center">
                     <div class="col">
                         <h5 class="mb-0">
-                            <i class="fas fa-clipboard-list me-2 text-secondary"></i>
+                            <i class="fas fa-list me-2 text-secondary"></i>
                             Listado de Entregas
                         </h5>
                     </div>
@@ -154,9 +154,7 @@ require_once './layout/nav_bar.php';
                                     <td class="text-center">
                                         <a href="../<?php echo $fila['archivo']; ?>"
                                             target="_blank"
-                                            class="btn btn-primary btn-sm shadow-sm"
-                                            data-bs-toggle="tooltip"
-                                            title="Descargar archivo">
+                                            class="btn btn-primary btn-sm shadow-sm">
                                             <i class="fa-solid fa-file-download me-1"></i>
                                             Ver Archivo
                                         </a>

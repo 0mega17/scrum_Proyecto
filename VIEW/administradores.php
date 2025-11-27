@@ -50,7 +50,7 @@ require_once './layout/nav_bar.php';
 
 
         <div class="card shadow-sm border-0">
-            <div class="card-header bg-white py-3">
+            <div class="card-header bg-body-tertiary py-3">
                 <div class="row align-items-center">
                     <div class="col">
                         <h5 class="mb-0">

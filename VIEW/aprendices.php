@@ -25,7 +25,7 @@ require_once './layout/nav_bar.php';
 <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
     <div class="container-fluid mt-2">
 
-        <!-- Header Section-->
+        
         <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-4 border-bottom">
             <div>
                 <h1 class="h2 mb-1">
@@ -47,7 +47,7 @@ require_once './layout/nav_bar.php';
 
         <!-- Card con la tabla -->
         <div class="card shadow-sm border-0">
-            <div class="card-header bg-white py-3">
+            <div class="card-header bg-body-tertiary py-3">
                 <div class="row align-items-center">
                     <div class="col">
                         <h5 class="mb-0">

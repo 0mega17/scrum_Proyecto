@@ -64,7 +64,7 @@ require_once './layout/nav_bar.php';
 <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
     <div class="container-fluid mt-2">
 
-        <!-- Header Section Mejorado -->
+       
         <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-4 border-bottom">
             <div>
                 <h1 class="h2 mb-1">
