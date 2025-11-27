@@ -64,10 +64,11 @@ require_once './layout/nav_bar.php';
                     <table class="table table-striped align-middle" id="tblGeneral">
                         <thead class="table-light">
                             <tr>
-                                <th>Aprendiz</th>
-                                <th>Comentario</th>
-                                <th>Calificación</th>
-                                <th>Fecha Calificacion</th>
+                                <th scope="col">Aprendiz</th>
+                                <th scope="col">Trabajo</th>
+                                <th scope="col">Archivo</th>
+                                <th scope="col">Comentario</th>
+                                <th scope="col">Calificacion</th>
                             </tr>
                         </thead>
                         <tbody id="datosCalificaciones">
@@ -107,7 +108,9 @@ require_once './layout/nav_bar.php';
                             <thead>
                                 <tr>
                                     <th>Aprendiz</th>
+                                    <th>Comentario</th>
                                     <th>Calificación</th>
+                                    <th>Fecha Calificacion</th>
                                 </tr>
                             </thead>
                             <tbody id="tablaAprendices">
