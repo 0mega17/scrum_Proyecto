@@ -94,19 +94,25 @@ require_once './layout/nav_bar.php';
                                 <tr>
                                     <td> <?php echo $fila['codigo'] ?> </td>
                                     <td>
-                                        <span class="badge text-bg-success px-3 py-2">
+                                        <span class="badge text-bg-secondary px-3 py-2">
                                             <i class="fas fa-graduation-cap me-1"></i>
                                             <?php echo $fila['nombre'] ?>
                                         </span>
                                     </td>
                                     <td>
-                                        <span class="badge text-bg-primary px-3 py-2">
-                                            <i class="fa-solid fa-suitcase"></i>
-                                            <?php echo $fila['nombre_area'] ?>
+                                        <i class="fa-solid fa-suitcase"></i>
+                                        <?php echo $fila['nombre_area'] ?>
+                                    </td>
+                                    <td>
+                                        <span class="badge text-bg-success py-2 px-3">
+                                            <?php echo $fila['fecha_inicio'] ?>
                                         </span>
                                     </td>
-                                    <td> <?php echo $fila['fecha_inicio'] ?> </td>
-                                    <td> <?php echo $fila['fecha_fin'] ?> </td>
+                                    <td>
+                                        <span class="badge text-bg-primary py-2 px-3">
+                                            <?php echo $fila['fecha_fin'] ?>
+                                        </span>
+                                    </td>
                                 </tr>
                             <?php } ?>
                         </tbody>

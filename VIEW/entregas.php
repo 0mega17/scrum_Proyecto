@@ -38,7 +38,7 @@ require_once './layout/nav_bar.php';
         <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-4 border-bottom">
             <div>
                 <h1 class="h2 mb-1">
-                    <i class="fas fa-inbox text-success me-2"></i>
+                    <i class="fas fa-inbox text-primary me-2"></i>
                     Gestión de Entregas
                 </h1>
                 <p class="text-muted mb-0">
@@ -65,7 +65,7 @@ require_once './layout/nav_bar.php';
             </div>
             <div class="card-body p-0">
                 <div class="table-responsive">
-                    <table class="table table-striped mb-0 align-middle nowrap" id="tblGeneral">
+                    <table class="table table-striped mb-0 align-middle" id="tblGeneral">
                         <thead class="table-light">
                             <tr>
                                 <th class="fw-semibold">
@@ -113,7 +113,7 @@ require_once './layout/nav_bar.php';
                                     <td class="text-center">
                                         <span class="badge bg-info text-dark px-3 py-2">
 
-                                            <?php echo date('d/m/Y', strtotime($fila['fecha_subida'])); ?>
+                                            <?php echo $fila['fecha_subida'] ?>
                                         </span>
                                     </td>
                                     <td class="text-center">

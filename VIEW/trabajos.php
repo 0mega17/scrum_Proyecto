@@ -102,12 +102,12 @@ require_once './layout/nav_bar.php';
             <div class="card-header bg-body-tertiary py-3">
                 <h5 class="mb-0">
                     <i class="fas fa-list me-2 text-secondary"></i>
-                    Listado de Trabajos
+                    Listado de Trabajos 
                 </h5>
             </div>
             <div class="card-body p-0">
                 <div class="table-responsive">
-                    <table class="table table-striped mb-0 nowrap" id="tblGeneral">
+                    <table class="table table-striped mb-0" id="tblGeneral">
                         <thead class="table-light">
                             <tr class="p-1">
                                 <th class="fw-semibold">
@@ -146,7 +146,7 @@ require_once './layout/nav_bar.php';
                                         </span>
                                     </td>
                                     <td class="text-center">
-                                        <span class="badge bg-info text-dark">
+                                        <span class="badge bg-info text-dark p-2">
                                             <?php echo $fila['fecha_publicacion']; ?>
                                         </span>
                                     </td>
@@ -156,7 +156,7 @@ require_once './layout/nav_bar.php';
                                         $limite = $fila["fecha_limite"];
                                         $fueraDeTiempo = ($hoy > $limite);
                                         ?>
-                                        <span class="badge <?php echo $fueraDeTiempo ? 'bg-danger' : 'bg-warning text-dark'; ?>">
+                                        <span class="badge <?php echo $fueraDeTiempo ? 'bg-danger' : 'bg-warning text-dark'; ?> p-2">
                                             <?php echo $fila['fecha_limite']; ?>
                                         </span>
                                     </td>

@@ -25,7 +25,7 @@ require_once './layout/nav_bar.php';
 <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
     <div class="container-fluid mt-2">
 
-        
+
         <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-4 border-bottom">
             <div>
                 <h1 class="h2 mb-1">
@@ -33,7 +33,7 @@ require_once './layout/nav_bar.php';
                     Gestión de Aprendices
                 </h1>
                 <p class="text-muted mb-0">
-                        Administra todos los aprendices del sistema
+                    Administra todos los aprendices del sistema
                 </p>
             </div>
 
@@ -71,7 +71,7 @@ require_once './layout/nav_bar.php';
                         <tbody>
                             <?php
 
-                            while ($aprendiz = mysqli_fetch_assoc($resultado)):
+                            while ($aprendiz = $resultado->fetch_assoc()):
                             ?>
                                 <tr>
                                     <td>
@@ -122,27 +122,6 @@ require_once './layout/nav_bar.php';
                 </div>
             </div>
 
-            <!-- Footer de la tabla -->
-            <div class="card-footer bg-light py-3">
-                <div class="row align-items-center">
-                    <div class="col">
-                        <small class="text-muted">
-                            <i class="fas fa-info-circle me-1"></i>
-                            <?php if ($rol == 3): ?>
-                                Mostrando aprendices de su ficha
-                            <?php else: ?>
-                                Mostrando todos los aprendices del sistema
-                            <?php endif; ?>
-                        </small>
-                    </div>
-                    <div class="col-auto">
-                        <small class="text-muted">
-                            <i class="fas fa-clock me-1"></i>
-                            Actualizado: <?php echo date('d/m/Y H:i'); ?>
-                        </small>
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
 </main>
