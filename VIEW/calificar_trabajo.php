@@ -80,7 +80,9 @@ require_once './layout/nav_bar.php';
                         <thead>
                             <tr>
                                 <th>Aprendiz</th>
+                                <th>Comentario</th>
                                 <th>Calificación</th>
+                                <th>Fecha Calificacion</th>
                             </tr>
                         </thead>
                         <tbody id="tablaAprendices">
