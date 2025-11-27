@@ -101,7 +101,7 @@ require_once './layout/nav_bar.php';
                                 <tr>
                                     <td>
                                         <div class="d-flex align-items-center">
-                                            <div class="rounded-pill p-1 bg-primary bg-opacity-10 me-2">
+                                            <div class="p-1 bg-primary bg-opacity-10 me-2">
                                                 <i class="fas fa-user text-primary"></i>
                                             </div>
                                             <span class="fw-medium"><?php echo $fila['nombre_instructor'] ?></span>
