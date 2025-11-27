@@ -106,14 +106,30 @@ selectTrabajo.addEventListener("change", async () => {
 
   let filas = [];
 
+  // SI NO HAY CALIFICACIONES → MOSTRAR AVISO
+  if (aprendices.length === 0) {
+    tabla.innerHTML = `
+      <tr>
+        <td colspan="4" class="text-center p-3">
+          <div class="alert alert-warning mb-0" role="alert">
+            No hay calificaciones disponibles para este trabajo.
+          </div>
+        </td>
+      </tr>`;
+    return;
+  }
+
   aprendices.forEach((a) => {
     filas.push(`
       <tr>
         <td>${a.nombre_aprendiz}</td>
+        <td>${a.comentario ?? "Sin comentario"}</td>
         <td>${a.calificacion ?? "Sin calificar"}</td>
+        <td>${a.fecha_calificacion ?? "—"}</td>
       </tr>
     `);
   });
 
   tabla.innerHTML = filas.join("");
 });
+
