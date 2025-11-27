@@ -13,8 +13,8 @@ require_once '../MODEL/model.php';
 $mysql = new MySQL();
 $mysql->conectar();
 
-
-$resultado = $mysql->efectuarConsulta("SELECT * FROM aprendices");
+//* se usa left join para que muestre los aprendices sin ficha tambien auque no es inportante porque solo los administradores pueden ver esta pagina
+$resultado = $mysql->efectuarConsulta("SELECT aprendices.*, fichas.codigo as codigo_ficha FROM aprendices  LEFT JOIN fichas  ON aprendices.fichas_id = fichas.id");
 
 $mysql->desconectar();
 // LAYOUT HTML
@@ -65,7 +65,9 @@ require_once './layout/nav_bar.php';
                                 <th class="fw-semibold" scope="col">Documento</th>
                                 <th class="fw-semibold" scope="col">Nombre Completo</th>
                                 <th class="fw-semibold" scope="col">Email</th>
+                                <th class="fw-semibold text-center" scope="col">Ficha</th>
                                 <th class="fw-semibold text-center" scope="col">Estado</th>
+                                <th class="fw-semibold text-center" scope="col">Acciones</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -92,6 +94,11 @@ require_once './layout/nav_bar.php';
                                         <i class="fas fa-envelope me-1"></i>
                                         <?php echo $aprendiz['email'] ?>
                                     </td>
+
+                                    <td class="text-center">
+                                        <?php echo $aprendiz['codigo_ficha'] ?? 'Sin ficha'; ?>
+                                    </td>
+
                                     <td class="text-center">
                                         <?php
                                         $estado = $aprendiz['estado'];
@@ -114,6 +121,17 @@ require_once './layout/nav_bar.php';
                                             <i class="fas <?php echo $iconClass; ?> me-1"></i>
                                             <?php echo $estado; ?>
                                         </span>
+                                    </td>
+
+                                    <td class="text-center">
+                                        <!-- //? este boton guarda infomacion data-id para leeer en el js con $(this).data('id'); -->
+                                        <button class="btn btn-primary btn-sm btnCambiarFicha"
+                                            data-id="<?php echo $aprendiz['id']; ?>"
+                                            data-nombre="<?php echo $aprendiz['nombre']; ?>"
+                                            data-ficha="<?php echo $aprendiz['fichas_id']; ?>">
+                                            <i class="fas fa-exchange-alt me-1"></i>
+                                            Cambiar Ficha
+                                        </button>
                                     </td>
                                 </tr>
                             <?php endwhile; ?>
