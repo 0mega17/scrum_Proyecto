@@ -27,7 +27,10 @@ if ($rol == 3) {
              FROM entregas 
              WHERE entregas.trabajos_id = trabajos.id 
              AND aprendices_id = $idUsuario 
-             LIMIT 1) AS estado_entrega
+             LIMIT 1) AS estado_entrega,
+             (SELECT archivo FROM entregas 
+             WHERE entregas.trabajos_id = trabajos.id
+             AND aprendices_id = $idUsuario) as archivo_entrega
         FROM trabajos
         JOIN fichas ON fichas.id = trabajos.fichas_id
         WHERE trabajos.fichas_id = $IDficha
@@ -59,110 +62,169 @@ require_once './layout/nav_bar.php';
 ?>
 
 <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-    <div class="container mt-2">
-        <div
-            class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-1">
-            <h1 class="fs-2 fw-semibold">Listado de trabajos</h1>
-        </div>
-        <?php if ($rol == 2) { ?>
-            <div class="mt-1 mb-2">
-                <button
-                    data-id="<?php echo $idUsuario ?>"
-                    type="submit"
-                    id="crearTrabajo"
-                    name="crearTrabajo"
-                    class="btn btn-success fw-bold px-5 py-2">
-                    Crear Trabajo
-                </button>
+    <div class="container-fluid mt-2">
+
+       
+        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-4 border-bottom">
+            <div>
+                <h1 class="h2 mb-1">
+                    <i class="fas fa-tasks text-primary me-2"></i>
+                    Gestión de Trabajos
+                </h1>
+                <p class="text-muted mb-0">
+                    <?php if ($rol == 3): ?>
+                        Consulta y entrega tus trabajos asignados
+                    <?php elseif ($rol == 2): ?>
+                        Administra los trabajos de tus fichas
+                    <?php else: ?>
+                        Vista general de todos los trabajos
+                    <?php endif; ?>
+                </p>
             </div>
-        <?php } ?>
 
-
-        <div class="table-responsive small">
-            <table class="table table-striped table-bordered shadow-sm table-sm nowrap" id="tblGeneral">
-                <thead class="">
-                    <tr>
-                        <th>Nombre</th>
-                        <th>Descripción</th>
-                        <th>Fecha publicación</th>
-                        <th>Fecha límite</th>
-                        <th>Ficha</th>
-
-                        <?php if ($rol == 3) { ?>
-                            <th>Acciones</th>
-                        <?php } ?>
-                    </tr>
-                </thead>
-
-                <tbody id="tablaTrabajos">
-                    <?php while ($fila = $trabajos->fetch_assoc()): ?>
-                        <tr>
-                            <td><?php echo $fila['nombre_trabajo']; ?></td>
-                            <td><?php echo $fila['descripcion']; ?></td>
-                            <td><?php echo $fila['fecha_publicacion']; ?></td>
-                            <td><?php echo $fila['fecha_limite']; ?></td>
-                            <td><?php echo $fila['codigo']; ?> - <?php echo $fila["nombre_ficha"]; ?></td>
-
-                            <?php if ($rol == 3): ?>
-                                <td class="text-center">
-
-                                    <?php
-                                    $estado = $fila["estado_entrega"] ?? null;
-                                    $hoy = date("Y-m-d");
-                                    $limite = $fila["fecha_limite"];
-                                    $fueraDeTiempo = ($hoy > $limite);
-                                    ?>
-
-                                    <?php if ($estado === null): ?>
-
-                                        <?php if ($fueraDeTiempo): ?>
-                                            <button class="btn btn-secondary btn-sm fw-bold" disabled>
-                                                No entregado
-                                            </button>
-                                        <?php else: ?>
-                                            <button
-                                                data-IDusuario="<?php echo $idUsuario; ?>"
-                                                data-IDtrabajo="<?php echo $fila["id"]; ?>"
-                                                class="btn btn-primary btn-sm btnSubirArchivo fw-bold mb-1">
-                                                Subir
-                                            </button>
-                                        <?php endif; ?>
-
-                                    <?php elseif ($estado === "Entregado"): ?>
-
-                                        <div class="">
-                                            <span class="btn btn-warning btn-sm fw-bold" style="cursor: default;">
-                                                 Entregado
-                                            </span>
-
-                                            <button
-                                                onclick="eliminarTrabajo(<?= $fila['id'] ?>)"
-                                                class="btn btn-danger btn-sm fw-bold">
-                                                Eliminar
-                                            </button>
-                                        </div>
-
-                                    <?php elseif ($estado === "Calificado"): ?>
-
-                                        <button class="btn btn-success btn-sm fw-bold" disabled>
-                                            Calificado
-                                        </button>
-
-                                    <?php endif; ?>
-
-                                </td>
-                            <?php endif; ?>
-                        </tr>
-                    <?php endwhile; ?>
-                </tbody>
-
-            </table>
+            <?php if ($rol == 2): ?>
+                <div class="btn-toolbar mb-2 mb-md-0">
+                    <button
+                        data-id="<?php echo $idUsuario ?>"
+                        type="button"
+                        id="crearTrabajo"
+                        name="crearTrabajo"
+                        class="btn btn-primary px-4 py-2 shadow-sm">
+                        <i class="fas fa-plus-circle me-2"></i>
+                        Crear Trabajo
+                    </button>
+                </div>
+            <?php endif; ?>
         </div>
 
+        <!-- Card con la tabla -->
+        <div class="card shadow-sm border-0">
+            <div class="card-header bg-body-tertiary py-3">
+                <h5 class="mb-0">
+                    <i class="fas fa-list me-2 text-secondary"></i>
+                    Listado de Trabajos 
+                </h5>
+            </div>
+            <div class="card-body p-0">
+                <div class="table-responsive">
+                    <table class="table table-striped mb-0" id="tblGeneral">
+                        <thead class="table-light">
+                            <tr class="p-1">
+                                <th class="fw-semibold">
+                                    Nombre
+                                </th>
+                                <th class="fw-semibold">
+                                    Descripción
+                                </th>
+                                <th class="fw-semibold text-center">
+                                    Publicación
+                                </th>
+                                <th class="fw-semibold text-center">
+                                    Límite
+                                </th>
+                                <th class="fw-semibold">
+                                    Ficha
+                                </th>
+                                <?php if ($rol == 3): ?>
+                                    <th class="fw-semibold text-center">
+                                        Acciones
+                                    </th>
+                                <?php endif; ?>
+                            </tr>
+                        </thead>
 
+                        <tbody id="tablaTrabajos">
+                            <?php while ($fila = $trabajos->fetch_assoc()): ?>
+                                <tr>
+                                    <td>
+                                        <strong class="text-dark"><?php echo $fila['nombre_trabajo']; ?></strong>
+                                    </td>
+                                    <td>
+                                        <span class="text-muted">
+                                            <?php echo $fila['descripcion']; ?>
+                                          
+                                        </span>
+                                    </td>
+                                    <td class="text-center">
+                                        <span class="badge bg-info text-dark p-2">
+                                            <?php echo $fila['fecha_publicacion']; ?>
+                                        </span>
+                                    </td>
+                                    <td class="text-center">
+                                        <?php
+                                        $hoy = date("Y-m-d");
+                                        $limite = $fila["fecha_limite"];
+                                        $fueraDeTiempo = ($hoy > $limite);
+                                        ?>
+                                        <span class="badge <?php echo $fueraDeTiempo ? 'bg-danger' : 'bg-warning text-dark'; ?> p-2">
+                                            <?php echo $fila['fecha_limite']; ?>
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <span class="badge bg-secondary bg-opacity-25 text-dark px-3 py-2">
+                                            <i class="fas fa-graduation-cap me-1"></i>
+                                            <?php echo $fila['codigo']; ?> - <?php echo $fila["nombre_ficha"]; ?>
+                                        </span>
+                                    </td>
+
+                                    <?php if ($rol == 3): ?>
+                                        <td class="text-center">
+                                            <?php
+                                            $estado = $fila["estado_entrega"] ?? null;
+                                            ?>
+
+                                            <?php if ($estado === null): ?>
+                                                <?php if ($fueraDeTiempo): ?>
+                                                    <span class="badge bg-danger px-3 py-2">
+                                                        <i class="fa-solid fa-circle-xmark me-1"></i>
+                                                        No entregado
+                                                    </span>
+                                                <?php else: ?>
+                                                    <button
+                                                        data-IDusuario="<?php echo $idUsuario; ?>"
+                                                        data-IDtrabajo="<?php echo $fila["id"]; ?>"
+                                                        class="btn btn-success btn-sm btnSubirArchivo px-3 shadow-sm">
+                                                        <i class="fa-solid fa-upload me-1"></i>
+                                                        Subir Trabajo
+                                                    </button>
+                                                <?php endif; ?>
+
+                                            <?php elseif ($estado === "Entregado"): ?>
+                                                <?php if ($fueraDeTiempo): ?>
+                                                    <button
+                                                        onclick="editarTrabajo(<?= $fila['id'] ?>, <?= $idUsuario ?>)"
+                                                        class="btn btn-secondary btn-sm px-3 shadow-sm" disabled>
+                                                        <i class="fa-solid fa-pen-to-square me-1"></i>
+                                                        Editar
+                                                    </button>
+                                                <?php else: ?>
+                                                    <button
+                                                        onclick="editarTrabajo(<?= $fila['id'] ?>, <?= $idUsuario ?>)"
+                                                        class="btn btn-primary btn-sm px-3 shadow-sm">
+                                                        <i class="fa-solid fa-pen-to-square me-1"></i>
+                                                        Editar
+                                                    </button>
+                                                <?php endif; ?>
+
+                                            <?php elseif ($estado === "Calificado"): ?>
+                                                <span class="badge bg-success px-3 py-2">
+                                                    <i class="fa-solid fa-check-circle me-1"></i>
+                                                    Calificado
+                                                </span>
+                                            <?php endif; ?>
+                                        </td>
+                                    <?php endif; ?>
+                                </tr>
+                            <?php endwhile; ?>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
 
     </div>
 </main>
+
 
 <?php
 $archivoActual = "trabajos.php";

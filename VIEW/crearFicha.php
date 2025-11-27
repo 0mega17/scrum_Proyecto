@@ -36,10 +36,13 @@ require_once './layout/nav_bar.php';
             <input type="number" class="form-control" id="codigo" name="codigo" placeholder="Codigo" required>
         </div>
 
+
         <div class="mb-3">
             <label for="nombre" class="form-label">Nombre</label>
-            <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Nombre" required>
+            <input type="text" class="form-control" id="nombre" placeholder="Nombre" pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+" title="Solo se permiten letras y espacios" maxlength="100" required>
+            <small class="form-text text-muted">Solo letras y espacios</small>
         </div>
+        
         <div class="mb-3">
         <select class="form-control" name="area_ficha" id="area_ficha" required>
             <option value="">Seleccione un área</option>

@@ -7,20 +7,23 @@ document.addEventListener("DOMContentLoaded", () => {
       datos.forEach((datos) => {
         let fila = document.createElement("tr");
         fila.innerHTML = `
-              <td>${datos.nombre_aprendiz}</td>
+              <td>
+              <span class="badge text-bg-success bg-opacity-10 p-2 me-2"> <i class="fas fa-user-graduate text-success"></i> </span>
+              ${datos.nombre_aprendiz}
+             </td>
               <td>${datos.nombre_trabajo}</td>
               <td>
               <a href="../${datos.archivo}"
                       target="_blank"
                       class="btn btn-primary btn-sm fw-bold">
-                                <i class="fa-solid fa-file"></i>
+                                <i class="fa-solid fa-file"></i> Ver archivo
                         </a>
               <td>
                     <textarea class ="comentario" name="comentario" rows="3" style="width: 100%;"></textarea>
             </td>
             <td class="text-center">
-                <button type="button" class="btn btn-success btn-sm me-2 btnAprobar" data-id = "${datos.id}">A</button>
-                <button type="button" class="btn btn-danger btn-sm btnDesaprovar" data-id = "${datos.id}">D</button>
+                <button type="button" class="btn btn-success btn-sm me-2 btnAprobar" data-id = "${datos.id}">Aprobado</button>
+                <button type="button" class="btn btn-danger btn-sm btnDesaprovar" data-id = "${datos.id}">Desaprobado</button>
             </td>         `;
         datosCalificacion.appendChild(fila);
       });

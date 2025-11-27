@@ -1,14 +1,13 @@
 const tblTrabajos = document.querySelector("#tablaTrabajos");
 
 tblTrabajos.addEventListener("click", (e) => {
-    if (e.target.classList.contains("btnSubirArchivo")) {
+  if (e.target.classList.contains("btnSubirArchivo")) {
+    let IDtrabajo = e.target.dataset.idtrabajo;
+    let IDusuario = e.target.dataset.idusuario;
 
-        let IDtrabajo = e.target.dataset.idtrabajo;
-        let IDusuario = e.target.dataset.idusuario;
-
-        Swal.fire({
-            title: '<span class="text-primary fw-bold">Subir trabajo</span>',
-            html: `
+    Swal.fire({
+      title: '<span class="text-success fw-bold">Subir trabajo</span>',
+      html: `
                 <form method="post" id="frmTrabajos" enctype="multipart/form-data">
                     <div class="row justify-content-center">
                         <div class="col-md-12">
@@ -21,55 +20,59 @@ tblTrabajos.addEventListener("click", (e) => {
                                 accept=".pdf, .docx, .doc, .xlsx, .png, .jpg, .jpeg">
                         </div>
 
-                        <!-- ESTE ERA EL PROBLEMA: LE FALTABA EL CIERRE -->
+                       
                         <input type="hidden" id="IDtrabajo" name="IDtrabajo" value="${IDtrabajo}" />
                         <input type="hidden" id="IDusuario" name="IDusuario" value="${IDusuario}" />
                     </div>
                 </form>
             `,
-            showCancelButton: true,
-            confirmButtonText: "Agregar",
-            cancelButtonText: "Cancelar",
-            customClass: {
-                confirmButton: "btn btn-success",
-                cancelButton: "btn btn-danger",
-            },
+      showCancelButton: true,
+      confirmButtonText: "Agregar",
+      cancelButtonText: "Cancelar",
+      confirmButtonColor: "#1d861dff",
+      cancelButtonColor: "#d33",
+      customClass:{
+        confirmButton: "fw-bold",
+        cancelButton: "fw-bold"
+      },
 
-            preConfirm: () => {
-                const form = document.getElementById("frmTrabajos");
-                const formData = new FormData(form);
+      preConfirm: () => {
+        const form = document.getElementById("frmTrabajos");
+        const formData = new FormData(form);
 
-                $.ajax({
-                    url: "../CONTROLLER/subirTrabajo.php",
-                    type: "POST",
-                    data: formData,
-                    processData: false,
-                    contentType: false,
-                    dataType: "json",
+        $.ajax({
+          url: "../CONTROLLER/subirTrabajo.php",
+          type: "POST",
+          data: formData,
+          processData: false,
+          contentType: false,
+          dataType: "json",
 
-                    success: function (respuesta) {
+          success: function (respuesta) {
+            if (!respuesta.success) {
+              Swal.fire({
+                title: '<span class="fs-2 fw-bold">¡Error!</span>',
+                text: respuesta.message,
+                icon: "error",
+              });
+              return;
+            }
 
-                        if (!respuesta.success) {
-                            Swal.fire({
-                                title: '<span class="fs-2 fw-bold">¡Error!</span>',
-                                text: respuesta.message,
-                                icon: "error",
-                            });
-                            return;
-                        }
+            Swal.fire({
+              title: '<span class="fs-2 fw-bold">¡Éxito!</span>',
+              text: respuesta.message,
+              icon: "success",
+              timer: 2000,
+              timerProgressBar: true,
+              showConfirmButton: false,
+            }).then(() => {
+              location.href = "./entregas.php";
+            });
 
-                        Swal.fire({
-                            title: '<span class="fs-2 fw-bold">¡Éxito!</span>',
-                            text: respuesta.message,
-                            icon: "success",
-                        }).then(() => {
-                            location.href = "./entregas.php";
-                        });
-
-                        form.reset();
-                    },
-                });
-            },
+            form.reset();
+          },
         });
-    }
+      },
+    });
+  }
 });

@@ -20,6 +20,8 @@
 
   <?php if ($archivoActual == "trabajos.php" && $rol == 3) { ?>
       <script src="../ASSETS/JS/subir_trabajo.js"></script>
+      <script src="../ASSETS/JS/ver_calificaciones.js"></script>
+      <script src="../ASSETS/JS/editarTrabajo.js"></script>
   <?php } ?>
   <?php if ($archivoActual == "calificar_trabajo.php" && $rol == 2) { ?>
       <script src="../ASSETS/JS/cargar_calificaciones.js"></script>
@@ -56,16 +58,13 @@
       <script src="../ASSETS/js/crearArea.js"></script>
   <?php } ?>
 
-  <?php if ($archivoActual == "trabajos.php") { ?>
-      <script src="../ASSETS/JS/eliminarTrabajo.js"></script>
+  <?php if ($archivoActual == "asignarFichas.php") { ?>
+      <script src="../ASSETS/js/modalInstructor.js"></script>
+      <script src="../ASSETS/js/cargarFichasInstructor.js"></script>
+      <script src="../ASSETS/js/asignarFichaInstructor.js"></script>
+      <script src="../ASSETS/js/desasignarFichaInstructor.js"></script>
+      <script src="../ASSETS/js/asignarFichas.js"></script>
   <?php } ?>
-  <?php if($archivoActual == "asignarFichas.php"){ ?>
-  <script src="../ASSETS/js/modalInstructor.js"></script>
-  <script src="../ASSETS/js/cargarFichasInstructor.js"></script>
-  <script src="../ASSETS/js/asignarFichaInstructor.js"></script>
-  <script src="../ASSETS/js/desasignarFichaInstructor.js"></script>
-  <script src="../ASSETS/js/asignarFichas.js"></script>
-    <?php }?>
 
 
   <?php if ($archivoActual == "editar_perfil.php") { ?>
