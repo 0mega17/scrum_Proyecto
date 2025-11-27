@@ -31,7 +31,10 @@ require_once './layout/nav_bar.php';
         <div
             class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-4 border-bottom">
             <div>
-                <h1 class="h2 fw-semibold">Calificar trabajos</h1>
+                <h1 class="h2">
+                    <i class="fas fa-star text-primary me-1"></i>
+                    Calificar trabajos
+                </h1>
                 <p class="text-muted">
                     Apartado para asignar las notas y ver las calificaciones
                 </p>
