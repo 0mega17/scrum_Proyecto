@@ -32,16 +32,16 @@ $(document).ready(function () {
           respuesta.fichas.forEach((ficha) => {
             //* se usan operadores ternarios para definir el badge de estado y el boton segun si la ficha está asignada o no
             const estadoBadge = ficha.asignada == 1 
-              ? '<span class="badge bg-success">Asignada</span>' 
-              : '<span class="badge bg-secondary">No asignada</span>';
+              ? '<span class="badge bg-success px-3 py-2"><i class="fas fa-check-circle me-1"></i>Asignada</span>' 
+              : '<span class="badge bg-secondary px-3 py-2"><i class="fas fa-circle me-1"></i>No asignada</span>';
             
               //* lo mismo para el boton
             const boton = ficha.asignada == 1
-              ? `<button class="btn btn-danger btn-sm btn-desasignar" data-ficha-id="${ficha.id}">
-                   <i class="bi bi-x-circle"></i> Desasignar
+              ? `<button class="btn btn-danger btn-sm btn-desasignar shadow-sm" data-ficha-id="${ficha.id}">
+                   <i class="fas fa-times-circle me-1"></i> Desasignar
                  </button>`
-              : `<button class="btn btn-success btn-sm btn-asignar" data-ficha-id="${ficha.id}">
-                   <i class="bi bi-check-circle"></i> Asignar
+              : `<button class="btn btn-success btn-sm btn-asignar shadow-sm" data-ficha-id="${ficha.id}">
+                   <i class="fas fa-check-circle me-1"></i> Asignar
                  </button>`;
 
 
@@ -50,12 +50,28 @@ $(document).ready(function () {
               <tr>
                 <td>${ficha.id}</td>
                 <td>${ficha.codigo}</td>
-                <td>${ficha.nombre}</td>
-                <td>${ficha.nombre_area}</td>
-                <td>${ficha.fecha_inicio}</td>
-                <td>${ficha.fecha_fin}</td>
-                <td>${estadoBadge}</td>
-                <td>${boton}</td>
+                <td>
+                  <span class="badge text-bg-success px-3 py-2">
+                    <i class="fas fa-graduation-cap me-1"></i>
+                    ${ficha.nombre}
+                  </span>
+                </td>
+                <td>
+                  <span class="badge text-bg-primary px-3 py-2">
+                    <i class="fa-solid fa-suitcase"></i>
+                    ${ficha.nombre_area}
+                  </span>
+                </td>
+                <td>
+                  <i class="fas fa-calendar-alt text-success me-1"></i>
+                  <small>${ficha.fecha_inicio}</small>
+                </td>
+                <td>
+                  <i class="fas fa-calendar-check text-danger me-1"></i>
+                  <small>${ficha.fecha_fin}</small>
+                </td>
+                <td class="text-center">${estadoBadge}</td>
+                <td class="text-center">${boton}</td>
               </tr>
             `;
           });
