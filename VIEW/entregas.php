@@ -15,12 +15,13 @@ $mysql = new MySQL();
 $mysql->conectar();
 
 if ($rol == 1) {
-    $entregas = $mysql->efectuarConsulta("SELECT aprendices.nombre as nombre_aprendiz, instructores.nombre as nombre_instructor, trabajos.nombre, entregas.id, entregas.archivo, entregas.fecha_subida, entregas.estado, (SELECT COUNT(*) FROM calificaciones WHERE calificaciones.entregas_id = entregas.id) as calificado FROM entregas JOIN trabajos ON trabajos.id = entregas.trabajos_id JOIN instructores ON instructores.id = trabajos.instructores_id JOIN aprendices ON aprendices.id = entregas.aprendices_id ORDER BY entregas.id DESC");
+    $entregas = $mysql->efectuarConsulta("SELECT aprendices.nombre as nombre_aprendiz, instructores.nombre as nombre_instructor, trabajos.nombre, entregas.id, entregas.archivo, entregas.fecha_subida, entregas.estado, fichas.codigo, fichas.nombre as nombre_ficha, (SELECT COUNT(*) FROM calificaciones WHERE calificaciones.entregas_id = entregas.id) as calificado FROM entregas JOIN trabajos ON trabajos.id = entregas.trabajos_id JOIN instructores ON instructores.id = trabajos.instructores_id JOIN aprendices ON aprendices.id = entregas.aprendices_id JOIN fichas ON aprendices.fichas_id = fichas.id ORDER BY entregas.id DESC");
 }
 
 if ($rol == 3) {
-    $IDficha = $_SESSION["fichaID"];
-    $entregas = $mysql->efectuarConsulta("SELECT instructores.nombre as nombre_instructor, trabajos.nombre, entregas.id, entregas.archivo, entregas.fecha_subida, entregas.estado, (SELECT COUNT(*) FROM calificaciones WHERE calificaciones.entregas_id = entregas.id) as calificado FROM entregas JOIN trabajos ON trabajos.id = entregas.trabajos_id JOIN instructores ON instructores.id = trabajos.instructores_id WHERE entregas.aprendices_id = $idUsuario ORDER BY entregas.id DESC");
+    $consultaFicha = $mysql->efectuarConsulta("SELECT fichas_id FROM aprendices WHERE id = $idUsuario");
+    $IDficha = $consultaFicha->fetch_assoc()["fichas_id"];
+    $entregas = $mysql->efectuarConsulta("SELECT instructores.nombre as nombre_instructor, trabajos.nombre, entregas.id, entregas.archivo, entregas.fecha_subida, entregas.estado, (SELECT COUNT(*) FROM calificaciones WHERE calificaciones.entregas_id = entregas.id) as calificado FROM entregas JOIN trabajos ON trabajos.id = entregas.trabajos_id JOIN instructores ON instructores.id = trabajos.instructores_id WHERE entregas.aprendices_id = $idUsuario AND trabajos.fichas_id = $IDficha ORDER BY entregas.id DESC");
 }
 
 $mysql->desconectar();
@@ -65,7 +66,7 @@ require_once './layout/nav_bar.php';
             </div>
             <div class="card-body p-0">
                 <div class="table-responsive">
-                    <table class="table table-striped mb-0 align-middle" id="tblGeneral">
+                    <table class="table table-striped mb-0 align-middle nowrap" id="tblGeneral">
                         <thead class="table-light">
                             <tr>
                                 <th class="fw-semibold">
@@ -83,6 +84,10 @@ require_once './layout/nav_bar.php';
                                 <?php if ($rol == 1): ?>
                                     <th class="fw-semibold">
                                         Aprendiz
+                                    </th>
+
+                                    <th class="fw-semibold">
+                                        Ficha
                                     </th>
                                 <?php endif; ?>
                                 <th class="fw-semibold text-center">
@@ -148,6 +153,12 @@ require_once './layout/nav_bar.php';
                                                 </div>
                                                 <span><?php echo $fila['nombre_aprendiz'] ?></span>
                                             </div>
+                                        </td>
+
+                                        <td>
+                                            <span class="badge text-bg-secondary p-2">
+                                                <?php echo $fila["codigo"] ?> - <?php echo $fila["nombre_ficha"] ?>
+                                            </span>
                                         </td>
                                     <?php endif; ?>
 

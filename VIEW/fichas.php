@@ -100,8 +100,11 @@ require_once './layout/nav_bar.php';
                                         </span>
                                     </td>
                                     <td>
-                                        <i class="fa-solid fa-suitcase"></i>
-                                        <?php echo $fila['nombre_area'] ?>
+                                        <span class="badge text-bg-info px-3 py-2">
+                                            <i class="fa-solid fa-suitcase"></i>
+                                            <?php echo $fila['nombre_area'] ?>
+                                        </span>
+
                                     </td>
                                     <td>
                                         <span class="badge text-bg-success py-2 px-3">

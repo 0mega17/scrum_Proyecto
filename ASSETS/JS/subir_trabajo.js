@@ -29,11 +29,11 @@ tblTrabajos.addEventListener("click", (e) => {
       showCancelButton: true,
       confirmButtonText: "Agregar",
       cancelButtonText: "Cancelar",
-      confirmButtonColor: "#1d861dff",
+      confirmButtonColor: "#198754",
       cancelButtonColor: "#d33",
-      customClass:{
+      customClass: {
         confirmButton: "fw-bold",
-        cancelButton: "fw-bold"
+        cancelButton: "fw-bold",
       },
 
       preConfirm: () => {

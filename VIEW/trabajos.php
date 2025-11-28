@@ -13,7 +13,8 @@ $mysql = new MySQL();
 $mysql->conectar();
 
 if ($rol == 3) {
-    $IDficha = $_SESSION["fichaID"];
+    $consultaFicha = $mysql->efectuarConsulta("SELECT fichas_id FROM aprendices WHERE id = $idUsuario");
+    $IDficha = $consultaFicha->fetch_assoc()["fichas_id"];
     $trabajos = $mysql->efectuarConsulta("
         SELECT 
             trabajos.id,
@@ -23,6 +24,7 @@ if ($rol == 3) {
             trabajos.fecha_limite,
             fichas.codigo,
             fichas.nombre AS nombre_ficha,
+            instructores.nombre as nombre_instructor,
             (SELECT estado 
              FROM entregas 
              WHERE entregas.trabajos_id = trabajos.id 
@@ -33,6 +35,7 @@ if ($rol == 3) {
              AND aprendices_id = $idUsuario) as archivo_entrega
         FROM trabajos
         JOIN fichas ON fichas.id = trabajos.fichas_id
+        JOIN instructores ON instructores.id = trabajos.instructores_id
         WHERE trabajos.fichas_id = $IDficha
         ORDER BY trabajos.id DESC
     ");
@@ -48,9 +51,11 @@ if ($rol == 3) {
 } else {
     $trabajos = $mysql->efectuarConsulta("
         SELECT trabajos.nombre AS nombre_trabajo, trabajos.descripcion, trabajos.fecha_publicacion,
-            trabajos.fecha_limite, fichas.codigo, fichas.nombre AS nombre_ficha
+            trabajos.fecha_limite, fichas.codigo, fichas.nombre AS nombre_ficha, instructores.nombre as 
+            nombre_instructor
         FROM trabajos
         JOIN fichas ON fichas.id = trabajos.fichas_id
+        JOIN instructores ON instructores.id = trabajos.instructores_id
         ORDER BY trabajos.id DESC
     ");
 }
@@ -64,7 +69,7 @@ require_once './layout/nav_bar.php';
 <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
     <div class="container-fluid mt-2">
 
-       
+
         <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-4 border-bottom">
             <div>
                 <h1 class="h2 mb-1">
@@ -102,7 +107,7 @@ require_once './layout/nav_bar.php';
             <div class="card-header bg-body-tertiary py-3">
                 <h5 class="mb-0">
                     <i class="fas fa-list me-2 text-secondary"></i>
-                    Listado de Trabajos 
+                    Listado de Trabajos
                 </h5>
             </div>
             <div class="card-body p-0">
@@ -110,6 +115,11 @@ require_once './layout/nav_bar.php';
                     <table class="table table-striped mb-0" id="tblGeneral">
                         <thead class="table-light">
                             <tr class="p-1">
+                                <?php if ($rol == 3 || $rol == 1): ?>
+                                    <th class="fw-semibold">
+                                        Instructor
+                                    </th>
+                                <?php endif; ?>
                                 <th class="fw-semibold">
                                     Nombre
                                 </th>
@@ -136,13 +146,23 @@ require_once './layout/nav_bar.php';
                         <tbody id="tablaTrabajos">
                             <?php while ($fila = $trabajos->fetch_assoc()): ?>
                                 <tr>
+                                    <?php if ($rol == 3 || $rol == 1): ?>
+                                        <td>
+                                            <div class="d-flex align-items-center">
+                                                <div class="p-1 bg-primary bg-opacity-10 me-2">
+                                                    <i class="fas fa-user text-primary"></i>
+                                                </div>
+                                                <span class="fw-medium"><?php echo $fila['nombre_instructor'] ?></span>
+                                            </div>
+                                        </td>
+                                    <?php endif; ?>
                                     <td>
                                         <strong class="text-dark"><?php echo $fila['nombre_trabajo']; ?></strong>
                                     </td>
                                     <td>
                                         <span class="text-muted">
                                             <?php echo $fila['descripcion']; ?>
-                                          
+
                                         </span>
                                     </td>
                                     <td class="text-center">
@@ -185,7 +205,7 @@ require_once './layout/nav_bar.php';
                                                         data-IDtrabajo="<?php echo $fila["id"]; ?>"
                                                         class="btn btn-success btn-sm btnSubirArchivo px-3 shadow-sm">
                                                         <i class="fa-solid fa-upload me-1"></i>
-                                                        Subir Trabajo
+                                                        Subir
                                                     </button>
                                                 <?php endif; ?>
 

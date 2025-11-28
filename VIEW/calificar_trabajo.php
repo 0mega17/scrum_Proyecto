@@ -111,6 +111,7 @@ require_once './layout/nav_bar.php';
                                     <th>Comentario</th>
                                     <th>Calificación</th>
                                     <th>Fecha Calificacion</th>
+                                    <th>Trabajo</th>
                                 </tr>
                             </thead>
                             <tbody id="tablaAprendices">

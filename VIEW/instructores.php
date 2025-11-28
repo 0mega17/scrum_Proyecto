@@ -5,9 +5,7 @@ if ($_SESSION["acceso"] == false || $_SESSION["acceso"] == null) {
 }
 $pagina = "Instructores";
 $rol = $_SESSION["tipoUsuario"];
-if ($rol == 3) {
-    $ficha_id =  $_SESSION["fichaID"];
-}
+
 
 $IDusuario = $_SESSION["IDusuario"];
 
@@ -17,13 +15,7 @@ $mysql = new MySQL();
 
 $mysql->conectar();
 
-if ($rol == 3) {
-    $instructores = $mysql->efectuarConsulta("SELECT * FROM instructores JOIN fichas_has_instructores ON 
-    fichas_has_instructores.instructores_id = instructores.id WHERE fichas_id = $ficha_id");
-} else {
-    $instructores = $mysql->efectuarConsulta("SELECT * FROM instructores");
-}
-
+$instructores = $mysql->efectuarConsulta("SELECT * FROM instructores");
 
 $mysql->desconectar();
 

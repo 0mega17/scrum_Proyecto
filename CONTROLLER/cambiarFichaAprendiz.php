@@ -49,6 +49,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     
     $mysql = new MySQL();
     $mysql->conectar();
+
+    $verificacionEntregas = $mysql->efectuarConsulta("SELECT 1 FROM entregas WHERE aprendices_id = $aprendizId
+    AND estado = 'Entregado'");
+
+    if(mysqli_num_rows($verificacionEntregas) > 0){
+        echo json_encode([
+            "success" => false,
+            "message" => 'El aprendiz tiene trabajos pendientes por calificar'
+        ]);
+        exit();
+    }
     
     $consulta = "UPDATE aprendices SET fichas_id = $nuevaFichaId WHERE id = $aprendizId";
     $resultado = $mysql->efectuarConsulta($consulta);
